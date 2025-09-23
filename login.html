@@ -1,107 +1,38 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi,en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hotpot</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="login_style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
   </head>
-
   <body>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-      * {
-        box-sizing: border-box;
-        font-size: 17px;
-      }
-      body {
-        font-family: "Montserrat", sans-serif;
-        font-size: 17px;
-      }
-      /*Wrapper*/
-      #wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 80vh;
-      }
-      form {
-        margin-top: 5px;
-        border: 1px solid #dadce0;
-        border-radius: 30px;
-        padding: 25px;
-      }
-      /*tieu de hotpot*/
-      .header {
-        height: 40px;
-        text-align: center;
-        font-size: 10px;
-      }
-      /*tieu de dang nhap*/
-      h3 {
-        text-align: center;
-        font-size: 24px;
-        font-weight: 500;
-      }
-      h1 {
-        text-transform: uppercase;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        text-align: center;
-        font-size: 32px;
-        font-weight: 500;
-      }
-      h5 {
-        text-align: center;
-        margin-top: 5px;
-      }
-      input {
-        height: 40px;
-        width: 200px;
-        outline: none;
-        font-size: inherit;
-        border: 1px solid #dadce0;
-        padding: 10px;
-        border-radius: 15px;
-      }
-      .b1 {
-        margin-bottom: 5px;
-      }
-      .content_login_box {
-        margin-top: 5px;
-    </style>
-    <!--header-->
-    <div class="header">
-      <!--tieu de web-->
-      <h1>Hotpot.vn</h1>
-      <h5>bien gi do thanh noi lau kem</h5>
-    </div>
-    <div id="wrapper">
-      <form action="url_dang_nhap" method="post">
-        <div class="content_login_box">
-          <!--khung dang nhap-->
-          <h3>Đăng nhập</h3>
-          <div class="a1">
-            <!--tai khoan va mat khau dang nhap-->
-            <!--tai khoan-->
-            <div class="b1">
-              <input type="text" name="login" id="tendangnhap" />
-              <label for=""> tài khoản </label>
-            </div>
-
-            <!--mat khau-->
-            <div class="b1">
-              <input type="password" name="password" />
-              <label for=""> mật khẩu </label>
-            </div>
+    <div class="wrapper">
+        <form action="#">
+          <h1>Đăng nhập</h1>
+          <div class="input-box">
+            <input type="text" placeholder="Tài khoản" required />
+            <i class="bx bx-user"></i>
           </div>
-
-          <!--nut dang nhap-->
-          <input type="submit" value="Đăng nhập" id="login_button" />
-          <br />
-          <label class="">Chưa có tài khoản?</label>
-          <a href="url qua page dang ky">đăng ký tại đây</a>
-        </div>
-      </form>
+          <div class="input-box">
+            <input type="password" placeholder="Mật khẩu" required />
+            <i class="bx bx-lock-alt"></i>
+          </div>
+          <div class="remember-forgot">
+            <label><input type="checkbox">Nhớ tài khoản</label>
+            <a href="#">Quên mật khẩu?</a>
+          </div>
+          <button type="submit" class="btn">Đăng nhập</button>
+          <div class="register-link">
+            <p>Chưa có tài khoản?</p><a href="#">Đăng ký</a>
+          </div>
+        </form>
+      </div>
     </div>
   </body>
 </html>
