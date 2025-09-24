@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="vi,en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Page</title>
-    <link rel="stylesheet" href="login_style.css" />
+    <title>Sign in</title>
+    <link rel="stylesheet" href="signin_style.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -14,20 +14,22 @@
   <body>
     <div class="wrapper">
         <form action="#">
-          <h1>Đăng nhập</h1>
+          <h1>Đăng ký</h1>
           <div class="input-box">
             <input type="text" placeholder="Tài khoản" required />
           </div>
           <div class="input-box">
             <input type="password" placeholder="Mật khẩu" required />
+            
           </div>
-          <div class="remember-forgot">
-            <label><input type="checkbox">Nhớ tài khoản</label>
-            <a href="#">Quên mật khẩu?</a>
+          <div class="input-box">
+            <input type="password" placeholder="Nhập lại mật khẩu" required />
+           
           </div>
-          <button type="submit" class="btn">Đăng nhập</button>
+          
+          <button type="submit" class="btn">Đăng ký</button>
           <div class="register-link">
-            <p>Chưa có tài khoản?</p><a href="#">Đăng ký</a>
+            <p>Đã có tài khoản?</p><a href="#">Đăng nhập</a>
           </div>
         </form>
       </div>
