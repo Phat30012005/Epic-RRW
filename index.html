@@ -4,76 +4,139 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hotpot.com</title>
+    <link rel="styesheelt" href="style.css">
   </head>
   <hr />
   <body>
     <h1>Hotpot.Stu</h1>
     <h3><i>Biến Idea thành một nồi lẩu KEM mát lạnh</i></h3>
     <hr />
-    <h2>Trang chủ</h2>
-    <button>
-      <b>Tìm Kiếm</b>
-      <input type="" name="" id="" />
-    </button>
-    <button><b>Lọc</b></button>
-    <button><b>Trang cá nhân</b></button>
-    <p>
-      <button type="button"><i>Giá Phòng</i></button>
-      <button><i>Đánh Giá</i></button>
-      <button><i>Vị Trí</i></button>
-    </p>
-    <hr>
-    <h3><i>Các Phòng Trọ Được Đánh Giá Cao</i></h3>
-    <img src="https://ecogreen-saigon.vn/uploads/phong-tro-la-loai-hinh-nha-o-pho-bien-gia-re-tien-loi-cho-sinh-vien-va-nguoi-di-lam.png" height="150" alt="">
-    <img src="https://imperiaskygardens.com/wp-content/uploads/2023/01/unnamed-3.jpg" height="150" alt="">
-    <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" height="150" alt="">
-    <ul>
-      <li><button>
-        <input type="button" value="Đánh giá">
-      </button></li>
-      <li>
-        <button>
-          <input type="button" value="Vị Trí">
-        </button>
-      </li>
-      <li><button>
-        <input type="button" value="Giá Tiền">
-      </button></li>
-    </ul>
-    <hr>
-    <div class="room-container">
-  <figure class="room">
-    <img src="https://imperiaskygardens.com/wp-content/uploads/2023/01/unnamed-3.jpg" height="150" alt="Phòng trọ 1">
-    <figcaption>
-      <h3>Phòng Trọ Quận 1</h3>
-      <p>⭐ Đánh giá: 4.8/5</p>
-      <p>📍 Vị trí: Gần trung tâm</p>
-      <p>💰 Giá: 3.500.000đ/tháng</p>
-    </figcaption>
-  </figure>
+    <form>
+      <button><b>Trang chủ</b></button>
+      <button><b>Tìm người ở ghép</b></button>
+      <select name="" id="profile">
+        <optgroup label="Trang cá nhân">
+          <option>Đăng kí/Đăng nhập</option>
+          <option>Tài khoản</option>
+          <option>Quản lý bài đăng</option>
+        </optgroup>
+      </select>
+    </form>
+    <br>
+    <form>
+        <button><b>Tìm Kiếm</b></button>
+        <input type="search" id="" placeholder="Nhập nội dung cần tìm ở đây" size="25"/>
+    <br> <br>
+    <!-- Phân loại phòng trọ -->
+    <label for="choose-type-room"><button type="submit">Lọc</button></label>
+      <select name="price" id="choose-type-room">
+        <option value="">Giá phòng</option>
+        <option>1-2 triệu/tháng</option>
+        <option>2-3 triệu/tháng</option>
+        <option>4-5 triệu/tháng</option>
+      </select>
+      <select name="typeroom" id="choose-type-room">
+        <option value="">Loại phòng trọ</option>
+        <option>Phòng trọ cấp 4</option>
+        <optgroup label="Phòng trọ có gác mái">
+          <option value="">gác bê tông đúc thật lát gạch</option>
+          <option value="">gác cemboard phủ simili</option>
+          <option value="">gác sàn gỗ </option>
+        </optgroup>
+        </option>
+      </select>
+      <select name="roomsize" id="choose-type-room">
+        <option value="">Diện tích phòng</option>
+        <option value="">Trọ nhỏ (10-16m²) </option>
+        <option value="">trọ trung bình (18-25 m²)</option>
+        <option value="">trọ lớn (25-35m² hoặc hơn)</option>
+      </select>
+      <br> <br>
+    <hr />
+    <h2><i>Các Phòng Trọ Được Đánh Giá Cao</i></h2>
+      <div>
+        <img
+          src="https://ecogreen-saigon.vn/uploads/phong-tro-la-loai-hinh-nha-o-pho-bien-gia-re-tien-loi-cho-sinh-vien-va-nguoi-di-lam.png"
+          height="150"
+          alt=""
+        />
+        <ul type="none">
+        <li>
+          <button>
+            Đánh giá
+            <input type="text" />
+          </button>
+        </li>
+        <li>
+          <button>
+            Vị trí
+            <input type="text" />
+          </button>
+        </li>
+        <li>
+          <button>Giá tiền <input type="text"></button>
+        </li>
+      </ul>
+      </div>
+      <div>
+        <img
+          src="https://imperiaskygardens.com/wp-content/uploads/2023/01/unnamed-3.jpg"
+          height="150"
+          alt=""
+        />
+        <ul type="none">
+        <li>
+          <button>
+            Đánh giá
+            <input type="text" />
+          </button>
+        </li>
+        <li>
+          <button>
+            Vị trí
+            <input type="text" />
+          </button>
+        </li>
+        <li>
+          <button>Giá tiền <input type="text"></button>
+        </li>
+      </ul>
+      </div>
+      <img
+        src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg"
+        height="150"
+        alt=""
+      />
+      <ul type="none">
+        <li>
+          <button>
+            Đánh giá
+            <input type="text" />
+          </button>
+        </li>
+        <li>
+          <button>
+            Vị trí
+            <input type="text" />
+          </button>
+        </li>
+        <li>
+          <button>Giá tiền <input type="text"></button>
+        </li>
+      </ul>
+    <hr />
 
-  <figure class="room">
-    <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" height="150" alt="Phòng trọ 2">
-    <figcaption>
-      <h3>Phòng Trọ Quận Bình Thạnh</h3>
-      <p>⭐ Đánh giá: 4.5/5</p>
-      <p>📍 Vị trí: Gần đại học</p>
-      <p>💰 Giá: 2.800.000đ/tháng</p>
-    </figcaption>
-  </figure>
-
-  <figure class="room">
-    <img src="https://ecogreen-saigon.vn/uploads/phong-tro-la-loai-hinh-nha-o-pho-bien-gia-re-tien-loi-cho-sinh-vien-va-nguoi-di-lam.png" height="150" alt="Phòng trọ 3">
-    <figcaption>
-      <h3>Phòng Trọ Quận 7</h3>
-      <p>⭐ Đánh giá: 4.9/5</p>
-      <p>📍 Vị trí: Gần Phú Mỹ Hưng</p>
-      <p>💰 Giá: 4.200.000đ/tháng</p>
-    </figcaption>
-  </figure>
-</div>
-    <hr>
-    <a href="#"><img src="https://media.istockphoto.com/id/498569615/vi/vec-to/bi%E1%BB%83u-t%C6%B0%E1%BB%A3ng-n%C3%BAt-home-web.jpg?s=612x612&w=0&k=20&c=bYnt_bUZcDKk1TJIITxITJ3vSylXM6C32VlETsJQawQ=" height="40" alt="Home"></a>
-    <a href=""><img src="https://cdn-icons-png.freepik.com/512/5632/5632370.png" height="40" alt="Home"></a>
+    <a href="#"
+      ><img
+        src="https://media.istockphoto.com/id/498569615/vi/vec-to/bi%E1%BB%83u-t%C6%B0%E1%BB%A3ng-n%C3%BAt-home-web.jpg?s=612x612&w=0&k=20&c=bYnt_bUZcDKk1TJIITxITJ3vSylXM6C32VlETsJQawQ="
+        height="40"
+        alt="Home"
+    /></a>
+    <a href=""
+      ><img
+        src="https://cdn-icons-png.freepik.com/512/5632/5632370.png"
+        height="40"
+        alt="Home"
+    /></a>
   </body>
 </html>
