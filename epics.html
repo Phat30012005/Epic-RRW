@@ -2,24 +2,31 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Web</title>
-    <style>
-      #chat-box {
-        border: 2px solid #ca8025;
-        width: 330px;
-        height: 400px;
-        padding: 10px;
-      }
-      #message {
-        width: 300px;
-      }
-    </style>
+    <title>Chatbox</title>
+    <link rel="stylesheet" href="stylec.css" />
   </head>
-
   <body>
-    <div id="chat-box"></div>
-    <input id="message" type="text" placeholder="Nhập tin nhắn..." />
-    <button onclick="sendMessage()">Gửi</button>
+    <label for="chon-options">Cài Đặt</label>
+    <select id="chon-options">
+      <option value="">Chặn</option>
+      <option value="">Theo dõi</option>
+      <option value="">Bo xì</option>
+    </select>
+    <div class="chat-container">
+      <div class="chat-header">Chat</div>
+      <div class="chat-messages">
+        <div class="message other">Halo,freundin</div>
+        <div class="message me">Halo, Wir ist ir Name?</div>
+        <div class="message other">Ich bin Sigvaldi, und du?</div>
+        <div class="message me">Mein Name ist Wirbel</div>
+        <div class="message me">
+          Ich komme aus VietNam und Ich wohne in CanTho
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" placeholder="Nhập tin nhắn..." />
+        <button>Gửi</button>
+      </div>
+    </div>
   </body>
 </html>
