@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicky.stu - Đăng Tin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 text-sm font-semibold text-gray-700">
+                <a href="dangtin.html" class="nav-link bg-gray-200">Đăng tin</a>
+                <a href="danhsach.html" class="nav-link">Danh sách tin</a>
+                <a href="admin.html" class="nav-link">Quản trị</a>
+            </div>
+            <div>
+                <a href="#" class="nav-link">Đăng nhập</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Đăng tin cho thuê phòng trọ</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2">
+                <form id="postForm" class="space-y-6">
+                    <!-- Thông tin cơ bản -->
+                    <div class="card p-6">
+                        <div class="form-section-title">THÔNG TIN CƠ BẢN</div>
+                        <div class="space-y-4 pt-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="title" class="text-gray-600">Tiêu đề tin</label>
+                                    <input type="text" id="title" placeholder="Tiêu đề tin" required>
+                                </div>
+                                <div>
+                                    <label for="price" class="text-gray-600">Giá</label>
+                                    <div class="relative">
+                                        <input type="number" id="price" placeholder="Giá" required>
+                                        <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">vnđ</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="area" class="text-gray-600">Diện tích</label>
+                                    <div class="relative">
+                                        <input type="number" id="area" placeholder="Diện tích" required>
+                                        <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">m²</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="rooms" class="text-gray-600">Số phòng</label>
+                                    <input type="number" id="rooms" placeholder="Số phòng" required>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="province" class="text-gray-600">Tỉnh/Thành</label>
+                                    <select id="province" required>
+                                        <option value="">Chọn Tỉnh/Thành</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="address" class="text-gray-600">Địa chỉ</label>
+                                    <input type="text" id="address" placeholder="Địa chỉ chi tiết" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mô tả chi tiết -->
+                    <div class="card p-6">
+                        <div class="form-section-title">MÔ TẢ CHI TIẾT</div>
+                        <textarea id="description" rows="5" placeholder="Nhập mô tả chi tiết" required class="pt-6"></textarea>
+                    </div>
+
+                    <!-- Thông tin liên hệ -->
+                    <div class="card p-6">
+                        <div class="form-section-title">THÔNG TIN LIÊN HỆ</div>
+                        <div class="space-y-4 pt-6">
+                            <div>
+                                <label for="contactName" class="text-gray-600">Tên liên hệ</label>
+                                <input type="text" id="contactName" placeholder="Tên liên hệ" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="text-gray-600">Điện thoại</label>
+                                <input type="text" id="phone" placeholder="Điện thoại" required>
+                            </div>
+                            <div>
+                                <label for="email" class="text-gray-600">Email</label>
+                                <input type="text" id="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nổi bật -->
+                    <div class="card p-6">
+                        <div class="form-section-title">NỔI BẬT</div>
+                        <div id="highlights" class="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6">
+                            <label class="highlight-label">
+                                <input type="checkbox" name="highlight" value="Có điều hoà" class="highlight-checkbox">
+                                <div class="highlight-content">Có điều hoà</div>
+                            </label>
+                            <label class="highlight-label">
+                                <input type="checkbox" name="highlight" value="Khoá tự động" class="highlight-checkbox">
+                                <div class="highlight-content">Khoá tự động</div>
+                            </label>
+                            <label class="highlight-label">
+                                <input type="checkbox" name="highlight" value="Pet" class="highlight-checkbox">
+                                <div class="highlight-content">Pet</div>
+                            </label>
+                            <label class="highlight-label">
+                                <input type="checkbox" name="highlight" value="Không chung chủ" class="highlight-checkbox">
+                                <div class="highlight-content">Không chung chủ</div>
+                            </label>
+                            <label class="highlight-label">
+                                <input type="checkbox" name="highlight" value="Có gác" class="highlight-checkbox">
+                                <div class="highlight-content">Có gác</div>
+                            </label>
+                            <label class="highlight-label">
+                                <input type="checkbox" name="highlight" value="Giờ giấc tự do" class="highlight-checkbox">
+                                <div class="highlight-content">Giờ giấc tự do</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Hình ảnh -->
+                    <div class="card p-6">
+                        <div class="form-section-title">HÌNH ẢNH</div>
+                        <p class="text-sm text-gray-500 pt-6">
+                            Đăng tối đa 10 ảnh, mỗi ảnh không quá 5MB.
+                        </p>
+                        <input type="file" id="images" multiple accept="image/*" class="mt-4">
+                        <div id="image-preview" class="flex flex-wrap gap-2 mt-4"></div>
+                    </div>
+
+                    <div class="text-center mt-8">
+                        <button type="submit" class="btn-submit">ĐĂNG TIN</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Hướng dẫn đăng tin -->
+            <div class="md:col-span-1">
+                <div class="card p-6">
+                    <h2 class="text-lg font-semibold mb-4">HƯỚNG DẪN ĐĂNG TIN</h2>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-2">
+                        <li>Thông tin có dấu (*) là bắt buộc.</li>
+                        <li>Không đăng tin giả, tin đã đăng trên Chicky.stu.</li>
+                        <li>Đăng tin với nội dung rõ ràng, chính xác.</li>
+                        <li>Tin có nhiều hình ảnh sẽ được xem và gặp gỡ nhiều lần.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bg-gray-900 text-white py-12 mt-8">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAQEDAEGBAQGBAUEBwYHBgYHBgcHBgcHBgcGBwgI... (long base64 string) .../9k=" alt="Chicky.stu Logo" class="w-24 mb-4">
+                <h3 class="text-xl font-bold mb-4">Chicky.stu</h3>
+                <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Việt Nam.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
+                <ul class="text-gray-400 space-y-2">
+                    <li><a href="dangtin.html" class="hover:underline">Đăng tin</a></li>
+                    <li><a href="danhsach.html" class="hover:underline">Tìm kiếm</a></li>
+                    <li><a href="admin.html" class="hover:underline">Quản trị</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">LIÊN HỆ</h3>
+                <ul class="text-gray-400 space-y-2">
+                    <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM</li>
+                    <li>Điện thoại: (028) 123 4567</li>
+                    <li>Email: contact@chickystu.vn</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500">
+            <p>&copy; 2024 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
