@@ -1,0 +1,266 @@
+/* =========================================
+1. CÀI ĐẶT CHUNG (GLOBAL STYLES)
+=========================================
+*/
+body {
+    /* Đảm bảo chữ đẹp và dễ đọc, sử dụng font Inter qua Tailwind */
+    font-family: 'Inter', sans-serif; 
+}
+
+/* Modal Overlay cho alert/confirm (thay thế alert/confirm mặc định) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền tối mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo modal nằm trên cùng */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+}
+
+/* =========================================
+2. KIỂU DÁNG THANH ĐIỀU HƯỚNG VÀ CHUNG
+=========================================
+*/
+.nav-link {
+    /* Định kiểu cơ bản cho các liên kết điều hướng */
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: #f3f4f6; /* Màu nền nhẹ khi di chuột */
+}
+
+.bg-gray-200 {
+    /* Lớp đặc biệt đánh dấu trang đang hoạt động */
+    font-weight: bold;
+    color: #1f2937; /* Màu chữ đậm hơn */
+}
+
+.card {
+    /* Kiểu dáng chung cho các phần tử chứa (như Form sections, Hướng dẫn) */
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form-section-title {
+    /* Tiêu đề của từng mục lớn trong form Đăng tin */
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 700; /* font-bold */
+    color: #4b5563; /* text-gray-700 */
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 10px;
+}
+
+.section-title {
+    /* Tiêu đề cho các mục trong trang Chi tiết tin */
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700;
+    color: #1f2937;
+    border-left: 5px solid #3b82f6; /* Đường viền xanh nổi bật */
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+/* =========================================
+3. KIỂU DÁNG FORM VÀ INPUT
+=========================================
+*/
+input[type="text"], 
+input[type="number"], 
+input[type="email"], 
+select, 
+textarea {
+    /* Kiểu dáng chung cho tất cả các trường nhập liệu */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-radius: 6px; /* rounded-md */
+    margin-top: 4px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+input:focus, 
+select:focus, 
+textarea:focus {
+    border-color: #3b82f6; /* Màu xanh khi focus */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Vòng sáng mờ khi focus */
+}
+
+textarea {
+    resize: vertical; /* Chỉ cho phép kéo dãn theo chiều dọc */
+}
+
+/* Nút Đăng Tin */
+.btn-submit {
+    background-color: #ef4444; /* bg-red-500 */
+    color: white;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.1s;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+}
+
+.btn-submit:hover {
+    background-color: #dc2626; /* bg-red-600 */
+    transform: translateY(-1px);
+}
+
+/* =========================================
+4. HÌNH ẢNH VÀ NỔI BẬT (HIGHLIGHTS & IMAGE PREVIEW)
+=========================================
+*/
+
+/* Container cho các mục nổi bật */
+.highlight-label {
+    /* Ẩn checkbox mặc định, định kiểu cho container */
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    display: block; /* Đảm bảo mỗi label chiếm một ô trong grid */
+}
+
+.highlight-checkbox {
+    /* Ẩn checkbox gốc */
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.highlight-content {
+    /* Nội dung của highlight (hộp hiển thị) */
+    background-color: #f3f4f6; /* Màu nền xám nhạt */
+    border: 1px solid #e5e7eb;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.highlight-checkbox:checked + .highlight-content {
+    /* Kiểu dáng khi checkbox được chọn */
+    background-color: #3b82f6; /* Màu xanh nổi bật */
+    color: white;
+    border-color: #3b82f6;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    font-weight: 600;
+}
+
+.image-preview-item {
+    /* Ảnh nhỏ xem trước trong form đăng tin */
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+}
+
+/* =========================================
+5. DANH SÁCH TIN VÀ CHI TIẾT
+=========================================
+*/
+
+.post-card {
+    /* Kiểu dáng chung cho mỗi tin đăng trong danh sách */
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.post-card:hover {
+    transform: translateY(-5px); /* Hiệu ứng nhấc lên khi di chuột */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.post-thumbnail {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 16px;
+}
+
+.highlight-list {
+    /* Container cho danh sách các đặc điểm nổi bật trong trang Chi tiết */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.highlight-item {
+    /* Định kiểu cho từng đặc điểm nổi bật */
+    background-color: #ecfdf5; /* Màu nền xanh lá nhạt */
+    color: #059669; /* Màu chữ xanh lá đậm */
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid #a7f3d0;
+}
+
+/* =========================================
+6. TRANG QUẢN TRỊ (ADMIN)
+=========================================
+*/
+.admin-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-table th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+    color: #374151;
+    text-transform: uppercase;
+}
+
+.admin-table tr:hover {
+    background-color: #f9fafb;
+}
+
+.btn-delete {
+    background-color: #f87171; /* bg-red-400 */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    font-size: 0.875rem;
+}
+
+.btn-delete:hover {
+    background-color: #ef4444; /* bg-red-500 */
+}
