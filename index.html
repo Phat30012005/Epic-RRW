@@ -3,23 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hotpot.com</title>
-    <link rel="styesheelt" href="style.css">
+    <title>Chicky.stu</title>
+    <!-- Styles Boots -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- .CSS -->
+      <link rel="stylesheet" href="style.css">
   </head>
-  <hr />
+
   <body>
-    <h1>Hotpot.Stu</h1>
-    <h3><i>Biến Idea thành một nồi lẩu KEM mát lạnh</i></h3>
+    <!-- Js Boots -->
+    <div class="mx-auto p-2 text-danger-emphasis" style="width: 200px;">
+      <h1>Chicky.Stu</h1>
+    </div>
+      <p class="text-center text-capitalize fs-4">
+      <i>ở đây có một câu slogan vogiacu</i>
+    </p>
     <hr />
     <form>
-      <button><b>Trang chủ</b></button>
+      <button type="button">Trang chủ</button>
       <button><b>Tìm người ở ghép</b></button>
-      <select name="" id="profile">
-        <optgroup label="Trang cá nhân">
-          <option>Đăng kí/Đăng nhập</option>
-          <option>Tài khoản</option>
-          <option>Quản lý bài đăng</option>
-        </optgroup>
+      <select class="form-select form-select-sm" style="width: max-content;" aria-label="Trang cá nhân">
+        <option selected>Trang cá nhân</option>
+        <option value="">Đăng kí/Đăng nhập</option>
+        <option value="">Tài khoản</option>
+        <option value="">Quản lý bài đăng</option>
       </select>
     </form>
     <br>
@@ -52,80 +61,182 @@
         <option value="">trọ lớn (25-35m² hoặc hơn)</option>
       </select>
       <br> <br>
-    <hr />
-    <h2><i>Các Phòng Trọ Được Đánh Giá Cao</i></h2>
-      <div>
-        <img
-          src="https://ecogreen-saigon.vn/uploads/phong-tro-la-loai-hinh-nha-o-pho-bien-gia-re-tien-loi-cho-sinh-vien-va-nguoi-di-lam.png"
-          height="150"
-          alt=""
-        />
-        <ul type="none">
-        <li>
-          <button>
-            Đánh giá
-            <input type="text" />
-          </button>
-        </li>
-        <li>
-          <button>
-            Vị trí
-            <input type="text" />
-          </button>
-        </li>
-        <li>
-          <button>Giá tiền <input type="text"></button>
-        </li>
-      </ul>
-      </div>
-      <div>
-        <img
-          src="https://imperiaskygardens.com/wp-content/uploads/2023/01/unnamed-3.jpg"
-          height="150"
-          alt=""
-        />
-        <ul type="none">
-        <li>
-          <button>
-            Đánh giá
-            <input type="text" />
-          </button>
-        </li>
-        <li>
-          <button>
-            Vị trí
-            <input type="text" />
-          </button>
-        </li>
-        <li>
-          <button>Giá tiền <input type="text"></button>
-        </li>
-      </ul>
-      </div>
-      <img
-        src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg"
-        height="150"
-        alt=""
-      />
-      <ul type="none">
-        <li>
-          <button>
-            Đánh giá
-            <input type="text" />
-          </button>
-        </li>
-        <li>
-          <button>
-            Vị trí
-            <input type="text" />
-          </button>
-        </li>
-        <li>
-          <button>Giá tiền <input type="text"></button>
-        </li>
-      </ul>
-    <hr />
+      <!-- Hotnews -->
+    <section class="container my-5">
+  <h3 class="mb-4">Phòng trọ được đánh giá cao</h3>
 
+  <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="row row-cols-4 g-3">
+
+          <!-- Phòng 1 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 1">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 1</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 2 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 2">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 2</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 3 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 3">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 3</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 4 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 4">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 4</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="row row-cols-4 g-3">
+
+          <!-- Phòng 5 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 5">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 5</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 6 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 6">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 6</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 7 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 7">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 7</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 8 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 8">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 8</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Nút mũi tên -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#roomCarousel" data-bs-slide="prev">
+      <i class="bi bi-arrow-left-circle-fill fs-2 text-danger-emphasis"></i>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#roomCarousel" data-bs-slide="next">
+      <i class="bi bi-arrow-right-circle-fill fs-2 text-danger-emphasis "></i>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+      <br>
+    <table>
+      <tr>
+        <td>
+          <pre>
+            Trang chủ
+
+            Quy định sử dụng 
+            và đăng tin
+          </pre>
+        </td>
+        <td>
+          <pre>
+            Hướng dẫn
+
+            Trợ giúp khách hàng
+
+            Chính sách bảo mật
+          </pre>
+        </td>
+        <td>
+            <pre>
+              Liên hệ qua:
+              Zalo/Facebook
+              Email
+              Hotline
+            </pre>
+        </td>
+    </table>
+    <hr />
     <a href="#"
       ><img
         src="https://media.istockphoto.com/id/498569615/vi/vec-to/bi%E1%BB%83u-t%C6%B0%E1%BB%A3ng-n%C3%BAt-home-web.jpg?s=612x612&w=0&k=20&c=bYnt_bUZcDKk1TJIITxITJ3vSylXM6C32VlETsJQawQ="
@@ -137,6 +248,8 @@
         src="https://cdn-icons-png.freepik.com/512/5632/5632370.png"
         height="40"
         alt="Home"
-    /></a>
+    /></a> <br>
+    <b><i>Cảm ơn bạn đã dành chút thời gian ngó qua website của tụi mình!</i></b>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   </body>
 </html>

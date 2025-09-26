@@ -1,0 +1,40 @@
+/* Định dạng ảnh trong card */
+.card-img-top {
+    height: 300px;       /* Chiều cao đồng nhất */
+    object-fit: contain;
+  border-radius: 8px;  /* Bo góc ảnh */
+}
+
+/* Định dạng nội dung card */
+.card-body {
+  font-size: 14px;
+}
+
+.card-body h5 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Link "Xem thêm" */
+.card-body a {
+  font-weight: 500;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.card-body a:hover {
+  text-decoration: underline;
+}
+/* mũi tên */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev {
+  left: -70px;
+}
+
+.carousel-control-next {
+  right: -70px;
+}
