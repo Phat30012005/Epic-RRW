@@ -1,67 +1,118 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chicky.stu</title>
-    <!-- Styles Boots -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <!-- .CSS -->
-      <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body>
-    <!-- Js Boots -->
-    <div class="mx-auto p-2 text-danger-emphasis" style="width: 200px;">
-      <h1>Chicky.Stu</h1>
+  <body class="bg-gray-100 flex flex-column min-h-screen">
+    <!-- Phần đầu trang -->
+    <div class="text-center p-3">
+      <img
+        src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68d79ba9&is=68d64a29&hm=72a8564c4b06a5d7343e490472dab615fd91db399a2f82579c7f52abf0c74480&=&format=webp&quality=lossless&width=658&height=593"
+        alt="logo"
+        class="mx-auto d-block"
+        style="height: 100px; width: auto"
+      />
+      <h1 class="mt-2 fw-bold">Chicky.Stu</h1>
+      <p class="mt-2">ở đây có một câu slogan vogiacu</p>
     </div>
-      <p class="text-center text-capitalize fs-4">
-      <i>ở đây có một câu slogan vogiacu</i>
-    </p>
-    <hr />
-    <form>
-      <button type="button">Trang chủ</button>
-      <button><b>Tìm người ở ghép</b></button>
-      <select class="form-select form-select-sm" style="width: max-content;" aria-label="Trang cá nhân">
-        <option selected>Trang cá nhân</option>
-        <option value="">Đăng kí/Đăng nhập</option>
-        <option value="">Tài khoản</option>
-        <option value="">Quản lý bài đăng</option>
-      </select>
-    </form>
-    <br>
-    <form>
-        <button><b>Tìm Kiếm</b></button>
-        <input type="search" id="" placeholder="Nhập nội dung cần tìm ở đây" size="25"/>
-    <br> <br>
-    <!-- Phân loại phòng trọ -->
-    <label for="choose-type-room"><button type="submit">Lọc</button></label>
-      <select name="price" id="choose-type-room">
-        <option value="">Giá phòng</option>
-        <option>1-2 triệu/tháng</option>
-        <option>2-3 triệu/tháng</option>
-        <option>4-5 triệu/tháng</option>
-      </select>
-      <select name="typeroom" id="choose-type-room">
-        <option value="">Loại phòng trọ</option>
-        <option>Phòng trọ cấp 4</option>
-        <optgroup label="Phòng trọ có gác mái">
-          <option value="">gác bê tông đúc thật lát gạch</option>
-          <option value="">gác cemboard phủ simili</option>
-          <option value="">gác sàn gỗ </option>
-        </optgroup>
-        </option>
-      </select>
-      <select name="roomsize" id="choose-type-room">
-        <option value="">Diện tích phòng</option>
-        <option value="">Trọ nhỏ (10-16m²) </option>
-        <option value="">trọ trung bình (18-25 m²)</option>
-        <option value="">trọ lớn (25-35m² hoặc hơn)</option>
-      </select>
-      <br> <br>
-      <!-- Hotnews -->
+
+    <!-- Thanh điều hướng -->
+    <header class="bg-white shadow-md">
+      <nav
+        class="container d-flex justify-content-between align-items-center py-3"
+      >
+        <!-- Menu -->
+        <div class="d-flex align-items-center gap-3">
+          <a href="#">Trang chủ</a>
+          <a href="#">Tìm Trọ</a>
+          <a href="#">Tìm người ở ghép</a>
+        </div>
+
+        <!-- Bộ lọc -->
+        <div class="d-flex gap-2 align-items-center">
+          <select name="price" id="price">
+            <option value="">Giá phòng</option>
+            <option>1-2 triệu/tháng</option>
+            <option>3-4 triệu/tháng</option>
+            <option>5-6 triệu/tháng</option>
+          </select>
+
+          <select name="typeroom" id="typeroom">
+            <option value="">Loại phòng trọ</option>
+            <option>Phòng trọ cấp 4</option>
+            <optgroup label="Phòng trọ có gác mái">
+              <option>gác bê tông đúc thật lát gạch</option>
+              <option>gác cemboard phủ simili</option>
+              <option>gác sàn gỗ</option>
+            </optgroup>
+          </select>
+
+          <select name="roomsize" id="roomsize">
+            <option value="">Diện tích phòng</option>
+            <option>Trọ nhỏ (10-16m²)</option>
+            <option>Trọ trung bình (18-25 m²)</option>
+            <option>Trọ lớn (25-35m² hoặc hơn)</option>
+          </select>
+
+          <select name="local" id="local">
+            <option value="">Phường/Xã</option>
+            <option>Phường Ninh Kiều</option>
+            <option>Phường Cái Răng</option>
+            <option>Phường Cái Khế</option>
+            <option>Phường Bình Thủy</option>
+            <option>Phường Thốt Nốt</option>
+            <option>Phường Ô Môn</option>
+            <option>Phường Mỹ Xuyên</option>
+          </select>
+
+          <!-- Nút lọc -->
+          <button type="submit" class="btn btn-outline-primary">Lọc</button>
+        </div>
+
+        <!-- Trang cá nhân -->
+        <div class="dropdown">
+          <button
+            class="btn btn-outline-secondary dropdown-toggle"
+            type="button"
+            id="accountMenu"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="accountMenu">
+            <li><h6 class="dropdown-header">Trang cá nhân</h6></li>
+            <li><a class="dropdown-item" href="#">Đăng ký / Đăng nhập</a></li>
+            <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+            <li><a class="dropdown-item" href="#">Quản lý bài đăng</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Nội dung chính (carousel và phần khác giữ nguyên như bạn có) -->
+    <!-- Hotnews -->
     <section class="container my-5">
   <h3 class="mb-4">Phòng trọ được đánh giá cao</h3>
 
@@ -141,7 +192,7 @@
               <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 5">
               <div class="card-body d-flex flex-column">
                 <h6 class="card-title">Phòng 5</h6>
-                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
                 <p class="card-text small mb-1">Vị trí : </p>
                 <p class="card-text small mb-2">Giá: </p>
                 <a href="#" class="mt-auto text-end">Xem thêm</a>
@@ -155,7 +206,7 @@
               <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 6">
               <div class="card-body d-flex flex-column">
                 <h6 class="card-title">Phòng 6</h6>
-                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
                 <p class="card-text small mb-1">Vị trí : </p>
                 <p class="card-text small mb-2">Giá: </p>
                 <a href="#" class="mt-auto text-end">Xem thêm</a>
@@ -169,7 +220,7 @@
               <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 7">
               <div class="card-body d-flex flex-column">
                 <h6 class="card-title">Phòng 7</h6>
-                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
                 <p class="card-text small mb-1">Vị trí : </p>
                 <p class="card-text small mb-2">Giá: </p>
                 <a href="#" class="mt-auto text-end">Xem thêm</a>
@@ -183,7 +234,7 @@
               <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 8">
               <div class="card-body d-flex flex-column">
                 <h6 class="card-title">Phòng 8</h6>
-                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
                 <p class="card-text small mb-1">Vị trí : </p>
                 <p class="card-text small mb-2">Giá: </p>
                 <a href="#" class="mt-auto text-end">Xem thêm</a>
@@ -208,48 +259,184 @@
   </div>
 </section>
       <br>
-    <table>
-      <tr>
-        <td>
-          <pre>
-            Trang chủ
+      <!-- Ở ghép -->
+      <section class="container my-5">
+  <h3 class="mb-4">Tìm người ở ghép</h3>
 
-            Quy định sử dụng 
-            và đăng tin
-          </pre>
-        </td>
-        <td>
-          <pre>
-            Hướng dẫn
+  <div id="roomCarousel2" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
 
-            Trợ giúp khách hàng
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="row row-cols-4 g-3">
 
-            Chính sách bảo mật
-          </pre>
-        </td>
-        <td>
-            <pre>
-              Liên hệ qua:
-              Zalo/Facebook
-              Email
-              Hotline
-            </pre>
-        </td>
-    </table>
-    <hr />
-    <a href="#"
-      ><img
-        src="https://media.istockphoto.com/id/498569615/vi/vec-to/bi%E1%BB%83u-t%C6%B0%E1%BB%A3ng-n%C3%BAt-home-web.jpg?s=612x612&w=0&k=20&c=bYnt_bUZcDKk1TJIITxITJ3vSylXM6C32VlETsJQawQ="
-        height="40"
-        alt="Home"
-    /></a>
-    <a href=""
-      ><img
-        src="https://cdn-icons-png.freepik.com/512/5632/5632370.png"
-        height="40"
-        alt="Home"
-    /></a> <br>
-    <b><i>Cảm ơn bạn đã dành chút thời gian ngó qua website của tụi mình!</i></b>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+          <!-- Phòng 1 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 1">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 1</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 2 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 2">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 2</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 3 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 3">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 3</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 4 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 4">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 4</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="row row-cols-4 g-3">
+
+          <!-- Phòng 5 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 5">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 5</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 6 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 6">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 6</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 7 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 7">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 7</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phòng 8 -->
+          <div class="col">
+            <div class="card h-100">
+              <img src="https://enic.vn/wp-content/uploads/2023/12/nha-tro-cho-thue.jpg" class="card-img-top" alt="Phòng 8">
+              <div class="card-body d-flex flex-column">
+                <h6 class="card-title">Phòng 8</h6>
+                <p class="card-text small mb-1">Đánh Giá : ⭐⭐⭐⭐⭐</p>
+                <p class="card-text small mb-1">Vị trí : </p>
+                <p class="card-text small mb-2">Giá: </p>
+                <a href="#" class="mt-auto text-end">Xem thêm</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nút mũi tên -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#roomCarousel2" data-bs-slide="prev">
+      <i class="bi bi-arrow-left-circle-fill fs-2 text-danger-emphasis"></i>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#roomCarousel2" data-bs-slide="next">
+      <i class="bi bi-arrow-right-circle-fill fs-2 text-danger-emphasis "></i>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+    <!-- Footer -->
+    <div class="footer mt-5 d-flex justify-content-around p-3 bg-light">
+      <div>
+        <a href="#">
+          <img
+            src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68d79ba9&is=68d64a29&hm=72a8564c4b06a5d7343e490472dab615fd91db399a2f82579c7f52abf0c74480&=&format=webp&quality=lossless&width=658&height=593"
+            alt="logo"
+            style="height: 100px; width: auto"
+          />
+        </a>
+        <pre>Quy định sử dụng 
+và đăng tin</pre>
+      </div>
+      <div>
+        <p>Hướng dẫn</p>
+        <p>Trợ giúp khách hàng</p>
+        <p>Chính sách bảo mật</p>
+      </div>
+      <div>
+        <p><b>Liên hệ qua:</b></p>
+        <p>Zalo / Facebook</p>
+        <p>Email</p>
+        <p>Hotline</p>
+      </div>
+    </div>
+
+    <p class="thanks text-center">
+      &copy; 2025 Chicky.stu. Tất cả bản quyền được bảo lưu.
+    </p>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

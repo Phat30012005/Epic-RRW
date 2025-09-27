@@ -1,8 +1,14 @@
+/* ĐỊNH DẠNG CHUNG */
+body{
+  font-family:'Inter', sans-serif ;
+}
+
+
 /* Định dạng ảnh trong card */
 .card-img-top {
-    height: 300px;       /* Chiều cao đồng nhất */
-    object-fit: contain;
-  border-radius: 8px;  /* Bo góc ảnh */
+  height: 300px; /* Chiều cao đồng nhất */
+  object-fit: contain;
+  border-radius: 8px; /* Bo góc ảnh */
 }
 
 /* Định dạng nội dung card */
@@ -38,3 +44,32 @@
 .carousel-control-next {
   right: -70px;
 }
+
+/* phần cuối */
+.footer {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.footer div {
+  flex: 1;
+}
+
+.footer p,
+pre {
+  color: rgb(238, 140, 186);
+}
+
+.thanks {
+  text-align: center;
+  font-style: italic;
+  font-weight: lighter;
+  margin-top: 25px;
+  font-size: large;
+  color: rgb(222, 8, 8);
+}
+
+/* Phần đầu */
+
