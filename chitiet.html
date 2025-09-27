@@ -6,16 +6,15 @@
     <title>Chicky.stu - Chi tiết tin</title>
      <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for icons -->
+     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-</head>
+    </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
     <header class="bg-white shadow-md">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4 text-sm font-semibold text-gray-700">
                 <a href="#" class="nav-link">
-                    <img src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68d79ba9&is=68d64a29&hm=72a8564c4b06a5d7343e490472dab615fd91db399a2f82579c7f52abf0c74480&=&format=webp&quality=lossless&width=658&height=593"  alt="Trang chủ" class="w-24 mb-4">
+                    <img src="https://cdn.discordapp.com/attachments/1259718831102758944/1420819731585175642/image.png?ex=68d8c33d&is=68d771bd&hm=865ae16f394f9d7b0c0eb408766823a01eb0f7642e15a1ddf2b3b7b1130419ea&"  alt="Trang chủ" class="w-24 mb-4">
                 </a>
                 <a href="dangtin.html" class="nav-link">Đăng tin</a>
                 <a href="danhsach.html" class="nav-link">Danh sách thuê phòng trọ</a>
@@ -28,45 +27,60 @@
     </header>
 
     <main class="container mx-auto px-4 py-8 flex-grow">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6" id="detail-page-title"></h1>
+        
         <div id="post-detail-container" class="card p-6">
             
-            <h1 class="text-3xl font-bold text-gray-800 mb-2" id="detail-title"></h1>
+            <div class="mb-6 relative image-gallery-wrapper">
+                <div id="detail-images-display" class="image-display-area">
+                    </div>
+                <button id="prev-btn" class="slider-btn slider-btn-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="next-btn" class="slider-btn slider-btn-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div id="detail-thumbnails" class="image-thumbnails-area">
+                    </div>
+            </div>
+
+            <h2 class="text-3xl font-bold text-gray-800 mb-2" id="detail-title"></h2>
             <div class="text-gray-500 mb-4">
                 <span id="detail-date"></span>
             </div>
 
-            <div class="flex items-center text-xl font-semibold text-green-600 mb-4">
+            <div class="flex items-center text-2xl font-bold text-red-600 mb-4">
                 <i class="fa-solid fa-tag mr-2"></i>
                 <span id="detail-price"></span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-gray-700 mb-6 detail-info-grid">
+                
                 <div class="flex items-center">
-                    <i class="fa-solid fa-ruler-combined mr-2"></i>
-                    <span id="detail-area"></span>
+                    <i class="fa-solid fa-ruler-combined mr-2 text-blue-500"></i>
+                    <span class="font-semibold text-gray-600">Diện tích:</span>
+                    <span class="ml-2" id="detail-area"></span>
                 </div>
                 <div class="flex items-center">
-                    <i class="fa-solid fa-door-open mr-2"></i>
-                    <span id="detail-rooms"></span>
+                    <i class="fa-solid fa-door-open mr-2 text-blue-500"></i>
+                    <span class="font-semibold text-gray-600">Số phòng:</span>
+                    <span class="ml-2" id="detail-rooms"></span>
                 </div>
                 <div class="flex items-center">
-                    <i class="fa-solid fa-location-dot mr-2"></i>
-                    <span id="detail-province"></span>, <span id="detail-district"></span>, <span id="detail-ward"></span>
+                    <i class="fa-solid fa-location-dot mr-2 text-blue-500"></i>
+                    <span class="font-semibold text-gray-600">Khu vực:</span>
+                    <span class="ml-2" id="detail-ward"></span>
                 </div>
                 <div class="flex items-center">
-                    <i class="fa-solid fa-map-pin mr-2"></i>
-                    <span id="detail-address"></span>
+                    <i class="fa-solid fa-map-pin mr-2 text-blue-500"></i>
+                    <span class="font-semibold text-gray-600">Địa chỉ chi tiết:</span>
+                    <span class="ml-2" id="detail-address"></span>
                 </div>
-            </div>
-
-            <div class="mb-6">
-                <h2 class="section-title mb-4">HÌNH ẢNH</h2>
-                <div id="detail-images" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
             </div>
 
             <div class="mb-6">
                 <h2 class="section-title mb-4">MÔ TẢ CHI TIẾT</h2>
-                <p id="detail-description" class="text-gray-700 leading-relaxed whitespace-pre-wrap"></p>
+                <p id="detail-description" class="text-base text-gray-700 leading-relaxed whitespace-pre-wrap"></p>
             </div>
             
             <div class="mb-6">
@@ -76,9 +90,9 @@
 
             <div>
                 <h2 class="section-title mb-4">THÔNG TIN LIÊN HỆ</h2>
-                <p class="text-gray-700"><i class="fa-solid fa-user mr-2"></i> <span id="detail-contact-name"></span></p>
-                <p class="text-gray-700"><i class="fa-solid fa-phone mr-2"></i> <span id="detail-phone"></span></p>
-                <p class="text-gray-700"><i class="fa-solid fa-envelope mr-2"></i> <span id="detail-email"></span></p>
+                <p class="text-base text-gray-700"><i class="fa-solid fa-user mr-2 text-red-500"></i> **Người liên hệ:** <span class="font-semibold" id="detail-contact-name"></span></p>
+                <p class="text-base text-gray-700"><i class="fa-solid fa-phone mr-2 text-red-500"></i> **Điện thoại:** <span class="font-semibold" id="detail-phone"></span></p>
+                <p class="text-base text-gray-700"><i class="fa-solid fa-envelope mr-2 text-red-500"></i> **Email:** <span class="font-semibold" id="detail-email"></span></p>
             </div>
         </div>
     </main>
@@ -86,9 +100,8 @@
     <footer class="bg-gray-900 text-white py-12 mt-8">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <img src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68d79ba9&is=68d64a29&hm=72a8564c4b06a5d7343e490472dab615fd91db399a2f82579c7f52abf0c74480&=&format=webp&quality=lossless&width=658&height=593" alt="Chicky.stu Logo" class="w-24 mb-4">
                 <h3 class="text-xl font-bold mb-4">Chicky.stu</h3>
-                <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Việt Nam.</p>
+                <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ.</p>
             </div>
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>

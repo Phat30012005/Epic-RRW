@@ -5,6 +5,7 @@
 body {
     /* Đảm bảo chữ đẹp và dễ đọc, sử dụng font Inter qua Tailwind */
     font-family: 'Inter', sans-serif; 
+    font-size: 16px; /* Thiết lập phông chữ cơ bản hợp lý hơn */
 }
 
 /* Modal Overlay cho alert/confirm (thay thế alert/confirm mặc định) */
@@ -40,10 +41,17 @@ body {
     padding: 8px 12px;
     border-radius: 8px;
     transition: background-color 0.2s ease;
+    font-size: 0.95rem; /* Giữ chữ menu nhỏ gọn */
 }
 
 .nav-link:hover {
     background-color: #f3f4f6; /* Màu nền nhẹ khi di chuột */
+}
+
+.nav-brand {
+    /* Kiểu dáng cho chữ thương hiệu */
+    padding: 0 12px;
+    font-size: 1.8rem; /* Tiêu đề thương hiệu lớn */
 }
 
 .bg-gray-200 {
@@ -60,8 +68,8 @@ body {
 }
 
 .form-section-title {
-    /* Tiêu đề của từng mục lớn trong form Đăng tin */
-    font-size: 1.125rem; /* text-lg */
+    /* Tiêu đề của từng mục lớn trong form Đăng tin (Tiêu đề nhỏ đi 1 chút) */
+    font-size: 1rem; /* text-base */
     font-weight: 700; /* font-bold */
     color: #4b5563; /* text-gray-700 */
     border-bottom: 2px solid #e5e7eb;
@@ -69,8 +77,8 @@ body {
 }
 
 .section-title {
-    /* Tiêu đề cho các mục trong trang Chi tiết tin */
-    font-size: 1.5rem; /* text-2xl */
+    /* Tiêu đề cho các mục trong trang Chi tiết tin (Tiêu đề nhỏ đi 1 chút) */
+    font-size: 1.25rem; /* text-xl */
     font-weight: 700;
     color: #1f2937;
     border-left: 5px solid #3b82f6; /* Đường viền xanh nổi bật */
@@ -90,11 +98,13 @@ textarea {
     /* Kiểu dáng chung cho tất cả các trường nhập liệu */
     width: 100%;
     padding: 10px;
+	 height: 44px;
     border: 1px solid #d1d5db; /* border-gray-300 */
     border-radius: 6px; /* rounded-md */
     margin-top: 4px;
     transition: border-color 0.2s, box-shadow 0.2s;
     outline: none;
+    font-size: 1rem; /* Phông chữ input hợp lý */
 }
 
 input:focus, 
@@ -122,6 +132,59 @@ textarea {
 .btn-submit:hover {
     background-color: #dc2626; /* bg-red-600 */
     transform: translateY(-1px);
+}
+
+/* Kiểu dáng cho phần hiển thị của Select Box tùy chỉnh */
+.custom-select-trigger {
+    width: 100%;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    margin-top: 4px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 24px; /* Căn giữa nội dung văn bản */
+    position: relative;
+    /* Thêm mũi tên tùy chỉnh (bạn có thể tự thêm icon nếu muốn) */
+}
+
+.custom-select-trigger:focus {
+    border-color: #3b82f6; /* Màu xanh khi focus */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Kiểu dáng cho danh sách thả xuống */
+.custom-dropdown {
+    position: absolute; /* RẤT QUAN TRỌNG: Giúp nó mở xuống dưới */
+    width: 100%; /* Chiếm hết chiều rộng của div cha */
+    max-height: 200px;
+    overflow-y: auto; 
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    z-index: 50;
+    list-style: none;
+    padding: 0;
+    margin-top: 2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-dropdown.hidden {
+    display: none;
+}
+
+.custom-dropdown li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.custom-dropdown li:hover {
+    background-color: #f3f4f6;
+    font-weight: 500;
 }
 
 /* =========================================
@@ -176,7 +239,129 @@ textarea {
 }
 
 /* =========================================
-5. DANH SÁCH TIN VÀ CHI TIẾT
+5. TRANG CHI TIẾT TIN - IMAGE GALLERY VÀ SLIDER
+=========================================
+*/
+
+.image-gallery-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Giới hạn chiều rộng của gallery */
+    margin: 0 auto 20px auto;
+}
+
+
+.image-display-area {
+    width: 100%;
+    height: 400px;
+    background-color: #e5e7eb; 
+    overflow: hidden; 
+    border-radius: 12px;
+    margin-bottom: 15px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    /* Giữ nguyên Flexbox để căn giữa */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.image-display-area img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; /*  Dùng 'contain' để đảm bảo toàn bộ ảnh hiển thị */
+    object-position: center; /* Đảm bảo điểm lấy nét là trung tâm */
+    border-radius: 12px; 
+    display: none; 
+}
+
+.image-display-area img.active {
+    display: block;
+}
+
+
+.slider-btn {
+    position: absolute;
+    top: 150px; /* Căn giữa theo chiều cao của ảnh chính (450px/2) */
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    z-index: 10;
+}
+
+.slider-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.slider-btn-prev {
+    left: 10px;
+}
+
+.slider-btn-next {
+    right: 10px;
+}
+
+.image-thumbnails-area {
+    display: flex;
+    overflow-x: auto; /* Cho phép cuộn ngang */
+    gap: 10px;
+    padding: 10px; /* Thêm padding 2 bên */
+    background-color: #f9fafb;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.thumbnail-item {
+    flex-shrink: 0; /* Ngăn ảnh thumbnail co lại */
+    width: 120px; /* Chiều rộng cố định cho thumbnail */
+    height: 70px; /* Chiều cao cố định cho thumbnail */
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.thumbnail-item:hover {
+    transform: translateY(-2px);
+}
+
+.thumbnail-item.active {
+    border-color: #3b82f6; /* Viền xanh cho thumbnail đang hoạt động */
+    transform: scale(1.05);
+}
+
+/* Các phần tử thông tin chi tiết */
+.detail-info-grid {
+    font-size: 1rem; /* Phông chữ cho thông tin chi tiết */
+}
+
+.highlight-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.highlight-item {
+    background-color: #ecfdf5; /* Màu nền xanh lá nhạt */
+    color: #059669; /* Màu chữ xanh lá đậm */
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid #a7f3d0;
+}
+
+
+/* =========================================
+6. TRANG DANH SÁCH VÀ ADMIN
 =========================================
 */
 
@@ -205,28 +390,7 @@ textarea {
     padding: 16px;
 }
 
-.highlight-list {
-    /* Container cho danh sách các đặc điểm nổi bật trong trang Chi tiết */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
 
-.highlight-item {
-    /* Định kiểu cho từng đặc điểm nổi bật */
-    background-color: #ecfdf5; /* Màu nền xanh lá nhạt */
-    color: #059669; /* Màu chữ xanh lá đậm */
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: 1px solid #a7f3d0;
-}
-
-/* =========================================
-6. TRANG QUẢN TRỊ (ADMIN)
-=========================================
-*/
 .admin-table {
     width: 100%;
     border-collapse: separate;
@@ -264,3 +428,5 @@ textarea {
 .btn-delete:hover {
     background-color: #ef4444; /* bg-red-500 */
 }
+
+/*  */

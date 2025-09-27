@@ -6,6 +6,7 @@
     <title>Chicky.stu - Đăng Tin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
+    
 
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -13,7 +14,7 @@
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4 text-sm font-semibold text-gray-700">
                 <a href="#" class="nav-link">
-                    <img src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68d79ba9&is=68d64a29&hm=72a8564c4b06a5d7343e490472dab615fd91db399a2f82579c7f52abf0c74480&=&format=webp&quality=lossless&width=658&height=593"  alt="Trang chủ" class="w-24 mb-4">
+                    <img src="https://cdn.discordapp.com/attachments/1259718831102758944/1420819731585175642/image.png?ex=68d8c33d&is=68d771bd&hm=865ae16f394f9d7b0c0eb408766823a01eb0f7642e15a1ddf2b3b7b1130419ea&"  alt="Trang chủ" class="w-24 mb-4">
                 </a>
                 <a href="dangtin.html" class="nav-link bg-gray-200">Đăng tin</a>
                 <a href="danhsach.html" class="nav-link">Danh sách thuê phòng trọ</a>
@@ -31,11 +32,14 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="md:col-span-2">
                 <form id="postForm" class="space-y-6">
-                    <!-- Thông tin cơ bản -->
                     <div class="card p-6">
                         <div class="form-section-title">THÔNG TIN CƠ BẢN</div>
                         <div class="space-y-4 pt-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="motelName" class="text-gray-600">Tên trọ</label>
+                                    <input type="text" id="motelName" placeholder="Tên trọ" required>
+                                </div>
                                 <div>
                                     <label for="title" class="text-gray-600">Tiêu đề tin</label>
                                     <input type="text" id="title" placeholder="Tiêu đề tin" required>
@@ -58,33 +62,33 @@
                                     <label for="rooms" class="text-gray-600">Số phòng</label>
                                     <input type="number" id="rooms" placeholder="Số phòng" required>
                                 </div>
+                                <div class="relative"> 
+    <label for="ward" class="text-gray-600"> Phường/Xã</label>
+    <input type="hidden" id="ward-hidden" name="ward-hidden" required> 
+
+    <div id="ward-custom-select" class="custom-select-trigger" tabindex="0">
+        Chọn Phường/Xã
+    </div>
+    
+    <ul id="ward-dropdown" class="custom-dropdown hidden">
+        </ul>
+</div>
+
+<div class="md:col-span-2">
+    </div>
                                 <div class="md:col-span-2">
-                                    <label for="province" class="text-gray-600"> Chọn Phường/ Xã</label>
-                                    <select id="province" required>
-                                        <option value="">Phường Ninh Kiều</option>
-                                        <option value="">Phường Cái Răng</option>
-                                        <option value="">Phường Cái Khế</option>
-                                        <option value="">Phường Bình Thuỷ</option>
-                                        <option value="">Phường Thốt Nốt</option>
-                                        <option value="">Phường Ô Môn</option>
-                                        <option value="">Phường Mỹ Xuyên</option>
-                                    </select>
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label for="address" class="text-gray-600">Địa chỉ</label>
-                                    <input type="text" id="address" placeholder="Địa chỉ chi tiết" required>
+                                    <label for="address" class="text-gray-600">Địa chỉ chi tiết</label>
+                                    <input type="text" id="address" placeholder="Địa chỉ chi tiết (Số nhà, tên đường, thuộc Quận nào...)" required>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Mô tả chi tiết -->
                     <div class="card p-6">
                         <div class="form-section-title">MÔ TẢ CHI TIẾT</div>
                         <textarea id="description" rows="5" placeholder="Nhập mô tả chi tiết" required class="pt-6"></textarea>
                     </div>
 
-                    <!-- Thông tin liên hệ -->
                     <div class="card p-6">
                         <div class="form-section-title">THÔNG TIN LIÊN HỆ</div>
                         <div class="space-y-4 pt-6">
@@ -103,7 +107,6 @@
                         </div>
                     </div>
 
-                    <!-- Nổi bật -->
                     <div class="card p-6">
                         <div class="form-section-title">NỔI BẬT</div>
                         <div id="highlights" class="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6">
@@ -135,10 +138,13 @@
                                 <input type="checkbox" name="highlight" value="Có máy giặt" class="highlight-checkbox">
                                 <div class="highlight-content">Có máy giặt</div>
                             </label>
+                            <label class="highlight-label">
+                                <input type="checkbox" name="highlight" value="Có tủ lạnh" class="highlight-checkbox">
+                                <div class="highlight-content">Có tủ lạnh</div>
+                            </label>
                         </div>
                     </div>
 
-                    <!-- Hình ảnh -->
                     <div class="card p-6">
                         <div class="form-section-title">HÌNH ẢNH</div>
                         <p class="text-sm text-gray-500 pt-6">
@@ -154,7 +160,6 @@
                 </form>
             </div>
 
-            <!-- Hướng dẫn đăng tin -->
             <div class="md:col-span-1">
                 <div class="card p-6">
                     <h2 class="text-lg font-semibold mb-4">HƯỚNG DẪN ĐĂNG TIN</h2>
@@ -179,17 +184,17 @@
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li><a href="dangtin.html" class="hover:underline">Đăng tin</a></li>
-                    <li><a href="danhsach.html" class="hover:underline">Tìm kiếm</a></li>
-                    <li><a href="admin.html" class="hover:underline">Quản trị</a></li>
+                    <li><a href="dangtin.html" class="hover:underline">Hướng dẫn</a></li>
+                    <li><a href="danhsach.html" class="hover:underline">Trợ giúp khách hàng</a></li>
+                    <li><a href="admin.html" class="hover:underline">Chính sách bảo mật</a></li>
                 </ul>
             </div>
             <div>
-                <h3 class="text-lg font-semibold mb-4">LIÊN HỆ</h3>
+                <h3 class="text-lg font-semibold mb-4">Liên hệ qua</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.CanTho</li>
-                    <li>Điện thoại: (028) 123 4567</li>
+                    <li>Zalo/Facebook</li>                   
                     <li>Email: contact@chickystu.vn</li>
+                    <li>Hotline</li>
                 </ul>
             </div>
         </div>
@@ -198,5 +203,6 @@
         </div>
     </footer>
     <script src="script.js"></script>
+
 </body>
 </html>
