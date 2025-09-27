@@ -1,7 +1,7 @@
 (function () {
-  const STORAGE_KEY = "rooms";
+  const SAMPLE_KEY = "sampleRooms";
+  const USER_KEY = "userRooms";
 
-  // Mẫu dữ liệu khởi tạo lần đầu
   const sampleRooms = [
     {
       id: 1,
@@ -9,9 +9,10 @@
       type: "Ghép",
       price: 1800000,
       address: "123 ABCD",
-      images: images = ["images/room1.jpg"] ,
-      description: "Phòng rộng rãi, gần trung tâm, an ninh tốt.",
+      images: ["images/room1.jpg"],
+      description: "Phòng rộng rãi, gần trung tâm thành phố, an ninh tốt.",
       hot: true,
+      rating: 4,
     },
     {
       id: 2,
@@ -22,6 +23,7 @@
       images: ["images/room2.jpg"],
       description: "Căn hộ đầy đủ tiện nghi, cho gia đình.",
       hot: false,
+      rating: 5,
     },
     {
       id: 3,
@@ -32,6 +34,7 @@
       images: ["images/room2.jpg"],
       description: "Phòng đơn đầy đủ tiện nghi",
       hot: false,
+      rating: 3,
     },
     {
       id: 4,
@@ -42,35 +45,38 @@
       images: ["images/room3.jpg"],
       description: "Phòng sạch sẽ, gần ĐHCT, giá hợp lý.",
       hot: false,
+      rating: 4,
     },
   ];
 
-  // Lấy từ localStorage
+  function getSampleRooms() {
+    return JSON.parse(localStorage.getItem(SAMPLE_KEY) || "[]");
+  }
+
+  function getUserRooms() {
+    return JSON.parse(localStorage.getItem(USER_KEY) || "[]");
+  }
+
   function getRooms() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return [...getSampleRooms(), ...getUserRooms()];
   }
 
-  // Lưu vào localStorage
-  function saveRooms(data) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  function saveUserRooms(data) {
+    localStorage.setItem(USER_KEY, JSON.stringify(data));
   }
 
-  // Hàm lọc phòng
-  function filterRooms({ type = "", minPrice = 0, maxPrice = Infinity } = {}) {
-    return getRooms().filter((room) => {
-      const matchType = type ? room.type === type : true;
-      const matchPrice = room.price >= minPrice && room.price <= maxPrice;
-      return matchType && matchPrice;
-    });
+  function addRoom(room) {
+    const rooms = getUserRooms();
+    room.id = Date.now();
+    room.images = Array.isArray(room.images) ? room.images : [room.images];
+    rooms.push(room);
+    saveUserRooms(rooms);
   }
 
-  // Khởi tạo sampleRooms nếu chưa có key
-  if (!localStorage.getItem(STORAGE_KEY)) {
-    saveRooms(sampleRooms);
+  if (!localStorage.getItem(SAMPLE_KEY)) {
+    localStorage.setItem(SAMPLE_KEY, JSON.stringify(sampleRooms));
   }
 
-  // Xuất ra ngoài để file khác dùng
   window.getRooms = getRooms;
-  window.saveRooms = saveRooms;
-  window.filterRooms = filterRooms;
+  window.addRoom = addRoom;
 })();

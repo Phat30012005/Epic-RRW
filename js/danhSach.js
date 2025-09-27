@@ -4,16 +4,18 @@
   const filterType = document.getElementById("filterType");
   const filterPrice = document.getElementById("filterPrice");
   const sortSelect = document.getElementById("sortSelect");
+  const emptyState = document.getElementById("emptyState");
 
-  let currentRooms = getRooms(); // lấy từ localStorage
+  let currentRooms = getRooms();
 
-  // Hàm render danh sách phòng
   function renderRooms(rooms) {
     roomList.innerHTML = "";
 
     if (rooms.length === 0) {
-      roomList.innerHTML = `<p class="text-center text-muted">Không tìm thấy phòng nào.</p>`;
+      if (emptyState) emptyState.style.display = "block";
       return;
+    } else {
+      if (emptyState) emptyState.style.display = "none";
     }
 
     rooms.forEach((room) => {
@@ -21,11 +23,14 @@
       col.className = "col-md-4 mb-4";
       col.innerHTML = `
         <div class="card h-100 shadow-sm">
-          <img src="${room.images[0]}" class="card-img-top" alt="${room.name}">
+          <img src="${room.images[0]}" class="card-img-top" alt="${
+        room.name
+      }" onerror="this.src='images/default.jpg'">
           <div class="card-body">
             <h5 class="card-title">${room.name}</h5>
             <p class="card-text">${room.description}</p>
             <p><strong>Giá:</strong> ${room.price.toLocaleString()} đ</p>
+            <p><strong>Đánh giá:</strong> ${room.rating ?? "Chưa có"} ⭐</p>
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#roomModal" data-id="${
               room.id
             }">
@@ -38,62 +43,49 @@
     });
   }
 
-  // Hàm lọc theo giao diện
   function applyFilters() {
     let rooms = getRooms();
 
-    // lọc theo loại phòng
     const type = filterType.value;
-    if (type) {
-      rooms = rooms.filter((r) => r.type === type);
-    }
+    if (type) rooms = rooms.filter((r) => r.type === type);
 
-    // lọc theo giá
     const priceFilter = filterPrice.value;
-    if (priceFilter === "duoi2") {
-      rooms = rooms.filter((r) => r.price < 2000000);
-    } else if (priceFilter === "2-5") {
+    if (priceFilter === "duoi2") rooms = rooms.filter((r) => r.price < 2000000);
+    else if (priceFilter === "2-5")
       rooms = rooms.filter((r) => r.price >= 2000000 && r.price <= 5000000);
-    } else if (priceFilter === "tren5") {
+    else if (priceFilter === "tren5")
       rooms = rooms.filter((r) => r.price > 5000000);
-    }
 
-    // lọc theo search
     const keyword = searchInput.value.toLowerCase();
     if (keyword) {
-      rooms = rooms.filter((r) => r.name.toLowerCase().includes(keyword));
+      rooms = rooms.filter(
+        (r) =>
+          r.name.toLowerCase().includes(keyword) ||
+          r.description.toLowerCase().includes(keyword)
+      );
     }
 
-    // sắp xếp
     const sort = sortSelect.value;
-    if (sort === "gia-tang") {
-      rooms.sort((a, b) => a.price - b.price);
-    } else if (sort === "gia-giam") {
-      rooms.sort((a, b) => b.price - a.price);
-    } else if (sort === "ten") {
-      rooms.sort((a, b) => a.name.localeCompare(b.name));
-    }
+    if (sort === "gia-tang") rooms.sort((a, b) => a.price - b.price);
+    else if (sort === "gia-giam") rooms.sort((a, b) => b.price - a.price);
+    else if (sort === "ten") rooms.sort((a, b) => a.name.localeCompare(b.name));
 
     currentRooms = rooms;
     renderRooms(currentRooms);
   }
 
-  // Bắt sự kiện khi thay đổi filter
   searchInput.addEventListener("input", applyFilters);
   filterType.addEventListener("change", applyFilters);
   filterPrice.addEventListener("change", applyFilters);
   sortSelect.addEventListener("change", applyFilters);
 
-  // Render ban đầu
   renderRooms(currentRooms);
 
-  // Modal chi tiết
   const roomModal = document.getElementById("roomModal");
   roomModal.addEventListener("show.bs.modal", (event) => {
     const button = event.relatedTarget;
     const id = button.getAttribute("data-id");
     const room = getRooms().find((r) => r.id == id);
-
     if (!room) return;
 
     document.getElementById("modalTitle").innerText = room.name;
@@ -102,7 +94,6 @@
       room.price.toLocaleString() + " đ";
     document.getElementById("modalAddress").innerText = room.address;
 
-    // Carousel
     const carouselInner = document.getElementById("carouselInner");
     carouselInner.innerHTML = "";
     room.images.forEach((img, index) => {
@@ -111,5 +102,10 @@
       div.innerHTML = `<img src="${img}" class="d-block w-100" alt="${room.name}">`;
       carouselInner.appendChild(div);
     });
+
+    document.querySelector(".carousel-control-prev").style.display =
+      room.images.length > 1 ? "block" : "none";
+    document.querySelector(".carousel-control-next").style.display =
+      room.images.length > 1 ? "block" : "none";
   });
 })();

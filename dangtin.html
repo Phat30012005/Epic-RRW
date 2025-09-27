@@ -3,12 +3,16 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Đăng tin phòng trọ nhanh chóng, dễ dàng tại Chicky.stu - nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ." />
     <title>Đăng tin phòng trọ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+    <!-- Header -->
     <header class="bg-white shadow-sm mb-4">
         <nav class="container d-flex justify-content-between align-items-center py-3">
             <a href="danhsach.html"><img src="images/logo.png" alt="Trang chủ" height="40" /></a>
@@ -19,77 +23,82 @@
         </nav>
     </header>
 
+    <!-- Form đăng tin -->
     <div class="container my-4">
         <h3 class="mb-3">Đăng tin phòng trọ</h3>
         <form id="postForm">
             <div class="mb-3">
-                <label class="form-label">Tên phòng</label>
+                <label for="roomName" class="form-label">Tên phòng *</label>
                 <input type="text" id="roomName" class="form-control" required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Hình ảnh (URL)</label>
+                <label for="roomImage" class="form-label">Hình ảnh (URL) *</label>
                 <input type="text" id="roomImage" class="form-control" required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Địa chỉ</label>
+                <label for="roomLocation" class="form-label">Địa chỉ *</label>
                 <input type="text" id="roomLocation" class="form-control" required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Giá (VNĐ)</label>
+                <label for="roomPrice" class="form-label">Giá (VNĐ) *</label>
                 <input type="number" id="roomPrice" class="form-control" min="0" required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Đánh giá (1-5 ⭐)</label>
+                <label for="roomRating" class="form-label">Đánh giá (1-5 ⭐) *</label>
                 <input type="number" id="roomRating" class="form-control" min="1" max="5" required />
             </div>
-            <button type="submit" class="btn btn-success">Đăng tin</button>
+            <button type="submit" class="btn btn-success" aria-label="Đăng tin phòng trọ">Đăng tin</button>
         </form>
     </div>
-<!-- Hướng dẫn đăng tin -->
-            <div class="md:col-span-1">
-                <div class="card p-6">
-                    <h2 class="text-lg font-semibold mb-4">HƯỚNG DẪN ĐĂNG TIN</h2>
-                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-2">
-                        <li>Thông tin có dấu (*) là bắt buộc.</li>
-                        <li>Không đăng tin giả, tin đã đăng trên Chicky.stu.</li>
-                        <li>Đăng tin với nội dung rõ ràng, chính xác.</li>
-                        <li>Tin có nhiều hình ảnh sẽ được xem nhiều lần.</li>
+
+    <!-- Hướng dẫn đăng tin -->
+    <div class="container my-5">
+        <div class="card p-4">
+            <h4 class="fw-semibold mb-3">HƯỚNG DẪN ĐĂNG TIN</h4>
+            <ul class="list-unstyled text-muted">
+                <li>Thông tin có dấu (*) là bắt buộc.</li>
+                <li>Không đăng tin giả, tin đã đăng trên Chicky.stu.</li>
+                <li>Đăng tin với nội dung rõ ràng, chính xác.</li>
+                <li>Tin có nhiều hình ảnh sẽ được xem nhiều lần.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3 text-center">
+                    <img src="images/logo2.png" width="200" alt="logo" class="mb-2" />
+                    <h3 class="h5 fw-bold">CHICKY.STU</h3>
+                    <p class="text-white-50 small">Nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h3 class="h6 fw-semibold mb-3">LIÊN KẾT NHANH</h3>
+                    <ul class="list-unstyled text-muted">
+                        <li><a href="dangtin.html" class="text-decoration-none text-white-50">Đăng tin</a></li>
+                        <li><a href="danhsach.html" class="text-decoration-none text-white-50">Tìm kiếm</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h3 class="h6 fw-semibold mb-3">LIÊN HỆ</h3>
+                    <ul class="list-unstyled text-white-50">
+                        <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.Cần Thơ</li>
+                        <li>Điện thoại: (028) 123 4567</li>
+                        <li>Email: contact@chickystu.vn</li>
                     </ul>
                 </div>
             </div>
-             <footer class="bg-gray-900 text-white py-12 mt-8">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <center>
-                <img src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68d79ba9&is=68d64a29&hm=72a8564c4b06a5d7343e490472dab615fd91db399a2f82579c7f52abf0c74480&=&format=webp&quality=lossless&width=658&height=593" alt="Chicky.stu Logo" class="w-24 mb-4">
-                <h3 class="text-xl font-bold mb-4">Chicky.stu</h3>
-                <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ.</p>
+            <div class="border-top pt-3 text-center text-muted small">
+                <p>&copy; 2025 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
             </div>
-            <div>
-                <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
-                <ul class="text-gray-400 space-y-2">
-                    <li><a href="dangtin.html" class="hover:underline">Đăng tin</a></li>
-                    <li><a href="danhsach.html" class="hover:underline">Tìm kiếm</a></li>
-                    <li><a href="admin.html" class="hover:underline">Quản trị</a></li>
-                </ul>
-                </center>
-            </div>
-            <div>
-                <h3 class="text-lg font-semibold mb-4">LIÊN HỆ</h3>
-                <ul class="text-gray-400 space-y-2">
-                    <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.CanTho</li>
-                    <li>Điện thoại: (028) 123 4567</li>
-                    <li>Email: contact@chickystu.vn</li>
-                </ul>
-            </div>
-        </div>
-        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500">
-            <p>&copy; 2025 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/roomsStorage.js"></script>
-    <script src="js/postForm.js"></script>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/roomsStorage.js" defer></script>
+    <script src="js/postForm.js" defer></script>
 </body>
 
 </html>
