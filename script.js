@@ -51,7 +51,7 @@ const CAN_THO_WARDS = [
     "Nhơn Ái (Phong Điền)",
     "Nhơn Nghĩa (Phong Điền)",
     "Trường Thành (Thới Lai)"
-    // Lưu ý: Dữ liệu này chỉ mang tính chất minh họa và có thể chưa đầy đủ/cập nhật 100%
+    
 ];
 
 // Các hàm tiện ích
@@ -318,12 +318,7 @@ function setupChiTietPage() {
         document.getElementById('detail-description').textContent = post.description;
         document.getElementById('detail-date').textContent = `Đăng ngày: ${post.date}`;
         
-        // Thêm Tên trọ (Đã loại bỏ trong HTML, giữ ở đây nếu cần dùng)
-        // const motelNameEl = document.getElementById('detail-motelName');
-        // if (motelNameEl) {
-        //      motelNameEl.textContent = post.motelName || 'Đang cập nhật';
-       // }
-
+        
         // ===============================================
         // LOGIC HIỂN THỊ ẢNH (SLIDER/GALLERY) - 
         // ===============================================
