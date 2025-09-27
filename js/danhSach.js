@@ -1,180 +1,115 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const roomListEl = document.getElementById("roomList");
-  if (!roomListEl) return;
-
+(function () {
+  const roomList = document.getElementById("roomList");
   const searchInput = document.getElementById("searchInput");
   const filterType = document.getElementById("filterType");
   const filterPrice = document.getElementById("filterPrice");
   const sortSelect = document.getElementById("sortSelect");
-  const paginationEl = document.getElementById("pagination");
-  const activeFiltersEl = document.getElementById("activeFilters");
-  const modalElement = document.getElementById("roomModal");
-  const modal = new bootstrap.Modal(modalElement);
 
-  let currentPage = 1;
-  const itemsPerPage = 6;
+  let currentRooms = getRooms(); // lấy từ localStorage
 
-  // Gắn sự kiện
-  searchInput.addEventListener("input", () => {
-    currentPage = 1;
-    renderRooms();
-  });
-  filterType.addEventListener("change", () => {
-    currentPage = 1;
-    renderRooms();
-  });
-  filterPrice.addEventListener("change", () => {
-    currentPage = 1;
-    renderRooms();
-  });
-  sortSelect.addEventListener("change", () => renderRooms());
+  // Hàm render danh sách phòng
+  function renderRooms(rooms) {
+    roomList.innerHTML = "";
 
-  renderRooms();
+    if (rooms.length === 0) {
+      roomList.innerHTML = `<p class="text-center text-muted">Không tìm thấy phòng nào.</p>`;
+      return;
+    }
 
-  function renderRooms() {
-    const rooms = getRooms();
-    let filtered = rooms.filter((r) => {
-      const q = searchInput.value.trim().toLowerCase();
-      if (q && !r.name.toLowerCase().includes(q)) return false;
-      if (filterType.value && r.type !== filterType.value) return false;
-
-      if (filterPrice.value === "duoi2" && r.price >= 2000000) return false;
-      if (
-        filterPrice.value === "2-5" &&
-        (r.price < 2000000 || r.price > 5000000)
-      )
-        return false;
-      if (filterPrice.value === "tren5" && r.price <= 5000000) return false;
-
-      return true;
-    });
-
-    // Sắp xếp
-    if (sortSelect.value === "gia-tang")
-      filtered.sort((a, b) => a.price - b.price);
-    if (sortSelect.value === "gia-giam")
-      filtered.sort((a, b) => b.price - a.price);
-    if (sortSelect.value === "ten")
-      filtered.sort((a, b) => a.name.localeCompare(b.name));
-
-    // Phân trang
-    const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
-    currentPage = Math.min(currentPage, totalPages);
-    const start = (currentPage - 1) * itemsPerPage;
-    const paginated = filtered.slice(start, start + itemsPerPage);
-
-    // Render card
-    roomListEl.innerHTML = paginated
-      .map(
-        (r) => `
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          ${r.hot ? '<span class="badge bg-danger badge-hot">Hot</span>' : ""}
-          <span class="favorite-btn ${
-            isFavorite(r.id) ? "active" : ""
-          }" data-id="${r.id}">❤</span>
-          <img src="${r.images[0]}" class="card-img-top" alt="${r.name}">
+    rooms.forEach((room) => {
+      const col = document.createElement("div");
+      col.className = "col-md-4 mb-4";
+      col.innerHTML = `
+        <div class="card h-100 shadow-sm">
+          <img src="${room.images[0]}" class="card-img-top" alt="${room.name}">
           <div class="card-body">
-            <h5 class="card-title">${r.name}</h5>
-            <p class="card-text">${r.description}</p>
-            <p class="text-success mb-1">${r.price.toLocaleString()} VND</p>
-            <button class="btn btn-primary w-100" onclick="showRoom(${
-              r.id
-            })">Xem thêm</button>
+            <h5 class="card-title">${room.name}</h5>
+            <p class="card-text">${room.description}</p>
+            <p><strong>Giá:</strong> ${room.price.toLocaleString()} đ</p>
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#roomModal" data-id="${
+              room.id
+            }">
+              Xem chi tiết
+            </button>
           </div>
         </div>
-      </div>
-    `
-      )
-      .join("");
-
-    bindFavoriteEvents();
-    renderPagination(totalPages);
-    renderActiveFilters();
-  }
-
-  function renderPagination(total) {
-    let html = "";
-    for (let i = 1; i <= total; i++) {
-      html += `
-        <li class="page-item ${i === currentPage ? "active" : ""}">
-          <a class="page-link" href="#" data-page="${i}">${i}</a>
-        </li>`;
-    }
-    paginationEl.innerHTML = html;
-    paginationEl.querySelectorAll(".page-link").forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        currentPage = +link.dataset.page;
-        renderRooms();
-      });
+      `;
+      roomList.appendChild(col);
     });
   }
 
-  function isFavorite(id) {
-    const fav = JSON.parse(localStorage.getItem("favorites") || "[]");
-    return fav.includes(id);
-  }
+  // Hàm lọc theo giao diện
+  function applyFilters() {
+    let rooms = getRooms();
 
-  function toggleFavorite(id) {
-    let fav = JSON.parse(localStorage.getItem("favorites") || "[]");
-    fav = fav.includes(id) ? fav.filter((x) => x !== id) : [...fav, id];
-    localStorage.setItem("favorites", JSON.stringify(fav));
-    renderRooms();
-  }
-
-  function bindFavoriteEvents() {
-    document.querySelectorAll(".favorite-btn").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleFavorite(+btn.dataset.id);
-      });
-    });
-  }
-
-  function renderActiveFilters() {
-    let tags = "";
-    const q = searchInput.value.trim();
+    // lọc theo loại phòng
     const type = filterType.value;
-    const price = filterPrice.value;
-
-    if (q) tags += `<span class="badge bg-primary me-2">Từ khóa: ${q}</span>`;
-    if (type)
-      tags += `<span class="badge bg-success me-2">Loại: ${type}</span>`;
-    if (price) {
-      const txt =
-        price === "duoi2" ? "Dưới 2M" : price === "2-5" ? "2-5M" : "Trên 5M";
-      tags += `<span class="badge bg-warning text-dark me-2">${txt}</span>`;
+    if (type) {
+      rooms = rooms.filter((r) => r.type === type);
     }
-    activeFiltersEl.innerHTML = tags;
+
+    // lọc theo giá
+    const priceFilter = filterPrice.value;
+    if (priceFilter === "duoi2") {
+      rooms = rooms.filter((r) => r.price < 2000000);
+    } else if (priceFilter === "2-5") {
+      rooms = rooms.filter((r) => r.price >= 2000000 && r.price <= 5000000);
+    } else if (priceFilter === "tren5") {
+      rooms = rooms.filter((r) => r.price > 5000000);
+    }
+
+    // lọc theo search
+    const keyword = searchInput.value.toLowerCase();
+    if (keyword) {
+      rooms = rooms.filter((r) => r.name.toLowerCase().includes(keyword));
+    }
+
+    // sắp xếp
+    const sort = sortSelect.value;
+    if (sort === "gia-tang") {
+      rooms.sort((a, b) => a.price - b.price);
+    } else if (sort === "gia-giam") {
+      rooms.sort((a, b) => b.price - a.price);
+    } else if (sort === "ten") {
+      rooms.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    currentRooms = rooms;
+    renderRooms(currentRooms);
   }
 
-  window.showRoom = function (id) {
-    const r = getRooms().find((x) => x.id === id);
-    if (!r) return;
-    document.getElementById("modalTitle").textContent = r.name;
-    document.getElementById("modalDescription").textContent = r.description;
-    document.getElementById("modalPrice").textContent =
-      r.price.toLocaleString() + " VND";
-    document.getElementById("modalAddress").textContent = r.address;
+  // Bắt sự kiện khi thay đổi filter
+  searchInput.addEventListener("input", applyFilters);
+  filterType.addEventListener("change", applyFilters);
+  filterPrice.addEventListener("change", applyFilters);
+  sortSelect.addEventListener("change", applyFilters);
 
-    document.getElementById("carouselInner").innerHTML = r.images
-      .map(
-        (images, i) => `
-      <div class="carousel-item ${i === 0 ? "active" : ""}">
-        <img src="${images}" class="d-block w-100" alt="">
-      </div>
-    `
-      )
-      .join("");
+  // Render ban đầu
+  renderRooms(currentRooms);
 
-    document.getElementById("modalMap").innerHTML = `
-      <iframe 
-        src="https://www.google.com/maps?q=${encodeURIComponent(
-          r.address
-        )}&output=embed" 
-        width="100%" height="100%" style="border:0;"></iframe>`;
+  // Modal chi tiết
+  const roomModal = document.getElementById("roomModal");
+  roomModal.addEventListener("show.bs.modal", (event) => {
+    const button = event.relatedTarget;
+    const id = button.getAttribute("data-id");
+    const room = getRooms().find((r) => r.id == id);
 
-    modal.show();
-  };
-});
+    if (!room) return;
+
+    document.getElementById("modalTitle").innerText = room.name;
+    document.getElementById("modalDescription").innerText = room.description;
+    document.getElementById("modalPrice").innerText =
+      room.price.toLocaleString() + " đ";
+    document.getElementById("modalAddress").innerText = room.address;
+
+    // Carousel
+    const carouselInner = document.getElementById("carouselInner");
+    carouselInner.innerHTML = "";
+    room.images.forEach((img, index) => {
+      const div = document.createElement("div");
+      div.className = "carousel-item" + (index === 0 ? " active" : "");
+      div.innerHTML = `<img src="${img}" class="d-block w-100" alt="${room.name}">`;
+      carouselInner.appendChild(div);
+    });
+  });
+})();

@@ -1,6 +1,6 @@
 /* Nền fixed + overlay mờ */
 body {
-  background: rgb(176, 64, 64)
+  background: #FAFAD2
   background-size: cover;
   position: relative;
   margin: 0;
@@ -62,7 +62,7 @@ body::before {
   border-radius: 4px;
 }
 .pagination .page-item.active .page-link {
-  background-color: #838fa1;
+  background-color: #87CEFA;
   border-color: #0d6efd;
   color: #fff;
 }
