@@ -48,16 +48,16 @@ body {
 
 .message {
   margin: 8px 0;
-  padding: 8px 12px;
+  padding: 8px 0px;
   border-radius: 15px;
-  max-width: 70%;
+  max-width: 40%;
   clear: both;
 }
 
 .message.me {
   background: #e6f7ff;
   margin-left: auto;
-  text-align: right;
+  text-align: left;
 }
 
 .message.other {
