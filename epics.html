@@ -2,19 +2,45 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chatbox</title>
     <link rel="stylesheet" href="stylec.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <label for="chon-options">Cài Đặt</label>
-    <select id="chon-options">
-      <option value="">Chặn</option>
-      <option value="">Theo dõi</option>
-      <option value="">Bo xì</option>
-    </select>
-    <div class="chat-container">
-      <div class="chat-header">Chat</div>
-      <div class="chat-messages">
+    <header class="bg-white shadow-md">
+      <nav class="chat-header">
+        <h1 class="chat-title">Chat</h1>
+        <div class="dropdown">
+          <button
+            class="btn btn-outline-light dropdown-toggle"
+            type="button"
+            id="Settings"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            ≡
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="Settings">
+            <li><h6 class="dropdown-menu">Cài đặt</h6></li>
+            <li><a class="dropdown-item" href="#">Chặn</a></li>
+            <li><a class="dropdown-item" href="#">Theo dõi</a></li>
+            <li><a class="dropdown-item" href="#">Bo xì</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="chat-messages">
         <div class="message other">Halo,freundin</div>
         <div class="message me">Halo, Wir ist ir Name?</div>
         <div class="message other">Ich bin Sigvaldi, und du?</div>
@@ -23,10 +49,12 @@
           Ich komme aus VietNam und Ich wohne in CanTho
         </div>
       </div>
+      <!-- Phần gửi tin nhắn -->
       <div class="chat-input">
         <input type="text" placeholder="Nhập tin nhắn..." />
-        <button>Gửi</button>
+        <button type="submit">Gửi</button>
       </div>
-    </div>
+      </div>
+          </div>
   </body>
 </html>
