@@ -1,524 +1,443 @@
-// Dữ liệu Phường/Xã Cần Thơ (Đã được sắp xếp theo cấp độ Phường/Xã)
-const CAN_THO_WARDS = [
-  "An Cư (Ninh Kiều)",
-  "An Hòa (Ninh Kiều)",
-  "An Khánh (Ninh Kiều)",
-  "An Lạc (Ninh Kiều)",
-  "An Nghiệp (Ninh Kiều)",
-  "An Phú (Ninh Kiều)",
-  "Cái Khế (Ninh Kiều)",
-  "Hưng Lợi (Ninh Kiều)",
-  "Tân An (Ninh Kiều)",
-  "Thới Bình (Ninh Kiều)",
-  "Xuân Khánh (Ninh Kiều)",
-  "An Thới (Bình Thủy)",
-  "Bình Thủy (Bình Thủy)",
-  "Bùi Hữu Nghĩa (Bình Thủy)",
-  "Long Hòa (Bình Thủy)",
-  "Long Tuyền (Bình Thủy)",
-  "Phú Thứ (Cái Răng)",
-  "Hưng Phú (Cái Răng)",
-  "Hưng Thạnh (Cái Răng)",
-  "Lê Bình (Cái Răng)",
-  "Thường Thạnh (Cái Răng)",
-  "Tân Phú (Cái Răng)",
-  "Ba Láng (Cái Răng)",
-  "Thốt Nốt (Thốt Nốt)",
-  "Thới Thuận (Thốt Nốt)",
-  "Trung Kiên (Thốt Nốt)",
-  "Thuận An (Thốt Nốt)",
-  "Thạnh An (Thốt Nốt)",
-  "Trà Nóc (Ô Môn)",
-  "Phước Thới (Ô Môn)",
-  "Thới An (Ô Môn)",
-  "Thới Long (Ô Môn)",
-  "Long Hưng (Ô Môn)",
-  "Đông Thuận (Ô Môn)",
-  "Tân Hưng (Ô Môn)",
-  "Trung Hưng (Cờ Đỏ)",
-  "Đông Thắng (Cờ Đỏ)",
-  "Thạnh Phú (Cờ Đỏ)",
-  "Thới Hưng (Cờ Đỏ)",
-  "Thới Xuân (Cờ Đỏ)",
-  "Thới Lai (Thới Lai)",
-  "Xuân Thắng (Thới Lai)",
-  "Tân Thạnh (Thới Lai)",
-  "Định Môn (Thới Lai)",
-  "Trường Lạc (Thới Lai)",
-  "Phong Điền (Phong Điền)",
-  "Giai Xuân (Phong Điền)",
-  "Mỹ Khánh (Phong Điền)",
-  "Nhơn Ái (Phong Điền)",
-  "Nhơn Nghĩa (Phong Điền)",
-  "Trường Thành (Thới Lai)",
-];
+// script.js - logic tổng hợp cho dangtin.html, danhsach.html, chitiet.html, admin.html
+(function () {
+  // utilities: modal-like alert/confirm (simple)
+  function showAlert(message) {
+    const o = document.createElement("div");
+    o.className = "modal-overlay";
+    o.innerHTML = `<div class="modal-content"><p class="text-lg font-semibold mb-4">${message}</p><button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">Đóng</button></div>`;
+    document.body.appendChild(o);
+    o.querySelector("button").addEventListener("click", () => o.remove());
+  }
 
-// Các hàm tiện ích
-function showAlert(message) {
-  const modalOverlay = document.createElement("div");
-  modalOverlay.className = "modal-overlay";
-  modalOverlay.innerHTML = `
-        <div class="modal-content">
-            <p class="text-lg font-semibold mb-4">${message}</p>
-            <button onclick="this.closest('.modal-overlay').remove()" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">Đóng</button>
-        </div>
-    `;
-  document.body.appendChild(modalOverlay);
-}
+  function showConfirm(message, onConfirm) {
+    const o = document.createElement("div");
+    o.className = "modal-overlay";
+    o.innerHTML = `<div class="modal-content"><p class="text-lg font-semibold mb-4">${message}</p><div class="flex justify-center space-x-4"><button id="yes" class="bg-red-500 text-white px-4 py-2 rounded-md">Đồng ý</button><button id="no" class="bg-gray-300 px-4 py-2 rounded-md">Hủy</button></div></div>`;
+    document.body.appendChild(o);
+    o.querySelector("#yes").addEventListener("click", () => {
+      onConfirm();
+      o.remove();
+    });
+    o.querySelector("#no").addEventListener("click", () => o.remove());
+  }
 
-function showConfirm(message, onConfirm) {
-  const modalOverlay = document.createElement("div");
-  modalOverlay.className = "modal-overlay";
-  modalOverlay.innerHTML = `
-        <div class="modal-content">
-            <p class="text-lg font-semibold mb-4">${message}</p>
-            <div class="flex justify-center space-x-4">
-                <button id="confirm-yes" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">Đồng ý</button>
-                <button id="confirm-no" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 transition">Hủy</button>
-            </div>
-        </div>
-    `;
-  document.body.appendChild(modalOverlay);
+  // navigation active
+  function setupNavigation() {
+    const path = window.location.pathname.split("/").pop();
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+      if (href === path || (href === "index.html" && path === ""))
+        link.classList.add("bg-gray-200");
+      else link.classList.remove("bg-gray-200");
+    });
+  }
 
-  document.getElementById("confirm-yes").onclick = () => {
-    onConfirm();
-    modalOverlay.remove();
-  };
-  document.getElementById("confirm-no").onclick = () => {
-    modalOverlay.remove();
-  };
-}
+  /* --------------------------
+     Page: Đăng tin (dangtin.html)
+     -------------------------- */
+  function setupDangTinPage() {
+    setupNavigation();
+    const postForm = document.getElementById("postForm");
+    if (!postForm) return;
 
-// Logic chung
-function setupNavigation() {
-  const path = window.location.pathname.split("/").pop();
-  const navLinks = document.querySelectorAll(".nav-link");
-  navLinks.forEach((link) => {
-    // Loại bỏ logic active cho nav-brand (Chicky.stu)
-    if (link.classList.contains("nav-brand")) {
-      link.classList.remove("bg-gray-200");
+    // ward dropdown (CAN_THO_WARDS provided in previous versions; if not, simple fallback)
+    const wardHidden = document.getElementById("ward-hidden");
+    const trigger = document.getElementById("ward-custom-select");
+    const dropdown = document.getElementById("ward-dropdown");
+
+    // if CAN_THO_WARDS exists on window, use it; otherwise a small default
+    const WARDS =
+      window.CAN_THO_WARDS && window.CAN_THO_WARDS.length
+        ? window.CAN_THO_WARDS
+        : ["An Cư (Ninh Kiều)", "Bình Thủy (Bình Thủy)", "Cái Răng (Cái Răng)"];
+
+    // populate dropdown
+    dropdown.innerHTML = "";
+    WARDS.forEach((w) => {
+      const li = document.createElement("li");
+      li.textContent = w;
+      li.dataset.value = w;
+      li.addEventListener("click", () => {
+        wardHidden.value = w;
+        trigger.textContent = w;
+        dropdown.classList.add("hidden");
+      });
+      dropdown.appendChild(li);
+    });
+
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!trigger.contains(e.target) && !dropdown.contains(e.target))
+        dropdown.classList.add("hidden");
+    });
+
+    // image preview
+    const imageInput = document.getElementById("images");
+    const imagePreviewContainer = document.getElementById("image-preview");
+    imageInput &&
+      imageInput.addEventListener("change", () => {
+        imagePreviewContainer.innerHTML = "";
+        Array.from(imageInput.files || [])
+          .slice(0, 10)
+          .forEach((file) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              img.className = "image-preview-item";
+              imagePreviewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+          });
+      });
+
+    // submit handler
+    postForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      // basic validation
+      const requiredEls = postForm.querySelectorAll("[required]");
+      for (let el of requiredEls) {
+        if (!el.value || el.value.trim() === "") {
+          showAlert("Vui lòng điền đầy đủ thông tin bắt buộc.");
+          return;
+        }
+      }
+      if (!wardHidden.value) {
+        showAlert("Vui lòng chọn Phường/Xã");
+        return;
+      }
+
+      // images -> base64 (for demo only)
+      const files = Array.from(document.getElementById("images").files || []);
+      const images = [];
+      for (let i = 0; i < files.length && i < 10; i++) {
+        images.push(
+          await new Promise((resolve) => {
+            const r = new FileReader();
+            r.onload = (ev) => resolve(ev.target.result);
+            r.readAsDataURL(files[i]);
+          })
+        );
+      }
+      if (images.length === 0) images.push("images/default.jpg");
+
+      // collect fields
+      const newPost = {
+        title: document.getElementById("title").value.trim(),
+        motelName: document.getElementById("motelName").value.trim(),
+        type: document.getElementById("type")
+          ? document.getElementById("type").value
+          : "",
+        price: Number(document.getElementById("price").value) || 0,
+        area: Number(document.getElementById("area").value) || 0,
+        rooms: Number(document.getElementById("rooms").value) || 1,
+        ward: wardHidden.value,
+        address: document.getElementById("address").value.trim(),
+        description: document.getElementById("description").value.trim(),
+        contactName: document.getElementById("contactName").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        highlights: Array.from(
+          document.querySelectorAll('input[name="highlight"]:checked')
+        ).map((i) => i.value),
+        images,
+        date: new Date().toLocaleDateString("vi-VN"),
+      };
+
+      // save via roomsStorage service
+      const added = window.roomsStorage.addPost(newPost);
+      showAlert("Tin đã được đăng thành công!");
+      setTimeout(() => (window.location.href = "danhsach.html"), 900);
+    });
+  }
+
+  /* --------------------------
+     Page: Danh sách (danhsach.html)
+     -------------------------- */
+  function setupDanhSachPage() {
+    setupNavigation();
+    const postsContainer = document.getElementById("posts-container");
+    if (!postsContainer) return;
+
+    // elements (may not exist on all pages)
+    const filterType = document.getElementById("filterType");
+    const filterPrice = document.getElementById("filterPrice");
+    const sortSelect = document.getElementById("sortSelect");
+    const searchInput = document.getElementById("searchInput");
+    const emptyState = document.getElementById("emptyState");
+
+    // if 'searchResults' present (from quick search), use it then clear
+    const sr = JSON.parse(localStorage.getItem("searchResults") || "null");
+    if (sr && Array.isArray(sr)) {
+      window.roomsStorage.savePosts(
+        sr.concat(window.roomsStorage.getPosts().slice(sr.length))
+      ); // not necessary but ensure visibility
+      localStorage.removeItem("searchResults");
+    }
+
+    function getAll() {
+      return window.roomsStorage.getPosts();
+    }
+
+    function render(rooms) {
+      postsContainer.innerHTML = "";
+      if (!rooms || rooms.length === 0) {
+        postsContainer.innerHTML = `<p class="text-center text-gray-500 col-span-full">Chưa có tin nào được đăng.</p>`;
+        if (emptyState) emptyState.style.display = "block";
+        return;
+      } else {
+        if (emptyState) emptyState.style.display = "none";
+      }
+      rooms.forEach((post, index) => {
+        const card = document.createElement("div");
+        card.className = "post-card";
+        card.onclick = () =>
+          (window.location.href = `chitiet.html?id=${index}`);
+        card.innerHTML = `
+          <img src="${post.images?.[0] || "images/default.jpg"}" alt="${
+          post.title
+        }" class="post-thumbnail">
+          <div class="post-content">
+            <h2 class="text-lg font-semibold text-gray-800 truncate">${
+              post.title
+            }</h2>
+            <p class="text-xl font-bold text-red-500 my-2">${Number(
+              post.price
+            ).toLocaleString("vi-VN")} VNĐ</p>
+            <p class="text-gray-600 text-sm">${post.area} m² - ${
+          post.ward || "Cần Thơ"
+        }</p>
+            <p class="text-gray-500 text-xs mt-1">Đăng ngày: ${post.date}</p>
+          </div>`;
+        postsContainer.appendChild(card);
+      });
+    }
+
+    // initial render
+    let current = getAll();
+    render(current);
+
+    // filters handlers (if elements exist)
+    function applyFilters() {
+      let rooms = getAll();
+      if (filterType && filterType.value)
+        rooms = rooms.filter((r) => r.type === filterType.value);
+      if (filterPrice && filterPrice.value) {
+        const v = filterPrice.value;
+        if (v === "duoi2") rooms = rooms.filter((r) => r.price < 2000000);
+        else if (v === "2-5")
+          rooms = rooms.filter((r) => r.price >= 2000000 && r.price <= 5000000);
+        else if (v === "tren5") rooms = rooms.filter((r) => r.price > 5000000);
+      }
+      if (searchInput && searchInput.value.trim()) {
+        const q = searchInput.value.trim().toLowerCase();
+        rooms = rooms.filter(
+          (r) =>
+            (r.title || "").toLowerCase().includes(q) ||
+            (r.description || "").toLowerCase().includes(q)
+        );
+      }
+      if (sortSelect && sortSelect.value) {
+        if (sortSelect.value === "gia-tang")
+          rooms.sort((a, b) => a.price - b.price);
+        else if (sortSelect.value === "gia-giam")
+          rooms.sort((a, b) => b.price - a.price);
+        else if (sortSelect.value === "ten")
+          rooms.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+      }
+      current = rooms;
+      render(current);
+    }
+
+    if (searchInput) searchInput.addEventListener("input", applyFilters);
+    if (filterType) filterType.addEventListener("change", applyFilters);
+    if (filterPrice) filterPrice.addEventListener("change", applyFilters);
+    if (sortSelect) sortSelect.addEventListener("change", applyFilters);
+  }
+
+  /* --------------------------
+     Page: Chi tiết (chitiet.html)
+     -------------------------- */
+  function setupChiTietPage() {
+    setupNavigation();
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const posts = window.roomsStorage.getPosts();
+    if (id === null || !posts[id]) {
+      document.body.innerHTML =
+        '<p class="text-center mt-20 text-xl font-bold">Không tìm thấy tin đăng này.</p>';
       return;
     }
+    const post = posts[id];
 
-    if (link.getAttribute("href") === path) {
-      link.classList.add("bg-gray-200");
-    } else {
-      link.classList.remove("bg-gray-200");
-    }
-  });
-}
+    // fill fields
+    const set = (sel, val) => {
+      const el = document.getElementById(sel);
+      if (el) el.textContent = val;
+    };
+    set("detail-page-title", post.title);
+    set("detail-title", post.motelName || post.title);
+    set("detail-price", `${Number(post.price).toLocaleString("vi-VN")} VNĐ`);
+    set("detail-area", `${post.area} m²`);
+    set("detail-rooms", post.rooms);
+    set("detail-ward", post.ward || "");
+    set("detail-address", post.address || "");
+    set("detail-contact-name", post.contactName || "");
+    set("detail-phone", post.phone || "");
+    set("detail-email", post.email || "");
+    set("detail-description", post.description || "");
+    set("detail-date", `Đăng ngày: ${post.date || ""}`);
 
-// Logic cho trang Đăng Tin
-function setupDangTinPage() {
-  setupNavigation();
+    // images gallery
+    const imageDisplay = document.getElementById("detail-images-display");
+    const thumbnails = document.getElementById("detail-thumbnails");
+    const prev = document.getElementById("prev-btn");
+    const next = document.getElementById("next-btn");
 
-  const postForm = document.getElementById("postForm");
+    imageDisplay.innerHTML = "";
+    thumbnails.innerHTML = "";
+    (post.images || ["images/default.jpg"]).forEach((src, idx) => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = post.title;
+      img.className = idx === 0 ? "active" : "";
+      imageDisplay.appendChild(img);
 
-  // XÓA: const wardSelect = document.getElementById('ward'); // Không dùng nữa
-  const imageInput = document.getElementById("images");
-  const imagePreviewContainer = document.getElementById("image-preview");
-
-  // ===========================================
-  // LOGIC MỚI: SELECT BOX TÙY CHỈNH CHO PHƯỜNG/XÃ
-  // ===========================================
-  const wardHiddenInput = document.getElementById("ward-hidden");
-  const customSelectTrigger = document.getElementById("ward-custom-select");
-  const customDropdown = document.getElementById("ward-dropdown");
-
-  // 1. Load Wards vào Dropdown tùy chỉnh
-  CAN_THO_WARDS.forEach((ward) => {
-    const li = document.createElement("li");
-    li.textContent = ward;
-    li.setAttribute("data-value", ward);
-    customDropdown.appendChild(li);
-
-    li.addEventListener("click", () => {
-      // Cập nhật giá trị vào input ẩn và trigger hiển thị
-      wardHiddenInput.value = ward;
-      customSelectTrigger.textContent = ward;
-      customDropdown.classList.add("hidden"); // Đóng dropdown
-    });
-  });
-
-  // 2. Xử lý mở/đóng Dropdown
-  customSelectTrigger.addEventListener("click", () => {
-    customDropdown.classList.toggle("hidden");
-  });
-
-  // 3. Đóng khi click ra ngoài
-  document.addEventListener("click", (e) => {
-    // Chỉ đóng nếu click ra ngoài cả trigger và dropdown
-    if (
-      !customSelectTrigger.contains(e.target) &&
-      !customDropdown.contains(e.target)
-    ) {
-      customDropdown.classList.add("hidden");
-    }
-  });
-  // ===========================================
-  // KẾT THÚC LOGIC MỚI
-  // ===========================================
-
-  // Handle image preview
-  imageInput.addEventListener("change", () => {
-    // ... (Giữ nguyên logic image preview) ...
-    imagePreviewContainer.innerHTML = "";
-    if (imageInput.files) {
-      Array.from(imageInput.files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = document.createElement("img");
-          img.src = e.target.result;
-          img.className = "image-preview-item";
-          imagePreviewContainer.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  });
-
-  // Thêm event listener cho form submit
-  postForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    // TRUYỀN GIÁ TRỊ TỪ INPUT ẨN VÀO HÀM SUBMITPOST
-    await submitPost(wardHiddenInput.value);
-  });
-}
-
-// CHỈNH SỬA: Thêm tham số selectedWardValue
-async function submitPost(selectedWardValue) {
-  const form = document.getElementById("postForm");
-  const allInputs = form.querySelectorAll("input, select, textarea");
-  let isFormValid = true;
-
-  allInputs.forEach((input) => {
-    // Bỏ qua thẻ select/input cũ/ẩn để kiểm tra
-    if (input.id === "ward" || input.id === "ward-hidden") return;
-
-    if (input.hasAttribute("required") && !input.value) {
-      isFormValid = false;
-    }
-  });
-
-  // KIỂM TRA RIÊNG TRƯỜNG PHƯỜNG/XÃ
-  if (!selectedWardValue) {
-    isFormValid = false;
-  }
-
-  if (!isFormValid) {
-    showAlert("Vui lòng điền đầy đủ thông tin bắt buộc.");
-    return;
-  }
-
-  const imageInput = document.getElementById("images");
-  // ... (Giữ nguyên logic load ảnh) ...
-  const imageFiles = imageInput.files;
-  const base64Images = [];
-
-  if (imageFiles.length > 0) {
-    for (let i = 0; i < imageFiles.length; i++) {
-      const file = imageFiles[i];
-      const base64 = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (e) => resolve(e.target.result);
-        reader.readAsDataURL(file);
-      });
-      base64Images.push(base64);
-    }
-  } else {
-    base64Images.push(
-      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABpL3g+AAAAA1BMVEW+v78nB7LFAAAAJUlEQVR4nO3BAQ0AAADCoPdPbQ8H/wwAAAAAAAAAAAAAAAB+gABBAAECBL8nJgAAAABJRU5ErkJggg=="
-    ); // placeholder
-  }
-
-  const newPost = {
-    title: document.getElementById("title").value,
-    motelName: document.getElementById("motelName").value,
-    price: document.getElementById("price").value,
-    area: document.getElementById("area").value,
-    rooms: document.getElementById("rooms").value,
-    ward: selectedWardValue, // LẤY GIÁ TRỊ TỪ SELECT TÙY CHỈNH
-    address: document.getElementById("address").value,
-    description: document.getElementById("description").value,
-    contactName: document.getElementById("contactName").value,
-    phone: document.getElementById("phone").value,
-    email: document.getElementById("email").value,
-    highlights: Array.from(
-      document.querySelectorAll('input[name="highlight"]:checked')
-    ).map((el) => el.value),
-    images: base64Images,
-    date: new Date().toLocaleDateString("vi-VN"),
-  };
-
-  // ... (Giữ nguyên logic lưu và chuyển trang) ...
-  const storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
-  storedPosts.push(newPost);
-  localStorage.setItem("posts", JSON.stringify(storedPosts));
-  showAlert("Tin đã được đăng thành công!");
-  setTimeout(() => {
-    window.location.href = "danhsach.html";
-  }, 1500);
-}
-
-// Logic cho trang Danh Sách
-function setupDanhSachPage() {
-  setupNavigation();
-  const posts = JSON.parse(localStorage.getItem("posts")) || [];
-  const container = document.getElementById("posts-container");
-  if (posts.length === 0) {
-    container.innerHTML =
-      '<p class="text-center text-gray-500 col-span-full">Chưa có tin nào được đăng.</p>';
-  } else {
-    posts.forEach((post, index) => {
-      const postCard = document.createElement("div");
-      postCard.className = "post-card";
-      postCard.onclick = () => {
-        window.location.href = `chitiet.html?id=${index}`;
-      };
-      // Cập nhật hiển thị địa chỉ chỉ còn Phường/Xã
-      postCard.innerHTML = `
-                <img src="${post.images[0]}" alt="${
-        post.title
-      }" class="post-thumbnail">
-                <div class="post-content">
-                    <h2 class="text-lg font-semibold text-gray-800 truncate">${
-                      post.title
-                    }</h2>
-                    <p class="text-xl font-bold text-red-500 my-2">${Number(
-                      post.price
-                    ).toLocaleString("vi-VN")} VNĐ</p>
-                    <p class="text-gray-600 text-sm">${post.area} m² - ${
-        post.ward || "Cần Thơ"
-      }</p>
-                    <p class="text-gray-500 text-xs mt-1">Đăng ngày: ${
-                      post.date
-                    }</p>
-                </div>
-            `;
-      container.appendChild(postCard);
-    });
-  }
-}
-
-// Logic cho trang Chi Tiết
-function setupChiTietPage() {
-  setupNavigation();
-  const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get("id");
-  const posts = JSON.parse(localStorage.getItem("posts")) || [];
-
-  if (postId !== null && posts[postId]) {
-    const post = posts[postId];
-
-    // CẬP NHẬT: Tiêu đề tin (post.title) hiện ở vị trí màu đỏ (trên cùng)
-    const pageTitleEl = document.getElementById("detail-page-title");
-    if (pageTitleEl) {
-      pageTitleEl.textContent = post.title;
-    }
-
-    // CẬP NHẬT: Tên trọ (post.motelName) hiện ở vị trí màu xanh (ngay dưới ảnh)
-    document.getElementById("detail-title").textContent =
-      post.motelName || post.title; // Dùng tên trọ, nếu không có thì dùng tiêu đề
-
-    document.getElementById("detail-price").textContent = `${Number(
-      post.price
-    ).toLocaleString("vi-VN")} VNĐ`;
-    document.getElementById("detail-area").textContent = `${post.area} m²`;
-    document.getElementById("detail-rooms").textContent = post.rooms;
-
-    // Cập nhật hiển thị địa chỉ chỉ còn Phường/Xã
-    document.getElementById("detail-ward").textContent = post.ward;
-    document.getElementById("detail-address").textContent = post.address;
-
-    document.getElementById("detail-contact-name").textContent =
-      post.contactName;
-    document.getElementById("detail-phone").textContent = post.phone;
-    document.getElementById("detail-email").textContent = post.email;
-    document.getElementById("detail-description").textContent =
-      post.description;
-    document.getElementById(
-      "detail-date"
-    ).textContent = `Đăng ngày: ${post.date}`;
-
-    // ===============================================
-    // LOGIC HIỂN THỊ ẢNH (SLIDER/GALLERY) -
-    // ===============================================
-    const imageDisplayContainer = document.getElementById(
-      "detail-images-display"
-    ); // Ảnh chính
-    const thumbnailContainer = document.getElementById("detail-thumbnails"); // Ảnh nhỏ
-    const prevBtn = document.getElementById("prev-btn");
-    const nextBtn = document.getElementById("next-btn");
-    let currentImageIndex = 0;
-
-    imageDisplayContainer.innerHTML = "";
-    thumbnailContainer.innerHTML = "";
-
-    // 1. Tạo và thêm tất cả ảnh chính và thumbnail
-    post.images.forEach((imgSrc, index) => {
-      // Thêm ảnh chính (ban đầu ẩn hết, CSS sẽ xử lý)
-      const mainImg = document.createElement("img");
-      mainImg.src = imgSrc;
-      mainImg.alt = post.title;
-      imageDisplayContainer.appendChild(mainImg);
-
-      // Thêm thumbnail
-      const thumbnailImg = document.createElement("img");
-      thumbnailImg.src = imgSrc;
-      thumbnailImg.alt = `Thumbnail ${index + 1}`;
-      thumbnailImg.className = "thumbnail-item";
-      thumbnailImg.dataset.index = index;
-      thumbnailContainer.appendChild(thumbnailImg);
-
-      // Thêm sự kiện click cho thumbnail
-      thumbnailImg.addEventListener("click", () => {
-        showImage(index);
-      });
+      const t = document.createElement("img");
+      t.src = src;
+      t.className = "thumbnail-item" + (idx === 0 ? " active" : "");
+      t.dataset.index = idx;
+      t.addEventListener("click", () => showImage(Number(t.dataset.index)));
+      thumbnails.appendChild(t);
     });
 
-    const mainImages = imageDisplayContainer.querySelectorAll("img");
-    const thumbnails = thumbnailContainer.querySelectorAll(".thumbnail-item");
+    const mainImages = imageDisplay.querySelectorAll("img");
+    const thumbImages = thumbnails.querySelectorAll(".thumbnail-item");
+    let currentIndex = 0;
 
-    // Hàm hiển thị ảnh
-    function showImage(index) {
-      if (mainImages.length === 0) return;
-      // Ẩn/hiện ảnh chính
+    function showImage(i) {
+      if (!mainImages.length) return;
+      currentIndex = i;
       mainImages.forEach((img) => img.classList.remove("active"));
-      mainImages[index].classList.add("active");
-
-      // Cập nhật trạng thái active cho thumbnail
-      thumbnails.forEach((thumb) => thumb.classList.remove("active"));
-      thumbnails[index].classList.add("active");
-
-      // Cuộn đến thumbnail đang active
-      thumbnails[index].scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
-
-      currentImageIndex = index;
+      thumbImages.forEach((t) => t.classList.remove("active"));
+      mainImages[i].classList.add("active");
+      thumbImages[i].classList.add("active");
+      thumbImages[i].scrollIntoView({ behavior: "smooth", inline: "center" });
     }
 
-    // Xử lý nút NEXT
-    nextBtn.addEventListener("click", () => {
-      let newIndex = currentImageIndex + 1;
-      if (newIndex >= mainImages.length) {
-        newIndex = 0; // Quay lại ảnh đầu
-      }
-      showImage(newIndex);
-    });
+    next &&
+      next.addEventListener("click", () =>
+        showImage((currentIndex + 1) % mainImages.length)
+      );
+    prev &&
+      prev.addEventListener("click", () =>
+        showImage((currentIndex - 1 + mainImages.length) % mainImages.length)
+      );
+    if (mainImages.length) showImage(0);
 
-    // Xử lý nút PREV
-    prevBtn.addEventListener("click", () => {
-      let newIndex = currentImageIndex - 1;
-      if (newIndex < 0) {
-        newIndex = mainImages.length - 1; // Quay lại ảnh cuối
-      }
-      showImage(newIndex);
-    });
-
-    // Hiển thị ảnh đầu tiên khi tải trang
-    if (mainImages.length > 0) {
-      showImage(0);
-    }
-
-    // ===============================================
-    // KẾT THÚC LOGIC ẢNH
-    // ===============================================
-
+    // highlights
     const highlightContainer = document.getElementById("detail-highlights");
     highlightContainer.innerHTML = "";
-    post.highlights.forEach((highlight) => {
-      const span = document.createElement("span");
-      span.className = "highlight-item";
-      span.textContent = highlight;
-      highlightContainer.appendChild(span);
+    (post.highlights || []).forEach((h) => {
+      const s = document.createElement("span");
+      s.className = "highlight-item";
+      s.textContent = h;
+      highlightContainer.appendChild(s);
     });
-  } else {
-    document.body.innerHTML =
-      '<p class="text-center mt-20 text-xl font-bold">Không tìm thấy tin đăng này.</p>';
   }
-}
 
-// Logic cho trang Admin
-function setupAdminPage() {
-  setupNavigation();
-  const adminPanel = document.getElementById("admin-panel");
-  const passwordForm = document.getElementById("password-form");
+  /* --------------------------
+     Page: Admin (admin.html)
+     -------------------------- */
+  function setupAdminPage() {
+    setupNavigation();
+    const formWrap = document.getElementById("password-form");
+    const panel = document.getElementById("admin-panel");
+    const adminTableBody = document.getElementById("admin-table-body");
 
-  // Check if user is already logged in
-  if (sessionStorage.getItem("adminLoggedIn")) {
-    passwordForm.classList.add("hidden");
-    adminPanel.classList.remove("hidden");
-    loadPosts();
-  } else {
-    passwordForm.classList.remove("hidden");
-    adminPanel.classList.add("hidden");
-    const loginForm = document.getElementById("loginForm");
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const passwordInput = document.getElementById("password");
-      if (passwordInput.value === "123") {
-        // Mật khẩu cứng
-        sessionStorage.setItem("adminLoggedIn", "true");
-        passwordForm.classList.add("hidden");
-        adminPanel.classList.remove("hidden");
-        loadPosts();
-      } else {
-        showAlert("Mật khẩu không đúng!");
-        passwordInput.value = "";
+    function loadPostsToTable() {
+      const posts = window.roomsStorage.getPosts();
+      if (!adminTableBody) return;
+      adminTableBody.innerHTML = "";
+      if (!posts.length) {
+        adminTableBody.innerHTML =
+          '<tr><td colspan="6" class="text-center text-gray-500">Chưa có tin nào.</td></tr>';
+        return;
       }
-    });
-  }
-}
+      posts.forEach((p, idx) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${idx + 1}</td>
+                        <td><a href="chitiet.html?id=${idx}" class="text-blue-600 hover:underline">${
+          p.title
+        }</a></td>
+                        <td>${Number(p.price).toLocaleString("vi-VN")} VNĐ</td>
+                        <td>${p.ward || ""}</td>
+                        <td>${p.date || ""}</td>
+                        <td><button class="btn-delete" data-idx="${idx}">Xóa</button></td>`;
+        adminTableBody.appendChild(tr);
+      });
 
-function loadPosts() {
-  const posts = JSON.parse(localStorage.getItem("posts")) || [];
-  const tableBody = document.getElementById("admin-table-body");
-  if (!tableBody) return;
-  tableBody.innerHTML = "";
-  if (posts.length === 0) {
-    tableBody.innerHTML =
-      '<tr><td colspan="5" class="text-center text-gray-500">Chưa có tin nào.</td></tr>';
-  } else {
-    posts.forEach((post, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-                <td>${index + 1}</td>
-                <td><a href="chitiet.html?id=${index}" class="text-blue-600 hover:underline">${
-        post.title
-      }</a></td>
-                <td>${Number(post.price).toLocaleString("vi-VN")} VNĐ</td>
-                <td>${post.ward}</td>
-                <td>${post.date}</td>
-                <td><button onclick="deletePost(${index})" class="btn-delete">Xóa</button></td>
-            `;
-      tableBody.appendChild(row);
-    });
-  }
-}
+      adminTableBody.querySelectorAll(".btn-delete").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.dataset.idx);
+          showConfirm("Bạn có chắc muốn xóa?", () => {
+            window.roomsStorage.deletePostByIndex(idx);
+            loadPostsToTable();
+            showAlert("Tin đã được xóa.");
+          });
+        });
+      });
+    }
 
-function deletePost(index) {
-  showConfirm("Bạn có chắc chắn muốn xóa tin này không?", () => {
-    const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    posts.splice(index, 1);
-    localStorage.setItem("posts", JSON.stringify(posts));
-    loadPosts();
-    showAlert("Tin đã được xóa thành công!");
+    if (sessionStorage.getItem("adminLoggedIn")) {
+      formWrap && formWrap.classList.add("hidden");
+      panel && panel.classList.remove("hidden");
+      loadPostsToTable();
+    } else if (formWrap) {
+      formWrap.classList.remove("hidden");
+      panel && panel.classList.add("hidden");
+      const loginForm = document.getElementById("loginForm");
+      loginForm &&
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const pass = document.getElementById("password").value;
+          // demo only: change in production
+          if (pass === "123") {
+            sessionStorage.setItem("adminLoggedIn", "true");
+            formWrap.classList.add("hidden");
+            panel.classList.remove("hidden");
+            loadPostsToTable();
+          } else {
+            showAlert("Mật khẩu không đúng");
+            document.getElementById("password").value = "";
+          }
+        });
+    }
+  }
+
+  // bootstrap: identify page and init
+  document.addEventListener("DOMContentLoaded", () => {
+    const path = window.location.pathname.split("/").pop();
+    // normalize empty (index)
+    const page = path === "" ? "index.html" : path;
+    if (page === "dangtin.html") setupDangTinPage();
+    else if (page === "danhsach.html") setupDanhSachPage();
+    else if (page === "chitiet.html") setupChiTietPage();
+    else if (page === "admin.html") setupAdminPage();
+    else {
+      setupNavigation();
+    } // index or others
   });
-}
 
-// Vận hành chung cho tất cả các trang
-document.addEventListener("DOMContentLoaded", () => {
-  const path = window.location.pathname.split("/").pop();
-  if (path === "chitiet.html") {
-    setupChiTietPage();
-  } else if (path === "dangtin.html" || path === "") {
-    setupDangTinPage();
-  } else if (path === "danhsach.html") {
-    setupDanhSachPage();
-  } else if (path === "admin.html") {
-    setupAdminPage();
-  }
-});
+  // export small helpers if needed
+  window.__app = {
+    showAlert,
+    showConfirm,
+  };
+})();

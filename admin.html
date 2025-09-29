@@ -2,12 +2,11 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chicky.stu - Quản trị</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -19,20 +18,20 @@
                 <a href="danhsach.html" class="nav-link">Danh sách thuê phòng trọ</a>
                 <a href="admin.html" class="nav-link bg-gray-200">Quản trị</a>
             </div>
-            <div>
-                <a href="#" class="nav-link">Đăng nhập</a>
-            </div>
+            <div><a href="#" class="nav-link">Đăng nhập</a></div>
         </nav>
     </header>
 
     <main class="container mx-auto px-4 py-8 flex-grow">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Trang Quản Trị</h1>
+
         <div id="password-form" class="card p-6 max-w-sm mx-auto">
             <h2 class="text-center text-xl font-semibold mb-4">Đăng nhập Admin</h2>
             <form id="loginForm" class="space-y-4">
                 <div>
                     <label for="password" class="sr-only">Mật khẩu</label>
-                    <input type="password" id="password" placeholder="Nhập mật khẩu" required class="w-full">
+                    <input type="password" id="password" placeholder="Nhập mật khẩu" required
+                        class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn-submit">Đăng nhập</button>
@@ -54,9 +53,7 @@
                             <th>Thao tác</th>
                         </tr>
                     </thead>
-                    <tbody id="admin-table-body">
-                        <!-- Posts will be loaded here by JavaScript -->
-                    </tbody>
+                    <tbody id="admin-table-body"></tbody>
                 </table>
             </div>
         </div>
@@ -64,9 +61,9 @@
 
     <footer class="bg-gray-900 text-white py-12 mt-8">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <img src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68d8ed29&is=68d79ba9&hm=28fc63e83558dbe4987864882a8c89663e2522cd292a8b159a95d7da9bd2648d&=&format=webp&quality=lossless&width=658&height=593"
-                    alt="Chicky.stu Logo" class="w-24 mb-4">
+            <div><img
+                    src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png"
+                    alt="logo" class="w-24 mb-4">
                 <h3 class="text-xl font-bold mb-4">Chicky.stu</h3>
                 <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ.</p>
             </div>
@@ -74,8 +71,7 @@
                 <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
                 <ul class="text-gray-400 space-y-2">
                     <li><a href="dangtin.html" class="hover:underline">Hướng dẫn</a></li>
-                    <li><a href="danhsach.html" class="hover:underline">Trợ giúp khách hàng</a></li>
-                    <li><a href="admin.html" class="hover:underline">Chính sách bảo mật</a></li>
+                    <li><a href="danhsach.html" class="hover:underline">Trợ giúp</a></li>
                 </ul>
             </div>
             <div>
@@ -83,15 +79,15 @@
                 <ul class="text-gray-400 space-y-2">
                     <li>Zalo/Facebook</li>
                     <li>Email: contact@chickystu.vn</li>
-                    <li>Hotline</li>
                 </ul>
             </div>
         </div>
         <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500">
-            <p>&copy; 2024 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
+            <p>&copy; 2025 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
         </div>
     </footer>
 
+    <script src="roomsStorage.js"></script>
     <script src="script.js"></script>
 </body>
 

@@ -1,82 +1,87 @@
+// roomsStorage.js
 (function () {
-  const SAMPLE_KEY = "sampleRooms";
-  const USER_KEY = "userRooms";
+  const POSTS_KEY = "posts";
 
-  const sampleRooms = [
+  const samplePosts = [
     {
-      id: 1,
-      name: "Phòng trọ giá rẻ Ninh Kiều",
+      id: Date.now() - 1000000,
+      title: "Phòng trọ giá rẻ Ninh Kiều",
+      motelName: "Phòng trọ Ninh Kiều",
       type: "Ghép",
       price: 1800000,
+      area: 18,
+      rooms: 1,
+      ward: "An Cư (Ninh Kiều)",
       address: "123 ABCD",
       images: ["images/room1.jpg"],
       description: "Phòng rộng rãi, gần trung tâm thành phố, an ninh tốt.",
-      hot: true,
-      rating: 4,
+      highlights: ["Có điều hoà", "Giờ giấc tự do"],
+      contactName: "Chủ trọ A",
+      phone: "0900000001",
+      email: "owner1@example.com",
+      date: new Date().toLocaleDateString("vi-VN"),
     },
     {
-      id: 2,
-      name: "Căn hộ mini Bình Thủy",
+      id: Date.now() - 900000,
+      title: "Căn hộ mini Bình Thủy",
+      motelName: "Mini Bình Thủy",
       type: "Căn hộ",
       price: 4500000,
-      address: "123 ABC",
+      area: 35,
+      rooms: 1,
+      ward: "Bình Thủy (Bình Thủy)",
+      address: "456 DEF",
       images: ["images/room2.jpg"],
       description: "Căn hộ đầy đủ tiện nghi, cho gia đình.",
-      hot: false,
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Phòng đơn Bình Thủy",
-      type: "Đơn",
-      price: 1500000,
-      address: "123 ABC",
-      images: ["images/room2.jpg"],
-      description: "Phòng đơn đầy đủ tiện nghi",
-      hot: false,
-      rating: 3,
-    },
-    {
-      id: 4,
-      name: "Phòng trọ sinh viên Cần Thơ",
-      type: "Ghép",
-      price: 1800000,
-      address: "123 ABC",
-      images: ["images/room3.jpg"],
-      description: "Phòng sạch sẽ, gần ĐHCT, giá hợp lý.",
-      hot: false,
-      rating: 4,
+      highlights: ["Tủ lạnh", "Có máy giặt"],
+      contactName: "Chủ trọ B",
+      phone: "0900000002",
+      email: "owner2@example.com",
+      date: new Date().toLocaleDateString("vi-VN"),
     },
   ];
 
-  function getSampleRooms() {
-    return JSON.parse(localStorage.getItem(SAMPLE_KEY) || "[]");
+  function getPosts() {
+    return JSON.parse(localStorage.getItem(POSTS_KEY) || "[]");
   }
 
-  function getUserRooms() {
-    return JSON.parse(localStorage.getItem(USER_KEY) || "[]");
+  function savePosts(posts) {
+    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
   }
 
-  function getRooms() {
-    return [...getSampleRooms(), ...getUserRooms()];
+  function addPost(post) {
+    const posts = getPosts();
+    const newPost = Object.assign({}, post);
+    newPost.id = Date.now();
+    // ensure images array
+    newPost.images = Array.isArray(newPost.images)
+      ? newPost.images
+      : newPost.images
+      ? [newPost.images]
+      : [];
+    posts.push(newPost);
+    savePosts(posts);
+    return newPost;
   }
 
-  function saveUserRooms(data) {
-    localStorage.setItem(USER_KEY, JSON.stringify(data));
+  function deletePostByIndex(index) {
+    const posts = getPosts();
+    if (index >= 0 && index < posts.length) {
+      posts.splice(index, 1);
+      savePosts(posts);
+    }
   }
 
-  function addRoom(room) {
-    const rooms = getUserRooms();
-    room.id = Date.now();
-    room.images = Array.isArray(room.images) ? room.images : [room.images];
-    rooms.push(room);
-    saveUserRooms(rooms);
+  // init sample if empty
+  if (!localStorage.getItem(POSTS_KEY)) {
+    savePosts(samplePosts);
   }
 
-  if (!localStorage.getItem(SAMPLE_KEY)) {
-    localStorage.setItem(SAMPLE_KEY, JSON.stringify(sampleRooms));
-  }
-
-  window.getRooms = getRooms;
-  window.addRoom = addRoom;
+  // export to window
+  window.roomsStorage = {
+    getPosts,
+    savePosts,
+    addPost,
+    deletePostByIndex,
+  };
 })();

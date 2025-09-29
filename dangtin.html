@@ -2,30 +2,26 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chicky.stu - Đăng Tin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-
-
 </head>
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
     <header class="bg-white shadow-md">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4 text-sm font-semibold text-gray-700">
-                <a href="#" class="nav-link">
-                    <img src="https://cdn.discordapp.com/attachments/1259718831102758944/1420819731585175642/image.png?ex=68d8c33d&is=68d771bd&hm=865ae16f394f9d7b0c0eb408766823a01eb0f7642e15a1ddf2b3b7b1130419ea&"
+                <a href="index.html" class="nav-link">
+                    <img src="images/logo2.png"
                         alt="Trang chủ" class="w-24 mb-4">
                 </a>
                 <a href="dangtin.html" class="nav-link bg-gray-200">Đăng tin</a>
                 <a href="danhsach.html" class="nav-link">Danh sách thuê phòng trọ</a>
                 <a href="admin.html" class="nav-link">Quản trị</a>
             </div>
-            <div>
-                <a href="#" class="nav-link">Đăng nhập</a>
-            </div>
+            <div><a href="#" class="nav-link">Đăng nhập</a></div>
         </nav>
     </header>
 
@@ -41,48 +37,46 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="motelName" class="text-gray-600">Tên trọ</label>
-                                    <input type="text" id="motelName" placeholder="Tên trọ" required>
+                                    <input type="text" id="motelName" placeholder="Tên trọ" required class="w-full" />
                                 </div>
                                 <div>
                                     <label for="title" class="text-gray-600">Tiêu đề tin</label>
-                                    <input type="text" id="title" placeholder="Tiêu đề tin" required>
+                                    <input type="text" id="title" placeholder="Tiêu đề tin" required class="w-full" />
                                 </div>
                                 <div>
-                                    <label for="price" class="text-gray-600">Giá</label>
+                                    <label for="price" class="text-gray-600">Giá (VNĐ)</label>
                                     <div class="relative">
-                                        <input type="number" id="price" placeholder="Giá" required>
+                                        <input type="number" id="price" placeholder="Giá" required class="w-full" />
                                         <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">vnđ</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <label for="area" class="text-gray-600">Diện tích</label>
+                                    <label for="area" class="text-gray-600">Diện tích (m²)</label>
                                     <div class="relative">
-                                        <input type="number" id="area" placeholder="Diện tích" required>
+                                        <input type="number" id="area" placeholder="Diện tích" required
+                                            class="w-full" />
                                         <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">m²</span>
                                     </div>
                                 </div>
                                 <div>
                                     <label for="rooms" class="text-gray-600">Số phòng</label>
-                                    <input type="number" id="rooms" placeholder="Số phòng" required>
+                                    <input type="number" id="rooms" placeholder="Số phòng" required class="w-full" />
                                 </div>
                                 <div class="relative">
-                                    <label for="ward" class="text-gray-600"> Phường/Xã</label>
+                                    <label class="text-gray-600"> Phường/Xã</label>
                                     <input type="hidden" id="ward-hidden" name="ward-hidden" required>
-
-                                    <div id="ward-custom-select" class="custom-select-trigger" tabindex="0">
-                                        Chọn Phường/Xã
-                                    </div>
-
-                                    <ul id="ward-dropdown" class="custom-dropdown hidden">
-                                    </ul>
+                                    <div id="ward-custom-select" class="custom-select-trigger" tabindex="0">Chọn
+                                        Phường/Xã</div>
+                                    <ul id="ward-dropdown" class="custom-dropdown hidden"></ul>
                                 </div>
 
                                 <div class="md:col-span-2">
                                 </div>
+
                                 <div class="md:col-span-2">
                                     <label for="address" class="text-gray-600">Địa chỉ chi tiết</label>
-                                    <input type="text" id="address"
-                                        placeholder="Địa chỉ chi tiết (Số nhà, tên đường, thuộc Quận nào...)" required>
+                                    <input type="text" id="address" placeholder="Địa chỉ chi tiết" required
+                                        class="w-full" />
                                 </div>
                             </div>
                         </div>
@@ -91,7 +85,7 @@
                     <div class="card p-6">
                         <div class="form-section-title">MÔ TẢ CHI TIẾT</div>
                         <textarea id="description" rows="5" placeholder="Nhập mô tả chi tiết" required
-                            class="pt-6"></textarea>
+                            class="w-full pt-6"></textarea>
                     </div>
 
                     <div class="card p-6">
@@ -99,15 +93,15 @@
                         <div class="space-y-4 pt-6">
                             <div>
                                 <label for="contactName" class="text-gray-600">Tên liên hệ</label>
-                                <input type="text" id="contactName" placeholder="Tên liên hệ" required>
+                                <input type="text" id="contactName" placeholder="Tên liên hệ" required class="w-full" />
                             </div>
                             <div>
                                 <label for="phone" class="text-gray-600">Điện thoại</label>
-                                <input type="text" id="phone" placeholder="Điện thoại" required>
+                                <input type="text" id="phone" placeholder="Điện thoại" required class="w-full" />
                             </div>
                             <div>
                                 <label for="email" class="text-gray-600">Email</label>
-                                <input type="text" id="email" placeholder="Email" required>
+                                <input type="email" id="email" placeholder="Email" required class="w-full" />
                             </div>
                         </div>
                     </div>
@@ -115,38 +109,36 @@
                     <div class="card p-6">
                         <div class="form-section-title">NỔI BẬT</div>
                         <div id="highlights" class="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6">
-                            <label class="highlight-label">
-                                <input type="checkbox" name="highlight" value="Có điều hoà" class="highlight-checkbox">
+                            <label class="highlight-label"><input type="checkbox" name="highlight" value="Có điều hoà"
+                                    class="highlight-checkbox">
                                 <div class="highlight-content">Có điều hoà</div>
                             </label>
-                            <label class="highlight-label">
-                                <input type="checkbox" name="highlight" value="Khoá tự động" class="highlight-checkbox">
+                            <label class="highlight-label"><input type="checkbox" name="highlight" value="Khoá tự động"
+                                    class="highlight-checkbox">
                                 <div class="highlight-content">Khoá tự động</div>
                             </label>
-                            <label class="highlight-label">
-                                <input type="checkbox" name="highlight" value="Pet" class="highlight-checkbox">
+                            <label class="highlight-label"><input type="checkbox" name="highlight" value="Pet"
+                                    class="highlight-checkbox">
                                 <div class="highlight-content">Pet</div>
                             </label>
-                            <label class="highlight-label">
-                                <input type="checkbox" name="highlight" value="Không chung chủ"
-                                    class="highlight-checkbox">
+                            <label class="highlight-label"><input type="checkbox" name="highlight"
+                                    value="Không chung chủ" class="highlight-checkbox">
                                 <div class="highlight-content">Không chung chủ</div>
                             </label>
-                            <label class="highlight-label">
-                                <input type="checkbox" name="highlight" value="Có gác" class="highlight-checkbox">
+                            <label class="highlight-label"><input type="checkbox" name="highlight" value="Có gác"
+                                    class="highlight-checkbox">
                                 <div class="highlight-content">Có gác</div>
                             </label>
-                            <label class="highlight-label">
-                                <input type="checkbox" name="highlight" value="Giờ giấc tự do"
-                                    class="highlight-checkbox">
+                            <label class="highlight-label"><input type="checkbox" name="highlight"
+                                    value="Giờ giấc tự do" class="highlight-checkbox">
                                 <div class="highlight-content">Giờ giấc tự do</div>
                             </label>
-                            <label class="highlight-label">
-                                <input type="checkbox" name="highlight" value="Có máy giặt" class="highlight-checkbox">
+                            <label class="highlight-label"><input type="checkbox" name="highlight" value="Có máy giặt"
+                                    class="highlight-checkbox">
                                 <div class="highlight-content">Có máy giặt</div>
                             </label>
-                            <label class="highlight-label">
-                                <input type="checkbox" name="highlight" value="Có tủ lạnh" class="highlight-checkbox">
+                            <label class="highlight-label"><input type="checkbox" name="highlight" value="Có tủ lạnh"
+                                    class="highlight-checkbox">
                                 <div class="highlight-content">Có tủ lạnh</div>
                             </label>
                         </div>
@@ -154,10 +146,8 @@
 
                     <div class="card p-6">
                         <div class="form-section-title">HÌNH ẢNH</div>
-                        <p class="text-sm text-gray-500 pt-6">
-                            Đăng tối đa 10 ảnh, mỗi ảnh không quá 5MB.
-                        </p>
-                        <input type="file" id="images" multiple accept="image/*" class="mt-4">
+                        <p class="text-sm text-gray-500 pt-6">Đăng tối đa 10 ảnh, mỗi ảnh không quá 5MB.</p>
+                        <input type="file" id="images" multiple accept="image/*" class="mt-4" />
                         <div id="image-preview" class="flex flex-wrap gap-2 mt-4"></div>
                     </div>
 
@@ -172,9 +162,9 @@
                     <h2 class="text-lg font-semibold mb-4">HƯỚNG DẪN ĐĂNG TIN</h2>
                     <ul class="list-disc list-inside text-sm text-gray-600 space-y-2">
                         <li>Thông tin có dấu (*) là bắt buộc.</li>
-                        <li>Không đăng tin giả, tin đã đăng trên Chicky.stu.</li>
+                        <li>Không đăng tin giả, tin trùng lặp.</li>
                         <li>Đăng tin với nội dung rõ ràng, chính xác.</li>
-                        <li>Tin có nhiều hình ảnh sẽ được xem và gặp gỡ nhiều lần.</li>
+                        <li>Tin có nhiều hình ảnh sẽ được xem nhiều hơn.</li>
                     </ul>
                 </div>
             </div>
@@ -184,7 +174,7 @@
     <footer class="bg-gray-900 text-white py-12 mt-8">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <img src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68d79ba9&is=68d64a29&hm=72a8564c4b06a5d7343e490472dab615fd91db399a2f82579c7f52abf0c74480&=&format=webp&quality=lossless&width=658&height=593"
+                <img src="https://media.discordapp.net/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png"
                     alt="Chicky.stu Logo" class="w-24 mb-4">
                 <h3 class="text-xl font-bold mb-4">Chicky.stu</h3>
                 <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ.</p>
@@ -210,8 +200,9 @@
             <p>&copy; 2025 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
         </div>
     </footer>
-    <script src="script.js"></script>
 
+    <script src="roomsStorage.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

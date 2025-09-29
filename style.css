@@ -1,390 +1,270 @@
-/* =========================================
-1. CÀI ĐẶT CHUNG (GLOBAL STYLES)
-=========================================
-*/
-body {
-  /* Đảm bảo chữ đẹp và dễ đọc, sử dụng font Inter qua Tailwind */
-  font-family: "Inter", sans-serif;
-  font-size: 16px; /* Thiết lập phông chữ cơ bản hợp lý hơn */
+:root {
+  --primary: #3b82f6;
+  --danger: #ef4444;
+  --muted: #f3f4f6;
+  --border: #d1d5db;
 }
 
-/* Modal Overlay cho alert/confirm (thay thế alert/confirm mặc định) */
+/* 1. Global */
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+}
+
+/* Modal overlay */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Nền tối mờ */
+  inset: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000; /* Đảm bảo modal nằm trên cùng */
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
-
 .modal-content {
-  background-color: white;
-  padding: 30px;
+  background: #fff;
+  padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  width: min(420px, 92%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
-  max-width: 90%;
-  width: 400px;
 }
 
-/* =========================================
-2. KIỂU DÁNG THANH ĐIỀU HƯỚNG VÀ CHUNG
-=========================================
-*/
+/* Navigation */
 .nav-link {
-  /* Định kiểu cơ bản cho các liên kết điều hướng */
   padding: 8px 12px;
   border-radius: 8px;
-  transition: background-color 0.2s ease;
-  font-size: 0.95rem; /* Giữ chữ menu nhỏ gọn */
+  transition: background-color 0.2s;
+  font-size: 0.95rem;
+  color: #374151;
 }
-
 .nav-link:hover {
-  background-color: #f3f4f6; /* Màu nền nhẹ khi di chuột */
+  background: var(--muted);
 }
 
-.nav-brand {
-  /* Kiểu dáng cho chữ thương hiệu */
-  padding: 0 12px;
-  font-size: 1.8rem; /* Tiêu đề thương hiệu lớn */
-}
-
-.bg-gray-200 {
-  /* Lớp đặc biệt đánh dấu trang đang hoạt động */
-  font-weight: bold;
-  color: #1f2937; /* Màu chữ đậm hơn */
-}
-
+/* Cards */
 .card {
-  /* Kiểu dáng chung cho các phần tử chứa (như Form sections, Hướng dẫn) */
-  background-color: white;
+  background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.form-section-title {
-  /* Tiêu đề của từng mục lớn trong form Đăng tin (Tiêu đề nhỏ đi 1 chút) */
-  font-size: 1rem; /* text-base */
-  font-weight: 700; /* font-bold */
-  color: #4b5563; /* text-gray-700 */
-  border-bottom: 2px solid #e5e7eb;
-  padding-bottom: 10px;
-}
-
-.section-title {
-  /* Tiêu đề cho các mục trong trang Chi tiết tin (Tiêu đề nhỏ đi 1 chút) */
-  font-size: 1.25rem; /* text-xl */
-  font-weight: 700;
-  color: #1f2937;
-  border-left: 5px solid #3b82f6; /* Đường viền xanh nổi bật */
-  padding-left: 10px;
-  margin-top: 20px;
-}
-
-/* =========================================
-3. KIỂU DÁNG FORM VÀ INPUT
-=========================================
-*/
+/* Form inputs */
 input[type="text"],
 input[type="number"],
 input[type="email"],
 select,
 textarea {
-  /* Kiểu dáng chung cho tất cả các trường nhập liệu */
   width: 100%;
   padding: 10px;
   height: 44px;
-  border: 1px solid #d1d5db; /* border-gray-300 */
-  border-radius: 6px; /* rounded-md */
+  border: 1px solid var(--border);
+  border-radius: 6px;
   margin-top: 4px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
-  font-size: 1rem; /* Phông chữ input hợp lý */
+  transition: box-shadow 0.2s;
+  font-size: 1rem;
 }
-
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #3b82f6; /* Màu xanh khi focus */
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Vòng sáng mờ khi focus */
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
 }
-
 textarea {
-  resize: vertical; /* Chỉ cho phép kéo dãn theo chiều dọc */
+  resize: vertical;
+  height: auto;
+  min-height: 120px;
 }
 
-/* Nút Đăng Tin */
+/* Buttons */
 .btn-submit {
-  background-color: #ef4444; /* bg-red-500 */
-  color: white;
+  background: var(--danger);
+  color: #fff;
   font-weight: 600;
-  padding: 12px 30px;
+  padding: 12px 28px;
   border-radius: 8px;
-  transition: background-color 0.2s ease, transform 0.1s;
-  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.18);
+  transition: transform 0.08s, background-color 0.2s;
 }
-
 .btn-submit:hover {
-  background-color: #dc2626; /* bg-red-600 */
+  background: #dc2626;
   transform: translateY(-1px);
 }
 
-/* Kiểu dáng cho phần hiển thị của Select Box tùy chỉnh */
+/* Custom select */
 .custom-select-trigger {
   width: 100%;
   height: 44px;
   padding: 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   border-radius: 6px;
   margin-top: 4px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
-  font-size: 1rem;
   cursor: pointer;
-  line-height: 24px; /* Căn giữa nội dung văn bản */
   position: relative;
-  /* Thêm mũi tên tùy chỉnh (bạn có thể tự thêm icon nếu muốn) */
 }
-
-.custom-select-trigger:focus {
-  border-color: #3b82f6; /* Màu xanh khi focus */
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
-/* Kiểu dáng cho danh sách thả xuống */
 .custom-dropdown {
-  position: absolute; /* RẤT QUAN TRỌNG: Giúp nó mở xuống dưới */
-  width: 100%; /* Chiếm hết chiều rộng của div cha */
+  position: absolute;
+  width: 100%;
   max-height: 200px;
   overflow-y: auto;
-  background: white;
-  border: 1px solid #d1d5db;
+  background: #fff;
+  border: 1px solid var(--border);
   border-radius: 6px;
   z-index: 50;
-  list-style: none;
-  padding: 0;
-  margin-top: 2px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
 }
-
 .custom-dropdown.hidden {
   display: none;
 }
-
 .custom-dropdown li {
+  list-style: none;
   padding: 8px 12px;
   cursor: pointer;
-  font-size: 0.95rem;
 }
-
 .custom-dropdown li:hover {
-  background-color: #f3f4f6;
-  font-weight: 500;
+  background: var(--muted);
 }
 
-/* =========================================
-4. HÌNH ẢNH VÀ NỔI BẬT (HIGHLIGHTS & IMAGE PREVIEW)
-=========================================
-*/
-
-/* Container cho các mục nổi bật */
+/* Highlights */
 .highlight-label {
-  /* Ẩn checkbox mặc định, định kiểu cho container */
   cursor: pointer;
-  user-select: none;
+  display: block;
   position: relative;
-  display: block; /* Đảm bảo mỗi label chiếm một ô trong grid */
 }
-
 .highlight-checkbox {
-  /* Ẩn checkbox gốc */
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
-
 .highlight-content {
-  /* Nội dung của highlight (hộp hiển thị) */
-  background-color: #f3f4f6; /* Màu nền xám nhạt */
+  background: var(--muted);
   border: 1px solid #e5e7eb;
   padding: 10px 15px;
   border-radius: 8px;
   text-align: center;
-  font-size: 0.875rem;
   transition: all 0.2s;
 }
-
 .highlight-checkbox:checked + .highlight-content {
-  /* Kiểu dáng khi checkbox được chọn */
-  background-color: #3b82f6; /* Màu xanh nổi bật */
-  color: white;
-  border-color: #3b82f6;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
-  font-weight: 600;
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
 }
 
+/* Image preview */
 .image-preview-item {
-  /* Ảnh nhỏ xem trước trong form đăng tin */
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 6px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
 }
 
-/* =========================================
-5. TRANG CHI TIẾT TIN - IMAGE GALLERY VÀ SLIDER
-=========================================
-*/
-
+/* Gallery */
 .image-gallery-wrapper {
   position: relative;
   width: 100%;
-  max-width: 800px; /* Giới hạn chiều rộng của gallery */
-  margin: 0 auto 20px auto;
+  max-width: 800px;
+  margin: 0 auto 20px;
 }
-
 .image-display-area {
   width: 100%;
-  height: 400px;
-  background-color: #e5e7eb;
+  min-height: 220px;
+  background: #e5e7eb;
   overflow: hidden;
   border-radius: 12px;
-  margin-bottom: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  /* Giữ nguyên Flexbox để căn giữa */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
-
 .image-display-area img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /*  Dùng 'contain' để đảm bảo toàn bộ ảnh hiển thị */
-  object-position: center; /* Đảm bảo điểm lấy nét là trung tâm */
-  border-radius: 12px;
+  object-fit: contain;
   display: none;
+  border-radius: 12px;
 }
-
 .image-display-area img.active {
   display: block;
 }
-
 .slider-btn {
   position: absolute;
-  top: 150px; /* Căn giữa theo chiều cao của ảnh chính (450px/2) */
+  top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
   border: none;
-  padding: 10px 18px;
-  cursor: pointer;
+  padding: 10px 14px;
   border-radius: 50%;
-  font-size: 1rem;
-  transition: background-color 0.3s;
   z-index: 10;
 }
-
-.slider-btn:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
 .slider-btn-prev {
   left: 10px;
 }
-
 .slider-btn-next {
   right: 10px;
 }
 
 .image-thumbnails-area {
   display: flex;
-  overflow-x: auto; /* Cho phép cuộn ngang */
+  overflow-x: auto;
   gap: 10px;
-  padding: 10px; /* Thêm padding 2 bên */
-  background-color: #f9fafb;
+  padding: 10px;
+  background: #f9fafb;
   border-radius: 8px;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
 }
-
 .thumbnail-item {
-  flex-shrink: 0; /* Ngăn ảnh thumbnail co lại */
-  width: 120px; /* Chiều rộng cố định cho thumbnail */
-  height: 70px; /* Chiều cao cố định cho thumbnail */
+  width: 120px;
+  height: 70px;
   object-fit: cover;
   border-radius: 8px;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: transform 0.15s, border-color 0.15s;
 }
-
-.thumbnail-item:hover {
-  transform: translateY(-2px);
-}
-
 .thumbnail-item.active {
-  border-color: #3b82f6; /* Viền xanh cho thumbnail đang hoạt động */
+  border-color: var(--primary);
   transform: scale(1.05);
 }
 
-/* Các phần tử thông tin chi tiết */
+/* Detail info/highlight item */
 .detail-info-grid {
-  font-size: 1rem; /* Phông chữ cho thông tin chi tiết */
+  font-size: 1rem;
 }
-
 .highlight-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
-
 .highlight-item {
-  background-color: #ecfdf5; /* Màu nền xanh lá nhạt */
-  color: #059669; /* Màu chữ xanh lá đậm */
+  background: #ecfdf5;
+  color: #059669;
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 500;
   border: 1px solid #a7f3d0;
 }
 
-/* =========================================
-6. TRANG DANH SÁCH VÀ ADMIN
-=========================================
-*/
-
+/* Post card & admin */
 .post-card {
-  /* Kiểu dáng chung cho mỗi tin đăng trong danh sách */
-  background-color: white;
+  background: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s, box-shadow 0.25s;
   cursor: pointer;
 }
-
 .post-card:hover {
-  transform: translateY(-5px); /* Hiệu ứng nhấc lên khi di chuột */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
-
 .post-thumbnail {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
-
 .post-content {
   padding: 16px;
 }
-
 .admin-table {
   width: 100%;
   border-collapse: separate;
@@ -392,36 +272,36 @@ textarea {
   margin-top: 20px;
   font-size: 0.95rem;
 }
-
 .admin-table th,
 .admin-table td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #e5e7eb;
 }
-
 .admin-table th {
-  background-color: #f3f4f6;
+  background: #f3f4f6;
   font-weight: 600;
   color: #374151;
   text-transform: uppercase;
 }
-
-.admin-table tr:hover {
-  background-color: #f9fafb;
-}
-
 .btn-delete {
-  background-color: #f87171; /* bg-red-400 */
-  color: white;
+  background: #f87171;
+  color: #fff;
   padding: 6px 12px;
   border-radius: 6px;
-  transition: background-color 0.2s;
-  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
 }
-
 .btn-delete:hover {
-  background-color: #ef4444; /* bg-red-500 */
+  background: #ef4444;
 }
 
-/*  */
+/* small responsive tweak */
+@media (max-width: 640px) {
+  .image-display-area {
+    min-height: 180px;
+  }
+  .post-thumbnail {
+    height: 160px;
+  }
+}
