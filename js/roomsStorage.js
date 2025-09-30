@@ -1,4 +1,4 @@
-// roomsStorage.js
+// roomsStorage.js - quản lý dữ liệu phòng trọ
 (function () {
   const POSTS_KEY = "posts";
 
@@ -51,9 +51,7 @@
 
   function addPost(post) {
     const posts = getPosts();
-    const newPost = Object.assign({}, post);
-    newPost.id = Date.now();
-    // ensure images array
+    const newPost = { ...post, id: Date.now() };
     newPost.images = Array.isArray(newPost.images)
       ? newPost.images
       : newPost.images
@@ -72,12 +70,10 @@
     }
   }
 
-  // init sample if empty
   if (!localStorage.getItem(POSTS_KEY)) {
     savePosts(samplePosts);
   }
 
-  // export to window
   window.roomsStorage = {
     getPosts,
     savePosts,

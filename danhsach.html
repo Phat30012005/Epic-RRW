@@ -15,8 +15,7 @@
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4 text-sm font-semibold text-gray-700">
                 <a href="baidang.html" class="nav-link">
-                    <img src="images/logo2.png"
-                        alt="Trang chủ" class="w-24 mb-4">
+                    <img src="images/logo2.png" alt="Trang chủ" class="w-24 mb-4">
                 </a>
                 <a href="dangtin.html" class="nav-link">Đăng tin</a>
                 <a href="danhsach.html" class="nav-link bg-gray-200">Danh sách thuê phòng trọ</a>
@@ -94,7 +93,21 @@
     </footer>
 
     <!-- storage service + main script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const filterType = document.getElementById("filterType");
+
+            filterType.addEventListener("change", () => {
+                const value = filterType.value;
+                if (value === "Ghép") window.location.href = "Ghep.html";
+                else if (value === "Đơn") window.location.href = "Don.html";
+                else if (value === "Căn hộ") window.location.href = "Canho.html";
+            });
+        });
+    </script>
+
     <script src="roomsStorage.js"></script>
+
     <script src="script.js"></script>
 </body>
 

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Phòng Đơn - Chicky.stu</title>
+    <script src="roomsStorage.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("room-list");
+            const searchInput = document.getElementById("search");
+            const priceFilter = document.getElementById("price-filter");
+            const areaFilter = document.getElementById("area-filter");
+            const genderFilter = document.getElementById("gender-filter");
+
+            function render(posts) {
+                container.innerHTML = posts.map(post => `
+          <div class="bg-white rounded shadow p-4 mb-6 hover:shadow-lg transition">
+            <img src="${post.images[0]}" alt="${post.title}" class="w-full h-48 object-cover rounded mb-4">
+            <h2 class="text-xl font-bold text-gray-800 mb-1">${post.title}</h2>
+            <p class="text-gray-600 mb-1">${post.address} - ${post.ward}</p>
+            <p class="text-red-500 font-semibold mb-1">${post.price.toLocaleString()} VNĐ</p>
+            <p class="text-gray-600 mb-1">Diện tích: ${post.area} m²</p>
+            <p class="text-gray-600 mb-1">Giới tính: ${post.gender || "Không yêu cầu"}</p>
+            <p class="text-yellow-500 mb-2">Đánh giá: ${"★".repeat(Math.round(post.rating || 0))}</p>
+            <a href="chitiet.html?id=${post.id}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Xem chi tiết</a>
+          </div>
+        `).join("");
+            }
+
+            function filterPosts() {
+                const keyword = searchInput.value.toLowerCase();
+                const priceRange = priceFilter.value;
+                const areaRange = areaFilter.value;
+                const gender = genderFilter.value;
+
+                let posts = window.roomsStorage.getPosts().filter(p => p.type === "Đơn");
+
+                if (keyword) {
+                    posts = posts.filter(p =>
+                        p.title.toLowerCase().includes(keyword) ||
+                        p.address.toLowerCase().includes(keyword) ||
+                        p.ward.toLowerCase().includes(keyword)
+                    );
+                }
+
+                if (priceRange === "low") posts = posts.filter(p => p.price <= 2000000);
+                if (priceRange === "mid") posts = posts.filter(p => p.price > 2000000 && p.price <= 4000000);
+                if (priceRange === "high") posts = posts.filter(p => p.price > 4000000);
+
+                if (areaRange === "small") posts = posts.filter(p => p.area <= 20);
+                if (areaRange === "medium") posts = posts.filter(p => p.area > 20 && p.area <= 35);
+                if (areaRange === "large") posts = posts.filter(p => p.area > 35);
+
+                if (gender) posts = posts.filter(p => p.gender === gender);
+
+                render(posts);
+            }
+
+            searchInput.addEventListener("input", filterPosts);
+            priceFilter.addEventListener("change", filterPosts);
+            areaFilter.addEventListener("change", filterPosts);
+            genderFilter.addEventListener("change", filterPosts);
+
+            filterPosts(); // initial render
+        });
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow mb-6">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">Phòng Đơn</h1>
+            <a href="index.html" class="text-gray-600 hover:text-blue-600">Trang chủ</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <input id="search" type="text" placeholder="Tìm kiếm..."
+                class="px-4 py-2 border rounded shadow-sm col-span-1">
+            <select id="price-filter" class="px-4 py-2 border rounded shadow-sm col-span-1">
+                <option value="">Lọc theo giá</option>
+                <option value="low">Dưới 2 triệu</option>
+                <option value="mid">2 - 4 triệu</option>
+                <option value="high">Trên 4 triệu</option>
+            </select>
+            <select id="area-filter" class="px-4 py-2 border rounded shadow-sm col-span-1">
+                <option value="">Lọc theo diện tích</option>
+                <option value="small">Dưới 20m²</option>
+                <option value="medium">20 - 35m²</option>
+                <option value="large">Trên 35m²</option>
+            </select>
+            <select id="gender-filter" class="px-4 py-2 border rounded shadow-sm col-span-1">
+                <option value="">Giới tính</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+                <option value="Không yêu cầu">Không yêu cầu</option>
+            </select>
+        </div>
+
+        <div id="room-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-6 mt-12 text-center text-sm">
+        &copy; 2025 Chicky.stu - Nền tảng tìm phòng trọ Cần Thơ
+    </footer>
+</body>
+
+</html>
