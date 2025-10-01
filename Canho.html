@@ -3,125 +3,82 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Căn Hộ - Chicky.stu</title>
-    <script src="roomsStorage.js"></script>
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("room-list");
-            const searchInput = document.getElementById("search");
-            const priceFilter = document.getElementById("price-filter");
-            const areaFilter = document.getElementById("area-filter");
-            const genderFilter = document.getElementById("gender-filter");
-
-            function render(posts) {
-                container.innerHTML = posts.map(post => `
-          <div class="bg-white rounded shadow p-4 mb-6 hover:shadow-lg transition">
-            <img src="${post.images[0]}" alt="${post.title}" class="w-full h-48 object-cover rounded mb-4">
-            <h2 class="text-xl font-bold text-gray-800 mb-1">${post.title}</h2>
-            <p class="text-gray-600 mb-1">${post.address} - ${post.ward}</p>
-            <p class="text-red-500 font-semibold mb-1">${post.price.toLocaleString()} VNĐ</p>
-            <p class="text-gray-600 mb-1">Diện tích: ${post.area} m²</p>
-            <p class="text-gray-600 mb-1">Giới tính: ${post.gender || "Không yêu cầu"}</p>
-            <p class="text-yellow-500 mb-2">Đánh giá: ${"★".repeat(Math.round(post.rating || 0))}</p>
-            <a href="chitiet.html?id=${post.id}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Xem chi tiết</a>
-          </div>
-        `).join("");
-            }
-
-            function filterPosts() {
-                const keyword = searchInput.value.toLowerCase();
-                const priceRange = priceFilter.value;
-                const areaRange = areaFilter.value;
-                const gender = genderFilter.value;
-
-                let posts = window.roomsStorage.getPosts().filter(p => p.type === "Căn hộ");
-
-                if (keyword) {
-                    posts = posts.filter(p =>
-                        p.title.toLowerCase().includes(keyword) ||
-                        p.address.toLowerCase().includes(keyword) ||
-                        p.ward.toLowerCase().includes(keyword)
-                    );
-                }
-
-                if (priceRange === "low") posts = posts.filter(p => p.price <= 2000000);
-                if (priceRange === "mid") posts = posts.filter(p => p.price > 2000000 && p.price <= 4000000);
-                if (priceRange === "high") posts = posts.filter(p => p.price > 4000000);
-
-                if (areaRange === "small") posts = posts.filter(p => p.area <= 20);
-                if (areaRange === "medium") posts = posts.filter(p => p.area > 20 && p.area <= 35);
-                if (areaRange === "large") posts = posts.filter(p => p.area > 35);
-
-                if (gender) posts = posts.filter(p => p.gender === gender);
-
-                render(posts);
-            }
-
-            searchInput.addEventListener("input", filterPosts);
-            priceFilter.addEventListener("change", filterPosts);
-            areaFilter.addEventListener("change", filterPosts);
-            genderFilter.addEventListener("change", filterPosts);
-
-            filterPosts(); // initial render
-        });
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Căn hộ | Chicky.stu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="bg-gray-100 min-h-screen">
-    <header class="bg-white shadow mb-6">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-blue-600">Căn hộ</h1>
-            <a href="index.html" class="text-gray-600 hover:text-blue-600">Trang chủ</a>
-        </div>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm mb-4">
+        <nav class="container d-flex justify-content-between align-items-center py-3">
+            <a href="index.html"><img src="images/logo2.png" alt="Trang chủ" height="40" /></a>
+            <div>
+                <a href="danhsach.html" class="btn btn-outline-primary me-2">Danh sách</a>
+                <a href="dangtin.html" class="btn btn-primary">Đăng tin</a>
+            </div>
+        </nav>
     </header>
 
-    <main class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <input id="search" type="text" placeholder="Tìm kiếm..."
-                class="px-4 py-2 border rounded shadow-sm col-span-1">
-            <select id="price-filter" class="px-4 py-2 border rounded shadow-sm col-span-1">
-                <option value="">Lọc theo giá</option>
-                <option value="low">Dưới 2 triệu</option>
-                <option value="mid">2 - 4 triệu</option>
-                <option value="high">Trên 4 triệu</option>
-            </select>
-            <select id="area-filter" class="px-4 py-2 border rounded shadow-sm col-span-1">
-                <option value="">Lọc theo diện tích</option>
-                <option value="small">Dưới 20m²</option>
-                <option value="medium">20 - 35m²</option>
-                <option value="large">Trên 35m²</option>
-            </select>
-            <select id="gender-filter" class="px-4 py-2 border rounded shadow-sm col-span-1">
-                <option value="">Giới tính</option>
-                <option value="Nam">Nam</option>
-                <option value="Nữ">Nữ</option>
-                <option value="Không yêu cầu">Không yêu cầu</option>
-            </select>
+    <main class="container my-5 flex-grow">
+        <h2 class="text-center mb-4 font-bold">Danh sách căn hộ</h2>
+
+        <div class="row mb-4">
+            <div class="col-md-3"><input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm...">
+            </div>
+            <div class="col-md-3">
+                <select id="filterType" class="form-select">
+                    <option value="Căn hộ" selected>Căn hộ</option>
+                </select>
+            </div>
+            <div class="col-md-3"><select id="filterPrice" class="form-select">
+                    <option value="">Giá</option>
+                    <option value="duoi2">Dưới 2 triệu</option>
+                    <option value="2-5">2 - 5 triệu</option>
+                    <option value="tren5">Trên 5 triệu</option>
+                </select></div>
+            <div class="col-md-3"><select id="sortSelect" class="form-select">
+                    <option value="">Sắp xếp</option>
+                    <option value="gia-tang">Giá tăng dần</option>
+                    <option value="gia-giam">Giá giảm dần</option>
+                    <option value="ten">Theo tên</option>
+                </select></div>
         </div>
 
-        <div id="room-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div id="roomList" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded shadow p-3">
+                <img src="images/logo2.png" class="w-full h-40 object-cover mb-2">
+                <h5>[Tên căn hộ]</h5>
+                <p>[Địa chỉ Placeholder]</p>
+                <p class="fw-bold">[Giá VNĐ]</p>
+                <a href="chitiet.html" class="btn btn-sm btn-primary">Xem chi tiết</a>
+            </div>
+        </div>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12 mt-8">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="flex flex-col items-center text-center">
-                <img src="images/logo2.png" alt="CHICKY.STU" class="w-24 mb-4">
+            <div class="flex flex-col items-center text-center"><img src="images/logo2.png" alt="CHICKY.STU"
+                    class="w-24 mb-4">
                 <h3 class="text-xl font-bold mb-2">CHICKY.STU</h3>
                 <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ.</p>
             </div>
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li><a href="dangtin.html" class="hover:underline">Hướng dẫn</a></li>
-                    <li><a href="danhsach.html" class="hover:underline">Trợ giúp</a></li>
+                    <li><a href="dangtin.html" class="hover:underline">Đăng tin</a></li>
+                    <li><a href="danhsach.html" class="hover:underline">Tìm kiếm</a></li>
+                    <li><a href="admin.html" class="hover:underline">Quản trị</a></li>
                 </ul>
             </div>
             <div>
-                <h3 class="text-lg font-semibold mb-4">Liên hệ qua</h3>
+                <h3 class="text-lg font-semibold mb-4">LIÊN HỆ</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li>Zalo/Facebook</li>
+                    <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP. Cần Thơ</li>
+                    <li>Điện thoại: (028) 123 4567</li>
                     <li>Email: contact@chickystu.vn</li>
                 </ul>
             </div>
@@ -130,6 +87,9 @@
             <p>&copy; 2025 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
         </div>
     </footer>
+
+    <script src="js/roomsStorage.js"></script>
+    <script src="js/danhsach.js"></script>
 </body>
 
 </html>

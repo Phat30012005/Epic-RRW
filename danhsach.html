@@ -4,72 +4,60 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chicky.stu - Danh sách thuê phòng trọ</title>
+    <title>Danh sách phòng trọ | Chicky.stu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
-    <header class="bg-white shadow-md">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4 text-sm font-semibold text-gray-700">
-                <a href="index.html" class="nav-link">
-                    <img src="images/logo2.png" alt="Trang chủ" class="w-24 mb-4">
-                </a>
-                <a href="dangtin.html" class="nav-link">Đăng tin</a>
-                <a href="danhsach.html" class="nav-link bg-gray-200">Danh sách thuê phòng trọ</a>
-                <a href="admin.html" class="nav-link">Quản trị</a>
-            </div>
+    <!-- Header -->
+    <header class="bg-white shadow-sm mb-4">
+        <nav class="container d-flex justify-content-between align-items-center py-3">
+            <a href="index.html"><img src="images/logo2.png" alt="Trang chủ" height="40" /></a>
             <div>
-                <a href="#" class="nav-link">Đăng nhập</a>
+                <a href="danhsach.html" class="btn btn-outline-primary me-2">Danh sách</a>
+                <a href="dangtin.html" class="btn btn-primary">Đăng tin</a>
             </div>
         </nav>
     </header>
 
-    <main class="container mx-auto px-4 py-8 flex-grow">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Danh sách thuê phòng trọ</h1>
-
-        <!-- Filters (optional, will work with script.js) -->
-        <div class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-            <input id="searchInput" type="search" placeholder="Tìm kiếm theo tiêu đề hoặc mô tả"
-                class="px-3 py-2 border rounded" />
-            <select id="filterType" class="px-3 py-2 border rounded">
-                <option value="">Tất cả loại</option>
-                <option value="Ghép">Ghép</option>
-                <option value="Đơn">Đơn</option>
-                <option value="Căn hộ">Căn hộ</option>
-            </select>
-            <select id="filterPrice" class="px-3 py-2 border rounded">
-                <option value="">Tất cả giá</option>
-                <option value="duoi2">Dưới 2 triệu</option>
-                <option value="2-5">2 - 5 triệu</option>
-                <option value="tren5">Trên 5 triệu</option>
-            </select>
-            <select id="sortSelect" class="px-3 py-2 border rounded">
-                <option value="">Sắp xếp</option>
-                <option value="gia-tang">Giá tăng</option>
-                <option value="gia-giam">Giá giảm</option>
-                <option value="ten">Tên A→Z</option>
-            </select>
+    <main class="container my-5 flex-grow">
+        <h2 class="text-center mb-4 font-bold">Danh sách phòng trọ</h2>
+        <div class="row mb-4">
+            <div class="col-md-3"><input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm...">
+            </div>
+            <div class="col-md-3"><select id="filterType" class="form-select">
+                    <option value="">Loại phòng</option>
+                    <option value="Ghép">Ở ghép</option>
+                    <option value="Đơn">Phòng đơn</option>
+                    <option value="Căn hộ">Căn hộ</option>
+                </select></div>
+            <div class="col-md-3"><select id="filterPrice" class="form-select">
+                    <option value="">Giá</option>
+                    <option value="duoi2">Dưới 2 triệu</option>
+                    <option value="2-5">2 - 5 triệu</option>
+                    <option value="tren5">Trên 5 triệu</option>
+                </select></div>
+            <div class="col-md-3"><select id="sortSelect" class="form-select">
+                    <option value="">Sắp xếp</option>
+                    <option value="gia-tang">Giá tăng dần</option>
+                    <option value="gia-giam">Giá giảm dần</option>
+                    <option value="ten">Theo tên</option>
+                </select></div>
         </div>
-
-        <div id="posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- cards injected by script.js -->
-        </div>
-
-        <div id="emptyState" class="hidden text-center text-gray-500 mt-8">Không có bài đăng nào.</div>
+        <div id="roomList" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        <div id="emptyState" class="text-center text-muted mt-4" style="display:none">Không có kết quả</div>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12 mt-8">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="flex flex-col items-center text-center">
-                <img src="images/logo2.png" alt="CHICKY.STU" class="w-24 mb-4">
+            <div class="flex flex-col items-center text-center"><img src="images/logo2.png" alt="CHICKY.STU"
+                    class="w-24 mb-4">
                 <h3 class="text-xl font-bold mb-2">CHICKY.STU</h3>
                 <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ.</p>
             </div>
-
-
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
                 <ul class="text-gray-400 space-y-2">
@@ -81,9 +69,9 @@
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN HỆ</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li>Zalo/Facebook</li>
+                    <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP. Cần Thơ</li>
+                    <li>Điện thoại: (028) 123 4567</li>
                     <li>Email: contact@chickystu.vn</li>
-                    <li>Hotline:</li>
                 </ul>
             </div>
         </div>
@@ -92,23 +80,9 @@
         </div>
     </footer>
 
-    <!-- storage service + main script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const filterType = document.getElementById("filterType");
-
-            filterType.addEventListener("change", () => {
-                const value = filterType.value;
-                if (value === "Ghép") window.location.href = "Ghep.html";
-                else if (value === "Đơn") window.location.href = "Don.html";
-                else if (value === "Căn hộ") window.location.href = "Canho.html";
-            });
-        });
-    </script>
-
-    <script src="roomsStorage.js"></script>
-
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/roomsStorage.js"></script>
+    <script src="js/danhsach.js"></script>
 </body>
 
 </html>

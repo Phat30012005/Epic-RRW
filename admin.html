@@ -3,80 +3,65 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chicky.stu - Quản trị</title>
+    <title>Admin | Chicky.stu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="bg-gray-100 flex flex-col min-h-screen">
-    <header class="bg-white shadow-md">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4 text-sm font-semibold text-gray-700">
-                <a href="dangtin.html" class="nav-link">Đăng tin</a>
-                <a href="danhsach.html" class="nav-link">Danh sách thuê phòng trọ</a>
-                <a href="admin.html" class="nav-link bg-gray-200">Quản trị</a>
-            </div>
-            <div><a href="#" class="nav-link">Đăng nhập</a></div>
+<body>
+    <header class="bg-white shadow-sm mb-4">
+        <nav class="container d-flex justify-content-between align-items-center py-3">
+            <a href="index.html"><img src="images/logo2.png" alt="Trang chủ" height="40" /></a>
+            <div><a href="danhsach.html" class="btn btn-outline-primary">Danh sách</a></div>
         </nav>
     </header>
 
-    <main class="container mx-auto px-4 py-8 flex-grow">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Trang Quản Trị</h1>
-
-        <div id="password-form" class="card p-6 max-w-sm mx-auto">
-            <h2 class="text-center text-xl font-semibold mb-4">Đăng nhập Admin</h2>
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label for="password" class="sr-only">Mật khẩu</label>
-                    <input type="password" id="password" placeholder="Nhập mật khẩu" required
-                        class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn-submit">Đăng nhập</button>
-                </div>
-            </form>
-        </div>
-
-        <div id="admin-panel" class="hidden">
-            <h2 class="text-2xl font-bold mb-4">Danh sách tin đã đăng</h2>
-            <div class="card overflow-x-auto">
-                <table id="admin-table" class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Tiêu đề</th>
-                            <th>Giá</th>
-                            <th>Địa chỉ</th>
-                            <th>Ngày đăng</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-table-body"></tbody>
-                </table>
-            </div>
-        </div>
+    <main class="container my-4">
+        <h3>Quản trị bài đăng</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tiêu đề</th>
+                    <th>Giá</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="adminTable">
+                <tr>
+                    <td>1</td>
+                    <td>[Placeholder phòng]</td>
+                    <td>[Giá]</td>
+                    <td>Đang hiển thị</td>
+                    <td><button class="btn btn-sm btn-danger">Xóa</button></td>
+                </tr>
+            </tbody>
+        </table>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12 mt-8">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="flex flex-col items-center text-center">
-                <img src="images/logo2.png" alt="CHICKY.STU" class="w-24 mb-4">
+            <div class="flex flex-col items-center text-center"><img src="images/logo2.png" alt="CHICKY.STU"
+                    class="w-24 mb-4">
                 <h3 class="text-xl font-bold mb-2">CHICKY.STU</h3>
                 <p class="text-gray-400 text-sm">Nền tảng tìm kiếm phòng trọ hàng đầu Cần Thơ.</p>
             </div>
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li><a href="dangtin.html" class="hover:underline">Hướng dẫn</a></li>
-                    <li><a href="danhsach.html" class="hover:underline">Trợ giúp</a></li>
+                    <li><a href="dangtin.html" class="hover:underline">Đăng tin</a></li>
+                    <li><a href="danhsach.html" class="hover:underline">Tìm kiếm</a></li>
+                    <li><a href="admin.html" class="hover:underline">Quản trị</a></li>
                 </ul>
             </div>
             <div>
-                <h3 class="text-lg font-semibold mb-4">Liên hệ qua</h3>
+                <h3 class="text-lg font-semibold mb-4">LIÊN HỆ</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li>Zalo/Facebook</li>
+                    <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP. Cần Thơ</li>
+                    <li>Điện thoại: (028) 123 4567</li>
                     <li>Email: contact@chickystu.vn</li>
                 </ul>
             </div>
@@ -85,9 +70,6 @@
             <p>&copy; 2025 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
         </div>
     </footer>
-
-    <script src="roomsStorage.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>
