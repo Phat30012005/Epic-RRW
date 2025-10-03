@@ -23,7 +23,7 @@ body {
   background-color: #0d6efd; /* xanh */
   color: white;
   padding: 10px;
-  border-radius: 8px 8px 0 0;
+  border-radius: 16px 16px 0 0;
   text-align: center; /* căn chữ Chat vào giữa */
 }
 
@@ -50,7 +50,7 @@ body {
   margin: 8px 0;
   padding: 8px 0px;
   border-radius: 15px;
-  max-width: 40%;
+  max-width: 20%;
   clear: both;
 }
 
