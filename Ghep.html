@@ -12,26 +12,38 @@
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
     <!-- Header -->
-    <header class="bg-white shadow-sm mb-4">
+    <header class="bg-white shadow-sm sticky top-0 z-50 mb-4">
         <nav class="container d-flex justify-content-between align-items-center py-3">
-            <a href="index.html"><img src="images/logo2.png" alt="Trang chủ" height="40" /></a>
-            <div>
-                <a href="danhsach.html" class="btn btn-outline-primary me-2">Danh sách</a>
-                <a href="dangtin.html" class="btn btn-primary">Đăng tin</a>
-            </div>
+            <!-- Logo -->
+            <a href="index.html" class="d-flex align-items-center text-decoration-none">
+                <img src="https://cdn.discordapp.com/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68e57369&is=68e421e9&hm=fd6d3cee83b9ebaeeaded7da283a8c8cfaeadfe93a19c1a82454d97df8507e9b&"
+                    alt="Trang chủ" width="45" height="45" class="me-2 header-logo" />
+                <span class="fw-bold fs-5 text-primary">CHICKY.STU</span>
+            </a>
+
+            <!-- Thanh điều hướng -->
+            <ul class="d-flex align-items-center list-unstyled mb-0 gap-3 nav-links">
+                <li><a href="index.html" class="nav-link fw-semibold">Trang chủ</a></li>
+                <li><a href="danhsach.html" class="nav-link fw-semibold">Danh sách</a></li>
+                <li><a href="dangtin.html" class="nav-link fw-semibold">Đăng tin</a></li>
+                <li><a href="admin.html" class="nav-link fw-semibold">Admin</a></li>
+                <li><a href="Ghep.html" class="nav-link fw-semibold text-primary">Ghép</a></li>
+                <li><a href="Don.html" class="nav-link fw-semibold">Đơn</a></li>
+                <li><a href="Canho.html" class="nav-link fw-semibold">Căn hộ</a></li>
+            </ul>
         </nav>
     </header>
 
     <main class="container my-5 flex-grow">
         <h2 class="text-center mb-4 font-bold">Danh sách phòng ở ghép</h2>
 
-        <!-- Lọc -->
+        <!-- Bộ lọc -->
         <div class="row mb-4">
             <div class="col-md-3"><input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm...">
             </div>
             <div class="col-md-3">
                 <select id="filterType" class="form-select">
-                    <option value="Ghép" selected>Ở ghép</option>
+                    <option value="Ghép" selected>Phòng ở ghép</option>
                 </select>
             </div>
             <div class="col-md-3"><select id="filterPrice" class="form-select">
@@ -48,11 +60,10 @@
                 </select></div>
         </div>
 
-        <!-- Danh sách -->
+        <!-- Danh sách phòng -->
         <div id="roomList" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Placeholder -->
             <div class="bg-white rounded shadow p-3">
-                <img src="images/room1.jpg" class="w-full h-40 object-cover mb-2">
+                <img src="images/room1.jpg" class="w-full h-40 object-cover mb-2" alt="Phòng ở ghép">
                 <h5>[Tên phòng ở ghép]</h5>
                 <p>[Địa chỉ Placeholder]</p>
                 <p class="fw-bold">[Giá VNĐ]</p>
@@ -61,14 +72,16 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 mt-8">
+    <!-- 🌍 Footer -->
+    <footer class="text-white py-12 mt-8">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="flex flex-col items-center text-center"><img src="images/logo2.png" alt="CHICKY.STU"
-                    class="w-24 mb-4">
+            <div class="flex flex-col items-center text-center">
+                <img src="https://cdn.discordapp.com/attachments/1416420005343527020/1421045937278554203/image-removebg-preview.png?ex=68e57369&is=68e421e9&hm=fd6d3cee83b9ebaeeaded7da283a8c8cfaeadfe93a19c1a82454d97df8507e9b&"
+                    alt="CHICKY.STU" class="w-24 mb-4">
                 <h3 class="text-xl font-bold mb-2">CHICKY.STU</h3>
                 <p class="text-gray-400 text-sm">Quy định sử dụng và đăng tin.</p>
             </div>
+
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
                 <ul class="text-gray-400 space-y-2">
@@ -77,15 +90,17 @@
                     <li><a href="admin.html" class="hover:underline">Quản trị</a></li>
                 </ul>
             </div>
+
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN HỆ</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li>Địa chỉ: 123 Đường ABC, Quận XYZ, TP. Cần Thơ</li>
-                    <li>Điện thoại: (028) 123 4567</li>
-                    <li>Email: contact@chickystu.vn</li>
+                    <li>📍 Địa chỉ: 123 Đường ABC, Quận XYZ, TP. Cần Thơ</li>
+                    <li>📞 Điện thoại: (028) 123 4567</li>
+                    <li>✉️ Email: contact@chickystu.vn</li>
                 </ul>
             </div>
         </div>
+
         <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500">
             <p>&copy; 2025 Chicky.stu. Tất cả bản quyền được bảo lưu.</p>
         </div>
