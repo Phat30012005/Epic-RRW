@@ -1,49 +1,73 @@
-/* 🎨 Chatbox CHICKY.STU */
-.message {
-  padding: 8px 12px;
-  border-radius: 16px;
-  margin-bottom: 6px;
-  max-width: 80%;
-  word-wrap: break-word;
-  font-size: 15px;
-  animation: fadeIn 0.3s ease-in-out;
+/* --- Chatbox Layout --- */
+.chatbox-container {
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  width: 320px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+  font-family: "Inter", sans-serif;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
 }
 
-.message.me {
-  background-color: #007bff;
-  color: white;
-  align-self: flex-end;
+.chatbox-container.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.message.other {
-  background-color: #e9ecef;
-  color: #333;
-  align-self: flex-start;
+.chatbox-header {
+  border-bottom: 1px solid #ccc;
 }
 
-#chatWindow {
+.chatbox-body {
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
 
-.hidden {
-  display: none !important;
+.message {
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 80%;
+  line-height: 1.4;
 }
 
-#chatWidget button#chatToggle {
-  border-radius: 50%;
-  font-size: 20px;
-  width: 55px;
-  height: 55px;
+.message.user {
+  align-self: flex-end;
+  background: #007bff;
+  color: #fff;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.message.bot {
+  align-self: flex-start;
+  background: #f1f1f1;
+  color: #333;
+}
+
+.chatbox-footer input {
+  border-radius: 8px;
+}
+
+.chatbox-footer button {
+  border-radius: 8px;
+}
+
+/* --- Nút mở chat --- */
+#chat-toggle {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  background: #007bff;
+  border: none;
+  transition: transform 0.3s ease, background 0.3s;
+}
+
+#chat-toggle:hover {
+  transform: scale(1.1);
+  background: #0056d2;
 }

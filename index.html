@@ -120,6 +120,15 @@
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="roomsStorage.js"></script>
+    <!-- Chatbox -->
+    <link rel="stylesheet" href="chatbox.css">
+    <script src="chatbox.js"></script>
+    <div id="chat-container"></div>
+    <script>
+        fetch('chatbox.html')
+            .then(res => res.text())
+            .then(html => document.getElementById('chat-container').innerHTML = html);
+    </script>
 </body>
 
 </html>

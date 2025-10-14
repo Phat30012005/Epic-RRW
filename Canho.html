@@ -116,6 +116,15 @@
 
     <script src="js/roomsStorage.js"></script>
     <script src="js/danhsach.js"></script>
+    <!-- Chatbox -->
+    <link rel="stylesheet" href="chatbox.css">
+    <script src="chatbox.js"></script>
+    <div id="chat-container"></div>
+    <script>
+        fetch('chatbox.html')
+            .then(res => res.text())
+            .then(html => document.getElementById('chat-container').innerHTML = html);
+    </script>
 </body>
 
 </html>

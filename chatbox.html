@@ -1,136 +1,28 @@
-<!-- 💬 Chat Widget -->
-<div id="chatWidget">
-    <!-- Nút mở chat -->
-    <button id="chatToggle" class="btn btn-primary rounded-full shadow-lg p-3 position-fixed bottom-4 end-4 z-50">
+<!-- 💬 CHATBOX -->
+<div id="chat-widget">
+    <!-- Nút mở -->
+    <button id="chat-toggle" class="btn btn-primary rounded-full shadow-lg p-3 position-fixed bottom-4 end-4 z-50">
         💬
     </button>
 
     <!-- Khung chat -->
-    <div id="chatWindow"
-        class="position-fixed bottom-20 end-4 bg-white shadow-lg rounded-3 p-3 w-80 md:w-96 hidden flex flex-col z-50">
-        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
-            <h5 class="fw-bold text-primary mb-0">CHICKY Chat 💬</h5>
-            <button id="chatClose" class="btn btn-sm btn-outline-secondary">✖</button>
+    <div id="chat-box" class="chatbox-container hidden">
+        <div class="chatbox-header bg-primary text-white flex justify-between items-center px-3 py-2 rounded-t-lg">
+            <span class="font-semibold">💬 Hỗ trợ Chicky.Stu</span>
+            <div class="flex gap-2 items-center">
+                <button id="toggle-save" class="btn btn-sm btn-light text-dark px-2 py-1">💾 Lưu OFF</button>
+                <button id="clear-chat" class="btn btn-sm btn-light text-dark px-2 py-1">🧹 Xóa</button>
+                <button id="close-chat" class="btn btn-sm btn-light text-dark px-2 py-1">✖</button>
+            </div>
         </div>
 
-        <!-- Nội dung chat -->
-        <div id="chatMessages" class="chat-messages overflow-auto flex-grow" style="height: 250px;">
-            <div class="message other">Xin chào 👋! Mình là trợ lý CHICKY, bạn cần hỗ trợ gì nè?</div>
+        <div id="chatbox" class="chatbox-body p-3 bg-white overflow-y-auto" style="height: 280px;">
+            <div class="message bot">Xin chào 👋! Mình là trợ lý Chicky, bạn cần hỗ trợ gì nè?</div>
         </div>
 
-        <!-- Ô nhập -->
-        <div class="d-flex mt-2">
-            <input id="chatInput" type="text" class="form-control me-2" placeholder="Nhập tin nhắn..." />
-            <button id="sendMsg" class="btn btn-primary">Gửi</button>
+        <div class="chatbox-footer flex items-center gap-2 bg-gray-100 p-2 rounded-b-lg">
+            <input id="chat-input" type="text" class="form-control flex-grow" placeholder="Nhập tin nhắn..." />
+            <button id="send-btn" class="btn btn-primary">Gửi</button>
         </div>
     </div>
 </div>
-
-<!-- Liên kết CSS -->
-<link rel="stylesheet" href="chatbox.css">
-
-<script>
-    // --- DOM Elements ---
-    const chatToggle = document.getElementById('chatToggle');
-    const chatWindow = document.getElementById('chatWindow');
-    const chatClose = document.getElementById('chatClose');
-    const sendMsg = document.getElementById('sendMsg');
-    const chatInput = document.getElementById('chatInput');
-    const chatMessages = document.getElementById('chatMessages');
-
-    // --- Mở / Đóng chat ---
-    chatToggle.addEventListener('click', () => {
-        chatWindow.classList.remove('hidden');
-        chatToggle.classList.add('hidden');
-    });
-    chatClose.addEventListener('click', () => {
-        chatWindow.classList.add('hidden');
-        chatToggle.classList.remove('hidden');
-    });
-
-    // --- Lưu & tải lịch sử ---
-    const STORAGE_KEY = 'chicky_chat_history';
-
-    function saveChatHistory() {
-        const messages = Array.from(chatMessages.children).map(m => ({
-            text: m.textContent,
-            sender: m.classList.contains('me') ? 'me' : 'other'
-        }));
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-    }
-
-    function loadChatHistory() {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            const messages = JSON.parse(saved);
-            chatMessages.innerHTML = '';
-            messages.forEach(m => {
-                const div = document.createElement('div');
-                div.classList.add('message', m.sender);
-                div.textContent = m.text;
-                chatMessages.appendChild(div);
-            });
-        }
-    }
-
-    // --- Phản hồi tự động (rule-based) ---
-    function getBotReply(userMsg) {
-        const msg = userMsg.toLowerCase();
-
-        if (msg.includes('chào') || msg.includes('xin chào')) {
-            return 'Chào bạn 👋! Mình là trợ lý CHICKY. Bạn muốn thuê trọ khu nào nè?';
-        }
-        if (msg.includes('giá') || msg.includes('bao nhiêu')) {
-            return 'Hiện phòng trọ bên mình có giá từ 1.200.000đ đến 3.500.000đ tuỳ vị trí và tiện nghi 💰.';
-        }
-        if (msg.includes('liên hệ') || msg.includes('sdt') || msg.includes('số điện thoại')) {
-            return 'Bạn có thể liên hệ chủ trọ qua số 📞 0909 888 777 hoặc để lại số của bạn, mình sẽ gọi lại!';
-        }
-        if (msg.includes('vị trí') || msg.includes('ở đâu')) {
-            return 'Bên mình có phòng ở Cần Thơ, gần Đại học Cần Thơ và khu công nghiệp Trà Nóc 📍.';
-        }
-        if (msg.includes('tiện nghi') || msg.includes('wifi') || msg.includes('máy lạnh')) {
-            return 'Phòng có wifi miễn phí, toilet riêng, máy lạnh, máy nước nóng và khu nấu ăn 🍳.';
-        }
-        if (msg.includes('tạm biệt') || msg.includes('bye')) {
-            return 'Tạm biệt bạn 👋! Hẹn gặp lại tại CHICKY.STU 💕';
-        }
-        return 'Mình chưa hiểu rõ ý bạn 😅. Bạn có thể hỏi về giá, vị trí, tiện nghi hoặc liên hệ nhé!';
-    }
-
-    // --- Gửi tin nhắn ---
-    function sendMessage() {
-        const msg = chatInput.value.trim();
-        if (msg !== '') {
-            addMessage(msg, 'me');
-            chatInput.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            // Bot phản hồi sau 1 giây
-            setTimeout(() => {
-                const reply = getBotReply(msg);
-                addMessage(reply, 'other');
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                saveChatHistory();
-            }, 1000);
-
-            saveChatHistory();
-        }
-    }
-
-    function addMessage(text, sender) {
-        const div = document.createElement('div');
-        div.classList.add('message', sender);
-        div.textContent = text;
-        chatMessages.appendChild(div);
-    }
-
-    sendMsg.addEventListener('click', sendMessage);
-    chatInput.addEventListener('keypress', e => {
-        if (e.key === 'Enter') sendMessage();
-    });
-
-    // --- Tải lịch sử ---
-    loadChatHistory();
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-</script>
