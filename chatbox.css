@@ -1,0 +1,49 @@
+/* 🎨 Chatbox CHICKY.STU */
+.message {
+  padding: 8px 12px;
+  border-radius: 16px;
+  margin-bottom: 6px;
+  max-width: 80%;
+  word-wrap: break-word;
+  font-size: 15px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.message.me {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+}
+
+.message.other {
+  background-color: #e9ecef;
+  color: #333;
+  align-self: flex-start;
+}
+
+#chatWindow {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#chatWidget button#chatToggle {
+  border-radius: 50%;
+  font-size: 20px;
+  width: 55px;
+  height: 55px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
