@@ -39,33 +39,56 @@
     <main class="container my-5 flex-grow">
         <h2 class="text-center mb-4 fw-bold text-primary">Danh sách căn hộ</h2>
 
-        <!-- Bộ lọc -->
-        <div class="row mb-4 g-3">
-            <div class="col-md-3">
-                <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm..." />
-            </div>
-            <div class="col-md-3">
-                <select id="filterType" class="form-select">
-                    <option value="Căn hộ" selected>Căn hộ</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <select id="filterPrice" class="form-select">
-                    <option value="">Giá</option>
-                    <option value="duoi2">Dưới 2 triệu</option>
-                    <option value="2-5">2 - 5 triệu</option>
-                    <option value="tren5">Trên 5 triệu</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <select id="sortSelect" class="form-select">
-                    <option value="">Sắp xếp</option>
-                    <option value="gia-tang">Giá tăng dần</option>
-                    <option value="gia-giam">Giá giảm dần</option>
-                    <option value="ten">Theo tên</option>
-                </select>
-            </div>
-        </div>
+        <!-- Bộ lọc (Desktop form) -->
+        <form class="d-none d-md-flex gap-2 align-items-center" id="desktopFilters"
+            onsubmit="event.preventDefault(); applyFilters();">
+            <select id="filterPrice" class="form-select">
+                <option value="">Giá phòng</option>
+                <option value="duoi2">Dưới 2 triệu</option>
+                <option value="2-5">2 - 5 triệu</option>
+                <option value="tren5">Trên 5 triệu</option>
+            </select>
+
+            <select id="filterType" class="form-select">
+                <option value="">Loại phòng</option>
+                <option value="Phòng trọ cấp 4">Phòng trọ cấp 4</option>
+                <option value="Gác bê tông lát gạch">Gác bê tông lát gạch</option>
+                <option value="Gác cemboard phủ simili">Gác cemboard phủ simili</option>
+                <option value="Gác sàn gỗ">Gác sàn gỗ</option>
+            </select>
+
+            <select id="roomsize-desktop" class="form-select">
+                <option value="">Diện tích</option>
+                <option value="10-16">10-16m²</option>
+                <option value="18-25">18-25m²</option>
+                <option value="25-35">25-35m²+</option>
+            </select>
+
+            <select id="local-desktop" class="form-select">
+                <option value="">Phường/Xã</option>
+                <option value="Ninh Kiều">Phường Ninh Kiều</option>
+                <option value="Cái Răng">Phường Cái Răng</option>
+                <option value="Cái Khế">Phường Cái Khế</option>
+                <option value="Bình Thủy">Phường Bình Thủy</option>
+                <option value="Thốt Nốt">Phường Thốt Nốt</option>
+                <option value="Ô Môn">Phường Ô Môn</option>
+                <option value="Mỹ Xuyên">Phường Mỹ Xuyên</option>
+            </select>
+
+            <select id="sortSelect" class="form-select">
+                <option value="">Sắp xếp</option>
+                <option value="gia-tang">Giá tăng dần</option>
+                <option value="gia-giam">Giá giảm dần</option>
+                <option value="ten">Theo tên</option>
+            </select>
+
+            <input type="text" id="searchInput" class="form-control" placeholder="Tìm theo tên phòng..." />
+
+            <!-- ✅ Nút Lọc -->
+            <button type="submit" class="btn btn-outline-primary px-4">
+                <i class="bi bi-funnel"></i> Lọc
+            </button>
+        </form>
 
         <!-- Danh sách -->
         <div id="roomList" class="grid grid-cols-1 md:grid-cols-3 gap-6">
