@@ -1,73 +1,163 @@
-/* --- Chatbox Layout --- */
-.chatbox-container {
+/* =======================================
+   --- FILE: chatbox.css ---
+   ======================================= */
+#chat-widget {
   position: fixed;
-  bottom: 90px;
-  right: 25px;
-  width: 320px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
+  bottom: 20px;
+  right: 20px;
   z-index: 1000;
-  font-family: "Inter", sans-serif;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
 }
 
-.chatbox-container.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.chatbox-header {
-  border-bottom: 1px solid #ccc;
-}
-
-.chatbox-body {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.message {
-  padding: 8px 12px;
-  border-radius: 12px;
-  max-width: 80%;
-  line-height: 1.4;
-}
-
-.message.user {
-  align-self: flex-end;
-  background: #007bff;
-  color: #fff;
-}
-
-.message.bot {
-  align-self: flex-start;
-  background: #f1f1f1;
-  color: #333;
-}
-
-.chatbox-footer input {
-  border-radius: 8px;
-}
-
-.chatbox-footer button {
-  border-radius: 8px;
-}
-
-/* --- Nút mở chat --- */
-#chat-toggle {
+.chat-toggle-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
   width: 60px;
   height: 60px;
   font-size: 24px;
-  background: #007bff;
-  border: none;
-  transition: transform 0.3s ease, background 0.3s;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
 }
 
-#chat-toggle:hover {
+.chat-toggle-btn:hover {
   transform: scale(1.1);
-  background: #0056d2;
+}
+
+.chat-box {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 350px;
+  height: 500px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+/* Class để ẩn/hiện chatbox */
+.chat-box.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none; /* Không cho click khi bị ẩn */
+}
+
+/* Khi không ẩn thì hiện ra */
+#chat-toggle:focus + .chat-box,
+.chat-box:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.chat-header {
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.chat-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.chat-body {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #f4f7f9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bot-message,
+.user-message {
+  display: flex;
+  max-width: 85%;
+}
+
+.bot-message p,
+.user-message p {
+  padding: 10px 15px;
+  border-radius: 18px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.bot-message {
+  align-self: flex-start;
+}
+
+.bot-message p {
+  background-color: #e9e9eb;
+  color: #333;
+  border-bottom-left-radius: 5px;
+}
+
+.user-message {
+  align-self: flex-end;
+}
+
+.user-message p {
+  background-color: #007bff;
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+.chat-footer {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+}
+
+#chat-input {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+#chat-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+#send-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#send-btn:hover {
+  background-color: #0056b3;
 }

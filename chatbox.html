@@ -1,28 +1,20 @@
-<!-- 💬 CHATBOX -->
 <div id="chat-widget">
-    <!-- Nút mở -->
-    <button id="chat-toggle" class="btn btn-primary rounded-full shadow-lg p-3 position-fixed bottom-4 end-4 z-50">
+    <button id="chat-toggle" class="chat-toggle-btn">
         💬
     </button>
 
-    <!-- Khung chat -->
-    <div id="chat-box" class="chatbox-container hidden">
-        <div class="chatbox-header bg-primary text-white flex justify-between items-center px-3 py-2 rounded-t-lg">
-            <span class="font-semibold">💬 Hỗ trợ Chicky.Stu</span>
-            <div class="flex gap-2 items-center">
-                <button id="toggle-save" class="btn btn-sm btn-light text-dark px-2 py-1">💾 Lưu OFF</button>
-                <button id="clear-chat" class="btn btn-sm btn-light text-dark px-2 py-1">🧹 Xóa</button>
-                <button id="close-chat" class="btn btn-sm btn-light text-dark px-2 py-1">✖</button>
-            </div>
+    <div id="chat-box" class="chat-box hidden">
+        <div class="chat-header">
+            <h4>Hỗ trợ CHICKY.STU</h4>
+            <button id="chat-close" class="close-btn">×</button>
         </div>
 
-        <div id="chatbox" class="chatbox-body p-3 bg-white overflow-y-auto" style="height: 280px;">
-            <div class="message bot">Xin chào 👋! Mình là trợ lý Chicky, bạn cần hỗ trợ gì nè?</div>
+        <div class="chat-body" id="chat-body">
         </div>
 
-        <div class="chatbox-footer flex items-center gap-2 bg-gray-100 p-2 rounded-b-lg">
-            <input id="chat-input" type="text" class="form-control flex-grow" placeholder="Nhập tin nhắn..." />
-            <button id="send-btn" class="btn btn-primary">Gửi</button>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." autocomplete="off" />
+            <button id="send-btn">Gửi</button>
         </div>
     </div>
 </div>
