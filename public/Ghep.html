@@ -113,9 +113,9 @@
             <div>
                 <h3 class="text-lg font-semibold mb-4">LIÊN KẾT NHANH</h3>
                 <ul class="text-gray-400 space-y-2">
-                    <li><a href="dangtin.html" class="hover:underline">Đăng tin</a></li>
-                    <li><a href="danhsach.html" class="hover:underline">Tìm kiếm</a></li>
-                    <li><a href="admin.html" class="hover:underline">Quản trị</a></li>
+                    <li><a href="/public/dangtin.html" class="hover:underline">Đăng tin</a></li>
+                    <li><a href="/public/danhsach.html" class="hover:underline">Tìm kiếm</a></li>
+                    <li><a href="/public/admin.html" class="hover:underline">Quản trị</a></li>
                 </ul>
             </div>
 
@@ -134,17 +134,17 @@
         </div>
     </footer>
 
-    <script src="js/roomsStorage.js"></script>
-    <script src="js/danhsach.js"></script>
+    <script src="/public/js/roomsStorage.js"></script>
+    <script src="/public/js/danhSach.js"></script>
     <!-- Chatbox -->
-        <link rel="stylesheet" href="chatbox.css">
-        <script src="js/chatbox.js"></script>
-        <div id="chat-container"></div>
-        <script>
-            fetch('chatbox.html')
-                .then(res => res.text())
-                .then(html => document.getElementById('chat-container').innerHTML = html);
-        </script>
+    <link rel="stylesheet" href="/public/css/chatbox.css">
+    <script src="/public/js/chatbox.js"></script>
+    <div id="chat-container"></div>
+    <script>
+        fetch('chatbox.html')
+            .then(res => res.text())
+            .then(html => document.getElementById('chat-container').innerHTML = html);
+    </script>
 
 </body>
 
