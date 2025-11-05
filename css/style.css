@@ -1,0 +1,458 @@
+/* =========================================================
+   🌟 CHICKY.STU - STYLE DÙNG CHUNG CHO TOÀN WEBSITE
+   Kết hợp Bootstrap + TailwindCSS
+   Tác giả: Võ Thanh Tâm
+   ========================================================= */
+
+/* === Biến màu === */
+:root {
+  --primary: #007bff;
+  --primary-hover: #0069d9;
+  --gray-100: #f9fafb;
+  --gray-200: #f1f5f9;
+  --gray-300: #e5e7eb;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-800: #222;
+  --dark-bg: #111827;
+}
+
+/* === Cấu hình chung === */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--gray-100);
+  color: #333;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Đảm bảo các thành phần form luôn kéo dài và được bọc đúng */
+/* LƯU Ý: Đây là một class utility, không phải thuộc tính CSS của a:hover */
+.form-group-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* =========================================================
+   🔹 HEADER
+   ========================================================= */
+header {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-logo {
+  transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+  transform: scale(1.1);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: #333 !important;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary) !important;
+}
+
+/* Hiệu ứng gạch chân */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    justify-content: center;
+    gap: 12px;
+  }
+  .nav-link {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   🔹 NỘI DUNG CHÍNH
+   ========================================================= */
+main {
+  flex-grow: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.table {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th {
+  background: var(--gray-200);
+  color: #333;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+/* Card hiển thị phòng */
+.room-card {
+  background: #fff;
+  border: 1px solid var(--gray-300);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   🔹 FORM CONTROLS (INPUTS, SELECTS, TEXTAREAS)
+   ========================================================= */
+
+/* Định nghĩa lại style cho form-control của Bootstrap */
+input,
+select,
+textarea,
+.form-control,
+.form-select {
+  /* 1. Hình thức */
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 1rem !important;
+
+  /* 2. Quy tắc layout quan trọng */
+  display: block !important;
+  width: 100% !important;
+  margin-top: 0.25rem !important; /* Dùng !important để đảm bảo ghi đè Tailwind/Bootstrap */
+
+  /* 3. Màu sắc và tương tác (Tùy chọn bổ sung) */
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Hiệu ứng khi focus */
+.form-control:focus,
+.form-select:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0d6efd !important; /* Màu xanh dương (Bootstrap Primary) */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+/* Căn chỉnh Input Group (dùng cho Giá/Diện tích) */
+.input-group .form-control {
+  /* Loại bỏ margin-top khi nằm trong input-group vì nó đã có class .form-label */
+  margin-top: 0 !important;
+  /* Loại bỏ border-radius bên cạnh span đơn vị */
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.input-group .input-group-text {
+  border-radius: 8px !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  background-color: var(--gray-200);
+  color: var(--gray-500);
+  padding: 0.75rem 1rem;
+}
+
+/* =========================================================
+   🔸 BUTTONS
+   ========================================================= */
+
+/* Tùy chỉnh cơ bản cho nút để đồng bộ với form-control */
+.btn {
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 1rem !important;
+  transition: all 0.15s ease-in-out;
+}
+
+/* Ví dụ: Điều chỉnh nút Primary */
+.btn-primary {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7 !important;
+  border-color: #0a58ca !important;
+}
+
+/* Nút Submit lớn */
+.btn-lg {
+  padding: 0.75rem 2rem !important;
+  font-size: 1.125rem !important;
+  font-weight: 600 !important; /* Tăng độ đậm */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================================
+   🔹 FOOTER
+   ========================================================= */
+footer {
+  font-size: 14px;
+  background: var(--dark-bg);
+  color: #fff;
+  margin-top: auto;
+  padding: 3rem 0 2rem;
+}
+
+footer h3 {
+  color: #fff;
+}
+
+footer a {
+  color: var(--gray-400);
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin-bottom: 8px;
+}
+
+footer .border-t {
+  border-top: 1px solid #374151 !important;
+}
+
+/* =========================================================
+   🔹 TRẠNG THÁI VÀ HIỂN THỊ
+   ========================================================= */
+.text-muted {
+  color: var(--gray-500) !important;
+}
+.text-primary {
+  color: var(--primary) !important;
+}
+.text-gray-400 {
+  color: var(--gray-400) !important;
+}
+.text-gray-500 {
+  color: var(--gray-500) !important;
+}
+
+#emptyState {
+  font-style: italic;
+}
+
+/* =========================================================
+   🔹 HIỆU ỨNG VÀ TIỆN ÍCH
+   ========================================================= */
+.shadow-sm {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+}
+.shadow-md {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+.rounded-xl {
+  border-radius: 1rem;
+}
+.transition {
+  transition: all 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =========================================================
+   🔹 CUSTOM UTILITY CLASSES (Đăng tin)
+   ========================================================= */
+.app-card {
+  background: #fff;
+  /* Đã tối ưu border và shadow */
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+/* =========================================================
+   ✅ SỬA LỖI HIỂN THỊ CHECKBOX/HIGHLIGHT VÀ CĂN CHỈNH
+   ========================================================= */
+
+.highlight-label {
+  /* Đảm bảo flex và padding cho cả khu vực chọn */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Cố định căn trái */
+  cursor: pointer;
+  padding: 1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+.highlight-label:hover {
+  border-color: #3b82f6; /* Màu xanh nhẹ khi hover */
+  background-color: #f9fafb;
+}
+
+.highlight-checkbox {
+  /* QUAN TRỌNG: Ẩn checkbox gốc và đảm bảo không bị ghi đè thành input text */
+  /* Sử dụng appearance và opacity để chắc chắn ẩn đi */
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+
+  /* Tạo box tùy chỉnh (Hình vuông rỗng) */
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid var(--gray-400) !important;
+  border-radius: 4px !important;
+  margin-right: 1rem !important;
+  flex-shrink: 0 !important; /* Ngăn nó co lại */
+  position: relative !important;
+
+  /* Ghi đè các quy tắc form-control: */
+  padding: 0 !important;
+  background-color: #fff !important;
+  box-shadow: none !important;
+  display: block !important; /* Vẫn phải là block để tạo hình vuông */
+}
+
+.highlight-content {
+  /* Nội dung label */
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gray-500);
+  transition: color 0.2s ease;
+}
+
+/* Khi được chọn */
+.highlight-checkbox:checked {
+  border-color: #0d6efd !important;
+  background-color: #0d6efd !important;
+}
+
+/* Icon checkmark (✔) */
+.highlight-checkbox:checked::after {
+  content: "✓" !important;
+  color: white !important;
+  font-size: 14px !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  line-height: 1 !important;
+  font-weight: bold !important;
+}
+
+/* Hiệu ứng khi label được chọn */
+.highlight-checkbox:checked + .highlight-content {
+  color: #0d6efd !important;
+}
+
+/* -------------------------------------------------------- */
+
+/* Custom select (Đã căn chỉnh lại margin-top) */
+.custom-select-trigger {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gray-300); /* Dùng biến màu */
+  border-radius: 8px !important;
+  margin-top: 0.25rem !important; /* Đồng bộ với các form-control khác */
+  background: #fff
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E")
+    no-repeat right 0.75rem center / 1.5em;
+  cursor: pointer;
+  position: relative;
+}
+
+.custom-dropdown {
+  position: absolute;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--gray-300);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 0.25rem;
+  z-index: 10;
+  max-height: 12rem;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+}
+
+.custom-dropdown li {
+  padding: 0.75rem 1rem; /* Tăng padding */
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.custom-dropdown li:hover {
+  background: var(--gray-200);
+}
+
+/* Căn chỉnh riêng cho textarea nếu cần (mặc định đã được form-control override) */
+#description.form-control {
+  margin-top: 0.25rem !important;
+}
